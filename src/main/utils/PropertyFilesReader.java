@@ -1,0 +1,60 @@
+package main.utils;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+public class PropertyFilesReader implements Constants {
+
+    public static Map<String, String> keyVal = new HashMap<String, String>();
+    FileReader reader;
+    Properties properties = new Properties();
+
+    public PropertyFilesReader(){
+        initializeProperties();
+    }
+
+    public void initializeReader(String env) {
+        try {
+            reader = new FileReader(System.getProperty("user.dir") + "//Inputs//" + env + ".properties");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initializeProperties() {
+        initializeReader(environment);
+
+        try {
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getServerURlProp() {
+        return properties.getProperty(serverURL);
+    }
+
+    public String getUserName() {
+        return properties.getProperty(username);
+    }
+
+    public String getPass() {
+        return properties.getProperty(password);
+    }
+
+    public String getUserCredentials() {
+
+        String user = getUserName();
+        String pass = getPass();
+
+        return  "{\n" +
+                "\t\""+username+"\":\""+user+"\",\n" +
+                "\t\""+password+"\":\""+pass+"\"\n" +
+                "}";
+    }
+}
