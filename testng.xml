@@ -7,7 +7,7 @@
     </listeners>
 
     <parameter name="browser" value="chrome" />
-    <parameter name="platform" value="API" />
+    <parameter name="platform" value="WEB" />
     <parameter name="headless" value="false" />
 
     <test name="TicketLake - Test Automation">
