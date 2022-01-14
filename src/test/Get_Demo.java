@@ -22,16 +22,18 @@ public class Get_Demo extends BaseTest implements Constants {
                 .contentType(appJson)
                 .when()
                 .get(listUsersEP);
+
+
     }
 
-    @Test (testName = "Verify List Users Response Status Code is 200.")
+    @Test (testName = "Verify List Users Response Status Code is 200.", enabled = false)
     public void verifyListUsersResStatus(){
         int statusCode = response.getStatusCode();
 
         Assert.assertEquals(statusCode, 200, "List Users Response Status");
     }
 
-    @Test (testName = "Verify List Users Response Time is less than 5 Sec.")
+    @Test (testName = "Verify List Users Response Time is less than 5 Sec.", enabled = false)
     public void verifyListUsersResTime(){
         response
                 .then()

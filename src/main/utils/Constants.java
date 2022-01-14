@@ -1,7 +1,7 @@
 package main.utils;
 
 public interface Constants {
-    String baseUrl = "http://127.0.0.1:5500/index.html";
+    String baseUrl = "http://127.0.0.1:5501/index.html";
 
     //How Many times we will retry if Test fails
     int retryCount = 2;

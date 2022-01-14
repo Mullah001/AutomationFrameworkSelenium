@@ -11,7 +11,7 @@ public interface DemoPageElements {
     String infoSignUpBtn = "info-signUp";
 
     /******** XPATHs ********/
-    String userNameLogin = "//div[@class='form-item log-in']//input[@name='Usernamef']";
+    String userNameLogin = "//div[@class='form-item log-in']//input[@name='Username']";
     String passwordLogin = "//div[@class='form-item log-in']//input[@name='Password']";
 
     String emailSignUp = "//div[@class='form-item sign-up']//input[@name='email']";

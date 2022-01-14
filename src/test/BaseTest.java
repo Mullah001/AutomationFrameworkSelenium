@@ -53,7 +53,7 @@ public class BaseTest extends CommonMethods {
         return getTokenInst();
     }
 
-    public String screenshotPAth="";
+    public String screenshotPAth = "";
 
     public String getServerURL() {
         return getServerURlIns();
@@ -91,12 +91,13 @@ public class BaseTest extends CommonMethods {
         extentReports.setSystemInfo("Automation Engineer", "Hamza Ashfaq");
 
         setRestAssuredBaseURL();
+        //setRestAssuredAuthHeader();
     }
 
     @BeforeMethod(alwaysRun = true)
     @Parameters(value = {"browser", "platform", "headless"})
-    public void beforeMethodMethod(String browser, Method testMethod, String platform, boolean headless) {
-        if (platform.equalsIgnoreCase("WEB")) {
+    public void beforeMethodMethod(@Optional String browser, Method testMethod, @Optional String platform, @Optional boolean headless) {
+        if (platform != null && platform.equalsIgnoreCase("WEB")) {
             setDriver(browser, headless);
 
             driver.manage().window().maximize();
