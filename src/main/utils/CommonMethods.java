@@ -3,6 +3,7 @@ package main.utils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import test.BaseTest;
@@ -26,6 +27,16 @@ public class CommonMethods {
     private String localDateTime;
 
     public static String screenshotPath;
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public String verificationCode;
 
     public static String screenshotName;
 
@@ -81,14 +92,14 @@ public class CommonMethods {
         return values;
     }
 
-    public String createScreenshotPath(String methodName){
+    public String createScreenshotPath(String methodName) {
         localDateTime = getLocalDateAndTimeString();
         screenshotName = methodName + localDateTime;
-        screenshotPath = System.getProperty("user.dir") + File.separator + "screenshots"  + File.separator + screenshotName;
+        screenshotPath = System.getProperty("user.dir") + File.separator + "screenshots" + File.separator + screenshotName;
         return screenshotPath;
     }
 
-    public String getScreenshotName(){
+    public String getScreenshotName() {
         return screenshotPath;
     }
 
@@ -107,6 +118,18 @@ public class CommonMethods {
         localDateTime = LocalDateTime.now().toLocalDate().toString() + "_" + LocalDateTime.now().toLocalTime().toString();
         localDateTime = localDateTime.replace(':', '_').replace('.', '_').replace('/', '_').replace('-', '_');
         return localDateTime;
+    }
+
+    public static String generateRandomEmail() {
+        String name = RandomStringUtils.randomAlphabetic(9);
+        String domain = RandomStringUtils.randomAlphabetic(6);
+        String randomWords = RandomStringUtils.randomAlphanumeric(5);
+        return name + randomWords + "@" + domain + ".com";
+    }
+
+    public static String generateRandomPhoneNumber() {
+        String phoneNumber = "+92320" + RandomStringUtils.randomNumeric(7);
+        return phoneNumber;
     }
 
     public static List<String> getRecordFromCSV(String path, int lineNumber) {
