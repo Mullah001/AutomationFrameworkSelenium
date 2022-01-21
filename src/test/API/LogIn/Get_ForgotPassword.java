@@ -2,23 +2,18 @@ package test.API.LogIn;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import main.ApiConfigs.Body.LogInBODY;
 import main.ApiConfigs.EndPoints.LogInEP;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
-import static main.ApiConfigs.EndPoints.LogInEP.loginEP;
 import static main.data.API.LogInData.*;
 import static main.utils.Constants.appJson;
 
 @Test(groups = {"API"})
 public class Get_ForgotPassword extends BaseTest {
     Response response;
-    LogInBODY loginBody = new LogInBODY();
-    int messageDisplayCount = 0;
 
     /********* Valid Data ********/
 

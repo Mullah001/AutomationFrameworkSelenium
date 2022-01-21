@@ -34,11 +34,11 @@ public class Post_ResavePassword  extends BaseTest {
                 .extract().response();
     }
 
-    @Test(testName = "Resave Password - Valid - Verify logIn Response Status Code is 200.", priority = 1)
+    @Test(testName = "Resave Password - Valid - Verify Resave Password Response Status Code is 200.", priority = 1)
     public void verifyResponseCode(){
         int statusCode = response.getStatusCode();
 
-        Assert.assertEquals(statusCode, 200, "LogIn Response Status");
+        Assert.assertEquals(statusCode, 200, "Resave Password Response Status");
     }
 
     @Test (testName = "Resave Password - Valid - Verify logIn Response Time is less than 5 Sec.", priority = 1)
@@ -70,11 +70,11 @@ public class Post_ResavePassword  extends BaseTest {
                 .extract().response();
     }
 
-    @Test(testName = "Resave Password - InValid - Verify logIn Response Status Code is 500.", priority = 3)
+    @Test(testName = "Resave Password - InValid - Verify Resave Password Response Status Code is 500.", priority = 3)
     public void verifyResponseCode_InValid(){
         int statusCode = response.getStatusCode();
 
-        Assert.assertEquals(statusCode, 500, "LogIn Response Status");
+        Assert.assertEquals(statusCode, 500, "Resave Password Response Status");
     }
 
     @Test(testName = "Resave Password - InValid Email - Verify logIn Response has the _error", priority = 3)
@@ -98,11 +98,11 @@ public class Post_ResavePassword  extends BaseTest {
                 .extract().response();
     }
 
-    @Test(testName = "Resave Password - Empty Token - Verify logIn Response Status Code is 500.", priority = 5)
+    @Test(testName = "Resave Password - Empty Token - Verify Resave Password Response Status Code is 500.", priority = 5)
     public void verifyResponseCode_Empty_Token(){
         int statusCode = response.getStatusCode();
 
-        Assert.assertEquals(statusCode, 500, "LogIn Response Status");
+        Assert.assertEquals(statusCode, 500, "Resave Password Response Status");
     }
 
     @Test(testName = "Resave Password - Empty Token - Verify logIn Response has the _error", priority = 5)
@@ -126,11 +126,11 @@ public class Post_ResavePassword  extends BaseTest {
                 .extract().response();
     }
 
-    @Test(testName = "Resave Password - Empty Password - Verify logIn Response Status Code is 422.", priority = 7)
+    @Test(testName = "Resave Password - Empty Password - Verify Resave Password Response Status Code is 422.", priority = 7)
     public void verifyResponseCode_Empty_Password(){
         int statusCode = response.getStatusCode();
 
-        Assert.assertEquals(statusCode, 422, "LogIn Response Status");
+        Assert.assertEquals(statusCode, 422, "Resave Password Response Status");
     }
 
     @Test(testName = "Resave Password - Empty Password - Verify logIn Response has the _error", priority = 7)

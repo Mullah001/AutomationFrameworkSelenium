@@ -39,7 +39,7 @@ public class Get_FetchAllCategories extends BaseTest {
         //System.out.println(response.prettyPrint());
         int statusCode = response.getStatusCode();
 
-        Assert.assertEquals(statusCode, 200, "LogIn Response Status");
+        Assert.assertEquals(statusCode, 200, "Fetch All Categories Response Status");
     }
 
     @Test(testName = "Fetch All Categories - Valid - Verify Fetch All Categories Response Time is less than 5 Sec.", priority = 1)
