@@ -2,12 +2,10 @@ package test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 //import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -23,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.BeforeMethod;
@@ -30,10 +29,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.*;
 import org.testng.internal.TestResult;
-import org.testng.reporters.jq.Model;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import static main.utils.Constants.*;
@@ -97,6 +97,7 @@ public class BaseTest extends CommonMethods {
     @BeforeMethod(alwaysRun = true)
     @Parameters(value = {"browser", "platform", "headless"})
     public void beforeMethodMethod(@Optional String browser, Method testMethod, @Optional String platform, @Optional boolean headless) {
+
         if (platform != null && platform.equalsIgnoreCase("WEB")) {
             setDriver(browser, headless);
 
@@ -106,26 +107,34 @@ public class BaseTest extends CommonMethods {
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
 
-        String methodName = testMethod.getName();
-        String logText = "Testing: " + methodName;
-        Markup markup = MarkupHelper.createLabel(logText, ExtentColor.WHITE);
+        String testName = testMethod.getAnnotation(Test.class).testName();
 
-        extentTestLogger = extentReports.createTest(testMethod.getName());
+        extentTestLogger = extentReports.createTest(testName);
+        extentTestLogger.log(Status.INFO, createMarkupText(testName, ExtentColor.WHITE));
+    }
+
+    private Markup createMarkupText(String testName, ExtentColor color) {
+        String logText = "Testing: " + testName;
+        Markup markup = MarkupHelper.createLabel(logText, color);
+        return markup;
+    }
+
+    public void logTextOnReport(String text){
+        Markup markup = MarkupHelper.createLabel(text, ExtentColor.WHITE);
         extentTestLogger.log(Status.INFO, markup);
     }
 
     @AfterMethod(alwaysRun = true)
     @Parameters(value = {"platform"})
     public void afterMethodMethod(ITestResult result, String platform) {
+        String testName = result.getMethod().getMethodName();
         if (result.getStatus() == TestResult.SUCCESS) {
-            String methodName = result.getMethod().getMethodName();
-            String logText = "Test Case: " + methodName + " Passed";
+            String logText = "Test Case: " + testName + " Passed";
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
             extentTestLogger.log(Status.PASS, markup);
         } else if (result.getStatus() == TestResult.FAILURE) {
             screenshotPAth = getScreenshotName();
-            String methodName = result.getMethod().getMethodName();
-            String logText = "Test Case: " + methodName + " Failed";
+            String logText = "Test Case: " + testName + " Failed";
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.RED);
             if (!(screenshotPAth == null || screenshotPAth.isEmpty())) {
                 extentTestLogger.addScreenCaptureFromPath(screenshotPath + ".PNG");
@@ -134,8 +143,7 @@ public class BaseTest extends CommonMethods {
             }
             extentTestLogger.log(Status.FAIL, markup);
         } else if (result.getStatus() == TestResult.SKIP) {
-            String methodName = result.getMethod().getMethodName();
-            String logText = "Test Case: " + methodName + " Skipped";
+            String logText = "Test Case: " + testName + " Skipped";
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.ORANGE);
             extentTestLogger.log(Status.SKIP, markup);
         }
@@ -173,12 +181,14 @@ public class BaseTest extends CommonMethods {
     public void setDriver(String browser, boolean headless) {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "chromedriver.exe");
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setBinary("C:\\Google Chrome Selenium\\chrome.exe");
             if (headless) {
-                ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setHeadless(true);
                 driver = new ChromeDriver(chromeOptions);
-            } else
-                driver = new ChromeDriver();
+            } else {
+                driver = new ChromeDriver(chromeOptions);
+            }
         } else if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "geckodriver.exe");
             driver = new FirefoxDriver();

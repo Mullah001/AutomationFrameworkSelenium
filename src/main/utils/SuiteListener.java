@@ -7,6 +7,7 @@ import org.testng.ITestResult;
 public class SuiteListener implements ITestListener {
 
     CommonMethods commonMethods = new CommonMethods();
+
     @Override
     public void onFinish(ITestContext iTestResult) {
     }
@@ -21,7 +22,8 @@ public class SuiteListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        commonMethods.TakeScreenshot(iTestResult.getMethod().getMethodName());
+        if (iTestResult.getTestClass().getXmlTest().getSuite().getAllParameters().get("platform") == "WEB")
+            commonMethods.TakeScreenshot(iTestResult.getMethod().getMethodName());
     }
 
     @Override

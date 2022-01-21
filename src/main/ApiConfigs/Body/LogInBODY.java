@@ -6,11 +6,13 @@ import org.json.simple.JSONValue;
 import java.util.HashMap;
 import java.util.Map;
 
-import static main.data.LogInData.*;
+import static main.data.API.LogInData.*;
 
 public class LogInBODY {
 
     static Map<String, String> map = new HashMap<>();
+
+    /******** Log In ********/
 
     public static String logIn_Body(){
         map.put("email",email);
@@ -20,6 +22,32 @@ public class LogInBODY {
         return jsonText;
     }
 
+    public static String logIn_Body_InValid_Email(){
+        map.put("email",inValidEmail);
+        map.put("password",password);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    public static String logIn_Body_InValid_Password(){
+        map.put("email",email);
+        map.put("password",inValidPassword);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    public static String logIn_Body_Empty(){
+        map.put("email",emptyEmail);
+        map.put("password",emptyPassword);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    /******** Log In with Google ********/
+
     public static String logInWithGoogle_Body(){
         map.put("token",token);
         map.put("CLIENT_ID",CLIENT_ID);
@@ -28,9 +56,35 @@ public class LogInBODY {
         return jsonText;
     }
 
+    /******** Resave Password ********/
+
     public static String reSavePassword_Body(){
         map.put("resetToken",resetToken);
-        map.put("new_password",new_password);
+        map.put("password",new_password);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    public static String reSavePassword_Body_InValid(){
+        map.put("resetToken",inValidResetToken);
+        map.put("password",new_password);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    public static String reSavePassword_Body_Empty_Token(){
+        map.put("resetToken",emptyResetToken);
+        map.put("password",new_password);
+
+        String jsonText = JSONValue.toJSONString(map);
+        return jsonText;
+    }
+
+    public static String reSavePassword_Body_Empty_Password(){
+        map.put("resetToken",resetToken);
+        map.put("password",emptyPassword);
 
         String jsonText = JSONValue.toJSONString(map);
         return jsonText;
