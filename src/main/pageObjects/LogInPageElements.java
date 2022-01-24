@@ -7,4 +7,5 @@ public interface LogInPageElements {
     String forgetpassword = "//a[contains(text(),'Forgot Password?')]";
     String socialLoginWithGoogle = "//*[@id=\"tab-1\"]/div/form/div[2]/button/div";
     String getSocialLoginWithFacebook = "//*[@id=\"tab-1\"]/div/form/div[2]/span/button";
+
 }
