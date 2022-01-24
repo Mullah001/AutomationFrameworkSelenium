@@ -12,7 +12,9 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.response.Response;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import main.ApiConfigs.Params.CategoriesPARAMS;
 import main.utils.CommonMethods;
 import main.utils.Constants;
 import org.openqa.selenium.By;
@@ -33,9 +35,11 @@ import org.testng.internal.TestResult;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+import static main.ApiConfigs.EndPoints.CategoriesEP.fetchAllCategoriesEP;
 import static main.utils.Constants.*;
 
 public class BaseTest extends CommonMethods {
@@ -76,6 +80,68 @@ public class BaseTest extends CommonMethods {
         requestSpec = builder.build();
 
         RestAssured.requestSpecification = requestSpec;
+    }
+
+    public Response getResponseForAllCategories() {
+        String token = CategoriesPARAMS.fetchAllCategories_Valid();
+
+        return RestAssured.given()
+                .contentType(textPlain)
+                .and()
+                .header(xAuth, token)
+                .when()
+                .get(fetchAllCategoriesEP)
+                .then()
+                .extract().response();
+    }
+
+    public ArrayList getCategoryNames() {
+        Response response = getResponseForAllCategories();
+
+        ArrayList data = response.jsonPath().get("data.title");
+
+        return data;
+    }
+
+    public ArrayList getSubCategoryNames(String category) {
+        int catIndex = findIndexOfCategoryByTitle(category);
+        Response response = getResponseForAllCategories();
+        ArrayList data = response.jsonPath().get("data["+catIndex+"].children.title");
+
+        return data;
+    }
+
+    public String getCategoryByIndex(int index) {
+        ArrayList categoryNames = getCategoryNames();
+
+        return categoryNames.get(index).toString();
+    }
+
+    public String getCategoryByTitle(String title) {
+        ArrayList categoryNames = getCategoryNames();
+        String el = "";
+
+        for (Object element :
+                categoryNames) {
+            if (element.toString().contains(title)) {
+                el = element.toString();
+            }
+        }
+
+        return el;
+    }
+
+    public int findIndexOfCategoryByTitle(String title) {
+        ArrayList categoryNames = getCategoryNames();
+        int elIndex = 0;
+
+        for (int i = 0; i < categoryNames.size(); i++) {
+            if (categoryNames.get(i).toString().equals(title)) {
+                elIndex = i;
+            }
+        }
+
+        return elIndex;
     }
 
     @BeforeTest(alwaysRun = true)
@@ -119,7 +185,7 @@ public class BaseTest extends CommonMethods {
         return markup;
     }
 
-    public void logTextOnReport(String text){
+    public void logTextOnReport(String text) {
         Markup markup = MarkupHelper.createLabel(text, ExtentColor.WHITE);
         extentTestLogger.log(Status.INFO, markup);
     }
