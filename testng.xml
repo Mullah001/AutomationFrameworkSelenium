@@ -7,13 +7,13 @@
     </listeners>
 
     <parameter name="browser" value="chrome"/>
-    <parameter name="platform" value="API"/>
+    <parameter name="platform" value="WEB"/>
     <parameter name="headless" value="false"/>
 
     <test name="TicketLake - Test Automation">
         <groups>
             <run>
-                <include name="API"/>
+                <include name="WEB"/>
             </run>
         </groups>
         <classes>
@@ -36,6 +36,11 @@
 
             <!-- Parent Events Listing -->
             <class name="test.API.ParentEventsListing.Post_FetchParentEventsForConsumers"/>
+
+            <class name="test.Web.Register"/>
+            <class name="test.Web.Login"/>
+            <class name="test.Web.ForgetPassword"/>
+            <class name="test.Web.SocialLogins"/>
 
         </classes>
     </test>

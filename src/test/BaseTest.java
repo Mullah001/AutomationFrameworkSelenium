@@ -248,7 +248,7 @@ public class BaseTest extends CommonMethods {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "chromedriver.exe");
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setBinary("C:\\Google Chrome Selenium\\chrome.exe");
+            //chromeOptions.setBinary("C:\\Google Chrome Selenium\\chrome.exe");
             if (headless) {
                 chromeOptions.setHeadless(true);
                 driver = new ChromeDriver(chromeOptions);

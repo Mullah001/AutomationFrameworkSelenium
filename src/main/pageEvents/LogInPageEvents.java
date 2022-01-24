@@ -1,14 +1,8 @@
 package main.pageEvents;
 
-import main.data.LogInData;
-import main.pageObjects.HomePageElements;
 import main.pageObjects.LogInPageElements;
-import main.pageObjects.SocialLoginElements;
 import main.utils.FetchElement;
 import main.utils.Locator;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import test.BaseTest;
 
 public class LogInPageEvents {

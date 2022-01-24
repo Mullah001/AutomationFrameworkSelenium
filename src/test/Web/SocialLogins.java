@@ -14,7 +14,7 @@ public class SocialLogins extends BaseTest {
     HomePageEvents homePageEvents = new HomePageEvents();
     LogInPageEvents logInPageEvents = new LogInPageEvents();
 
-    @Test
+    @Test(testName = "log in with google")
     public void socialLoginWithGoogle() throws InterruptedException {
         homePageEvents.clickOnSignIn();
         Thread.sleep(2000);
@@ -38,17 +38,17 @@ public class SocialLogins extends BaseTest {
         Assert.assertEquals(homePageTitle , "Home", "User is logged in with there google email");
     }
 
-    @Test
-    public void socialLoginWithFacebook() throws InterruptedException {
-        homePageEvents.clickOnSignIn();
-
-        Thread.sleep(2000);
-        logInPageEvents.clickOnFacebookLogo();
-
-        String winHandleBefore = driver.getWindowHandle();
-        for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
-        }
-    }
+//    @Test
+//    public void socialLoginWithFacebook() throws InterruptedException {
+//        homePageEvents.clickOnSignIn();
+//
+//        Thread.sleep(2000);
+//        logInPageEvents.clickOnFacebookLogo();
+//
+//        String winHandleBefore = driver.getWindowHandle();
+//        for(String winHandle : driver.getWindowHandles()){
+//            driver.switchTo().window(winHandle);
+//        }
+//    }
 
 }
