@@ -1,10 +1,10 @@
 package main.utils;
 
 public interface Constants {
-    String baseUrl = "http://127.0.0.1:5501/index.html";
+    String baseUrl = "https://qa.ticketlake.com/";
 
     //How Many times we will retry if Test fails
-    int retryCount = 2;
+    int retryCount = 0;
 
     String environment = "QA_Environment";
     String serverURL = "ServerURL";

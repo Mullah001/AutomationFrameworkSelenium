@@ -7,24 +7,29 @@
     </listeners>
 
     <parameter name="browser" value="chrome" />
-    <parameter name="platform" value="API" />
+    <parameter name="platform" value="WEB" />
     <parameter name="headless" value="false" />
 
     <test name="TicketLake - Test Automation">
         <groups>
             <run>
-                <include name="API" />
-<!--                <exclude name="API" />-->
+                <include name="WEB" />
+                <exclude name="API" />
 <!--                <exclude name="WEB" />-->
             </run>
         </groups>
         <classes>
 <!--            <class name="test.TestSample"/>-->
-            <class name="test.DemoTest" />
+<!--            <class name="test.DemoTest" />-->
             <class name="test.API.LogIn.Post_LogIn" />
 <!--            <class name="test.API.LogIn.Post_LogInWithGoogle" />-->
             <class name="test.API.LogIn.Get_ForgotPassword" />
             <class name="test.API.LogIn.Post_ResavePassword" />
+<!--            <class name="test.Web.Login" />-->
+            <class name="test.Web.Register" />
+            <class name="test.Web.Login" />
+            <class name="test.Web.ForgetPassword" />
+            <class name="test.Web.SocialLogins" />
 <!--            <class name="test.Get_Demo" />-->
 
         </classes>

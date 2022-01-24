@@ -15,12 +15,6 @@ public class TestSample extends BaseTest{
     LogInPageEvents logInPageEvents = new LogInPageEvents();
 
     @Test (enabled = false)
-    public void verifyHomePage(){
-        String heroText = homePageEvents.getHeroText();
-        Assert.assertEquals(heroText, HomePageData.heroText);
-    }
-
-    @Test (enabled = false)
     public void verifyHomePageTitle(){
         String title = CommonMethods.getTitle();
 //        List<List<String>> records =  CommonMethods.ReadCSV("C:\\Users\\Hamza Ashfaq\\Downloads\\SampleCSV.csv");
@@ -37,18 +31,5 @@ public class TestSample extends BaseTest{
         Assert.assertEquals(title,HomePageData.title);
     }
 
-    public void checkLogInFunctionality() {
-        homePageEvents.clickOnSignInButton();
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.titleIs("Sign in"),
-                ExpectedConditions.titleIs("Home")));
-
-        logInPageEvents.enterEmail();
-        logInPageEvents.enterPassword();
-        logInPageEvents.clickLogInButton();
-
-        Assert.assertTrue(logInPageEvents.verifyLogInSuccess());
-    }
 }
