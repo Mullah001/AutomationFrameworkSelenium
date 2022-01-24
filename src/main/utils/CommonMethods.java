@@ -4,8 +4,9 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import test.BaseTest;
 
 import java.io.*;
@@ -28,25 +29,19 @@ public class CommonMethods {
 
     public static String screenshotPath;
 
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
-    public String verificationCode;
-
     public static String screenshotName;
 
     public String getTokenInst() {
         String body = propRead.getUserCredentials();
 
+        if(RestAssured.baseURI.isEmpty() || RestAssured.baseURI == null)
+        RestAssured.baseURI = getServerURlIns();
+
         Response response = RestAssured.given()
                 .contentType(appJson)
                 .body(body)
                 .post(loginEP);
+
         return response.body().jsonPath().get(xAuth).toString();
     }
 
@@ -130,6 +125,16 @@ public class CommonMethods {
     public static String generateRandomPhoneNumber() {
         String phoneNumber = "+92320" + RandomStringUtils.randomNumeric(7);
         return phoneNumber;
+    }
+
+    public void waitForElementPresent(WebDriver driver, By item, int seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(item));
+    }
+
+    public void waitForElementVisible(WebDriver driver, By item, int seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(item));
     }
 
     public static List<String> getRecordFromCSV(String path, int lineNumber) {

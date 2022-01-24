@@ -13,7 +13,7 @@ public class PropertyFilesReader implements Constants {
     FileReader reader;
     Properties properties = new Properties();
 
-    public PropertyFilesReader(){
+    public PropertyFilesReader() {
         initializeProperties();
     }
 
@@ -47,14 +47,18 @@ public class PropertyFilesReader implements Constants {
         return properties.getProperty(password);
     }
 
+    public String getEmail() {
+        return properties.getProperty(email);
+    }
+
     public String getUserCredentials() {
 
-        String user = getUserName();
+        String e_mail = getEmail();
         String pass = getPass();
 
-        return  "{\n" +
-                "\t\""+username+"\":\""+user+"\",\n" +
-                "\t\""+password+"\":\""+pass+"\"\n" +
+        return "{\n" +
+                "\t\"" + email + "\":\"" + e_mail + "\",\n" +
+                "\t\"" + password + "\":\"" + pass + "\"\n" +
                 "}";
     }
 }

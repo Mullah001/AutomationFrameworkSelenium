@@ -2,36 +2,51 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="TicketLake Test Suite">
     <listeners>
-        <listener class-name="main.utils.SuiteListener" />
+        <listener class-name="main.utils.SuiteListener"/>
         <listener class-name="main.utils.RetryListener"/>
     </listeners>
 
-    <parameter name="browser" value="chrome" />
-    <parameter name="platform" value="WEB" />
-    <parameter name="headless" value="false" />
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="API"/>
+    <parameter name="headless" value="false"/>
 
     <test name="TicketLake - Test Automation">
         <groups>
             <run>
-                <include name="WEB" />
-                <exclude name="API" />
-<!--                <exclude name="WEB" />-->
+                <include name="API"/>
             </run>
         </groups>
         <classes>
-<!--            <class name="test.TestSample"/>-->
-<!--            <class name="test.DemoTest" />-->
-            <class name="test.API.LogIn.Post_LogIn" />
-<!--            <class name="test.API.LogIn.Post_LogInWithGoogle" />-->
-            <class name="test.API.LogIn.Get_ForgotPassword" />
-            <class name="test.API.LogIn.Post_ResavePassword" />
-<!--            <class name="test.Web.Login" />-->
-            <class name="test.Web.Register" />
-            <class name="test.Web.Login" />
-            <class name="test.Web.ForgetPassword" />
-            <class name="test.Web.SocialLogins" />
-<!--            <class name="test.Get_Demo" />-->
+            <class name="test.DemoTest"/>
 
+            <!-- Registration -->
+            <class name="test.API.Registration.Post_VerifyEmailPhone"/>
+            <class name="test.API.Registration.Post_Register"/>
+
+            <!-- Log In -->
+            <class name="test.API.LogIn.Post_LogIn"/>
+            <class name="test.API.LogIn.Get_ForgotPassword"/>
+            <class name="test.API.LogIn.Post_ResavePassword"/>
+
+            <!-- Movies Listing -->
+            <class name="test.API.MoviesListing.Post_FetchTrendingEventsCat"/>
+
+            <!-- Categories -->
+            <class name="test.API.Categories.Get_FetchAllCategories"/>
+
+            <!-- Parent Events Listing -->
+            <class name="test.API.ParentEventsListing.Post_FetchParentEventsForConsumers"/>
+
+        </classes>
+    </test>
+    <test name="TicketLake - WEB - Classes">
+        <groups>
+            <run>
+                <include name="WEB"/>
+            </run>
+        </groups>
+        <classes>
+            <!--            <class name="test.WEB.RegisterUser.SignUp"></class>-->
         </classes>
     </test>
 </suite>
