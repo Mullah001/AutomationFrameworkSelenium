@@ -3,6 +3,7 @@ package test.API.Categories;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import main.ApiConfigs.Params.CategoriesPARAMS;
+import main.utils.API_DataMethods;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class Get_FetchAllCategories extends BaseTest {
 
     @Test(testName = "Fetch All Categories - Valid - Set Response")
     public void setResponseForValidData() {
-        String token = CategoriesPARAMS.fetchAllCategories_Valid();
+        String token = categoriesPARAMS.fetchAllCategories_Valid();
 
         response = RestAssured.given()
                 .contentType(textPlain)
@@ -55,6 +56,4 @@ public class Get_FetchAllCategories extends BaseTest {
         ArrayList data = response.jsonPath().get("data");
         Assert.assertEquals(data.size(), 4, "Categories count should be '4'");
     }
-
-
 }

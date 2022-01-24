@@ -36,6 +36,9 @@
 
             <!-- Parent Events Listing -->
             <class name="test.API.ParentEventsListing.Post_FetchParentEventsForConsumers"/>
+            <class name="test.API.ParentEventsListing.Post_FetchTrendingEvents"/>
+            <class name="test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers"/>
+
 
             <class name="test.Web.Register"/>
             <class name="test.Web.Login"/>
