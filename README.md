@@ -4,11 +4,13 @@
 The Framework is designed to automate the QA processes for different projects developed at Synavos Solutions. As for now It is covering two major domains i.e. WEB and API Testing.
 The Framework is a Maven Project and follows the POM(Page Object Model) design pattern.
 ## PRE-REQUISITES
-1. Java (required 1.8 or later)
+1. Java JDK (required 1.8 or later)
     * [Java](https://www.guru99.com/install-java.html "How to install Java")
-2. Maven
+2. Java (required 1.8 or later)
+    * [Java](https://www.guru99.com/install-java.html "How to install Java")
+3. Maven
     * [Maven](https://devwithus.com/install-maven-windows/ "How to install Maven")
-3. IDE either Eclipse or Intellij(Community)
+4. IDE either Eclipse or Intellij(Community)
     * [Eclipse](https://www.guru99.com/install-eclipse-java.html "Install Eclipse")
     * [Intellij](https://www.thecoderworld.com/how-to-install-intellij-idea-for-java-developers/ "Install Intellij")
 
