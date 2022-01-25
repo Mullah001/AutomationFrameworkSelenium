@@ -6,11 +6,9 @@ The Framework is a Maven Project and follows the POM(Page Object Model) design p
 ## PRE-REQUISITES
 1. Java JDK (required 1.8 or later)
     * [Java](https://www.guru99.com/install-java.html "How to install Java")
-2. Java (required 1.8 or later)
-    * [Java](https://www.guru99.com/install-java.html "How to install Java")
-3. Maven
+2. Maven
     * [Maven](https://devwithus.com/install-maven-windows/ "How to install Maven")
-4. IDE either Eclipse or Intellij(Community)
+3. IDE either Eclipse or Intellij(Community)
     * [Eclipse](https://www.guru99.com/install-eclipse-java.html "Install Eclipse")
     * [Intellij](https://www.thecoderworld.com/how-to-install-intellij-idea-for-java-developers/ "Install Intellij")
 
