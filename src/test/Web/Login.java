@@ -13,15 +13,16 @@ public class Login extends BaseTest {
     LogInPageEvents logInPageEvents = new LogInPageEvents();
     HomePageEvents homePageEvents = new HomePageEvents();
 
-    @Test(dataProvider = "signInData", dataProviderClass = DProvider.class, enabled = false)
+    @Test(testName = "Verify that login functionality is working fine with valid, invalid and Empty data", dataProvider = "signInData", dataProviderClass = DProvider.class)
     public void Login(String email, String password, String check) throws InterruptedException {
+
         homePageEvents.clickOnSignIn();
         logInPageEvents.enterEmail(email);
         logInPageEvents.enterPassword(password);
         logInPageEvents.clickLogInButton();
         Thread.sleep(10000);
         String homePageTitle = driver.getTitle();
-        switch (check){
+        switch (check) {
             case "inValid":
                 Assert.assertEquals(homePageTitle, "Sign in", "Email and phone number are invalid");
                 break;

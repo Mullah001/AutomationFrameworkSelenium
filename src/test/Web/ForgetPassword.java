@@ -14,7 +14,7 @@ public class ForgetPassword extends BaseTest {
     ForgetPasswordEvents forgetPasswordEvents = new ForgetPasswordEvents();
     HomePageEvents homePageEvents = new HomePageEvents();
 
-    @Test(enabled = false)
+    @Test(testName = "Verify that forget password functionality is working fine")
     public void forgetPassword() throws InterruptedException {
         homePageEvents.clickOnSignIn();
         logInPageEvents.clickOnForgetPassword();
@@ -47,7 +47,7 @@ public class ForgetPassword extends BaseTest {
         Assert.assertEquals(congratulationsText, "Congratulations!", "Password has been updated successfully.");
 
     }
-    @Test(enabled = false)
+    @Test(testName = "Verify that after successfull forget password user ia able to login with new password")
     public void loginwithNewPassword() throws InterruptedException {
         driver.get("https://qa.ticketlake.com/");
         Thread.sleep(5000);

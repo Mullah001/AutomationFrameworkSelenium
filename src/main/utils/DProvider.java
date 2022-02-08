@@ -37,7 +37,7 @@ public class DProvider extends CommonMethods{
         Object[][] data = new Object[3][3];
 
         data[0][0] = "shameem";
-        data[0][1] = "1234567";
+        data[0][1] = "123456";
         data[0][2] = "inValid";
 
         data[1][0] = "";
@@ -45,7 +45,7 @@ public class DProvider extends CommonMethods{
         data[1][2] = "empty";
 
         data[2][0] = "shameem.akhtar@synavos.com";
-        data[2][1] = "1234567";
+        data[2][1] = "12345678";
         data[2][2] = "valid";
 
         return data;

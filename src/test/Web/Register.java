@@ -13,7 +13,7 @@ public class Register extends BaseTest {
     RegisterPageEvents registerPageEvents = new RegisterPageEvents();
     HomePageEvents homePageEvents = new HomePageEvents();
 
-    @Test(dataProvider = "signUpData",dataProviderClass = DProvider.class, enabled = false)
+    @Test(testName = "Verify that registration functionality is working with valid, invalid and empty data.",dataProvider = "signUpData",dataProviderClass = DProvider.class)
     public void Register(String email, String password, String name, String phoneNumber, boolean isValid) throws InterruptedException {
         homePageEvents.clickOnSignIn();
         registerPageEvents.clickRegisterTop();

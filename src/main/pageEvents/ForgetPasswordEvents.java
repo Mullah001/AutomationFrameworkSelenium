@@ -44,7 +44,7 @@ public class ForgetPasswordEvents extends DProvider {
     }
 
     public void enterInSearchField() {
-        fetchElement.getWebElement(Locator.XPath, ForgetPasswordElements.sreachField).sendKeys("in:spam");
+        fetchElement.getWebElement(Locator.XPath, ForgetPasswordElements.sreachField).sendKeys("in:inbox");
     }
 
     public void pressEnterOnsearchField() {

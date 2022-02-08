@@ -14,7 +14,7 @@ public class SocialLogins extends BaseTest {
     HomePageEvents homePageEvents = new HomePageEvents();
     LogInPageEvents logInPageEvents = new LogInPageEvents();
 
-    @Test(testName = "log in with google")
+    @Test(testName = "Verify that log in with google functionality is working", enabled = false)
     public void socialLoginWithGoogle() throws InterruptedException {
         homePageEvents.clickOnSignIn();
         Thread.sleep(2000);
