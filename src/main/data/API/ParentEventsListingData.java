@@ -13,17 +13,20 @@ public interface ParentEventsListingData {
     String isFeatured_false = "false";
     String isDraft_false = "false";
     String upcoming = "true";
+    String upcoming_false = "false";
     String paginate = "true";
     String isPublished = "true";
     String page = "1";
-    String pageSize = "5";
+    String pageSizeWeb_4 = "4";
+    String pageSize_5 = "5";
     String pageSizeWeb_6 = "6";
     String pageSizeWeb_20 = "20";
     String[] categories = {"6174af3692a109001a9dc7cd"};
+    String[] moviesCategoryID = {"6174af3692a109001a9dc6bc"};
 
     /* InValid Data */
 
-    String inValidCountry = "Gh";
+    String inValidCountry = "lol";
     String inValidPaginate = "hello";
 
     /* Empty Data */

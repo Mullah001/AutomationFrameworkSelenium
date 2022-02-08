@@ -83,7 +83,7 @@ public class Post_FetchTrendingEvents extends BaseTest {
     @Test(testName = "Fetch Trending Events - Valid - Verify Fetch Trending Events Response has the eventsCount", priority = 1)
     public void verifyEventsCount() {
         ArrayList data = response.jsonPath().get("data");
-        Assert.assertEquals(data.size(), 5, "Events count should be '5'");
+        Assert.assertTrue(data.size() > 3, "Events count should be greater than '3'");
     }
 
     /********* InValid Data - Paginate *********/

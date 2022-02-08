@@ -83,7 +83,7 @@ public class Post_FetchParentEventsForConsumers extends BaseTest {
     @Test(testName = "Fetch Parent Events For Consumers - Valid - Verify Fetch Parent Events For Consumers Response has the eventsCount", priority = 1)
     public void verifyEventsCount() {
         ArrayList data = response.jsonPath().get("data");
-        Assert.assertEquals(data.size(), 5, "Events count should be '5'");
+        Assert.assertTrue(data.size() > 3, "Events count should be greater than '3'");
     }
 
     /********* InValid Data - Paginate *********/

@@ -175,6 +175,7 @@ public class Post_FetchNearbyParentEventsForConsumers extends BaseTest {
     @Test(priority = 8, testName = "Fetch Nearby Parent Events For Consumers - InValid Country - Set Response")
     public void setResponse_InValid_Country() {
         String body = parentEventsListingBODY.fetchNearbyParentEventsConsumers_Body_InValid_Country();
+        System.out.println(body);
         response = RestAssured.given()
                 .contentType(appJson)
                 .and()
@@ -183,6 +184,7 @@ public class Post_FetchNearbyParentEventsForConsumers extends BaseTest {
                 .post(fetchNearbyParentEventsForConsumerEP)
                 .then()
                 .extract().response();
+
     }
 
     @Test(testName = "Fetch Nearby Parent Events For Consumers - InValid Country - Verify Fetch Nearby Parent Events For Consumers Response Status Code is 200.", priority = 9)

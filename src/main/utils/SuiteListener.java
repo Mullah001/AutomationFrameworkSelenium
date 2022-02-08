@@ -22,7 +22,7 @@ public class SuiteListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        if (iTestResult.getTestClass().getXmlTest().getSuite().getAllParameters().get("platform") == "WEB")
+        if (iTestResult.getTestClass().getXmlTest().getSuite().getAllParameters().get("platform").equals("WEB"))
             commonMethods.TakeScreenshot(iTestResult.getMethod().getMethodName());
     }
 

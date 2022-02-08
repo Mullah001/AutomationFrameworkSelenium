@@ -1,5 +1,6 @@
 package main.utils;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.commons.io.FileUtils;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static main.ApiConfigs.EndPoints.LogInEP.loginEP;
 import static main.utils.Constants.appJson;
@@ -31,11 +33,16 @@ public class CommonMethods {
 
     public static String screenshotName;
 
+    /**
+     * Get Authorization Token from API
+     *
+     * @return token
+     */
     public String getTokenInst() {
         String body = propRead.getUserCredentials();
 
-        if(RestAssured.baseURI.isEmpty() || RestAssured.baseURI == null)
-        RestAssured.baseURI = getServerURlIns();
+        if (RestAssured.baseURI.isEmpty() || RestAssured.baseURI == null)
+            RestAssured.baseURI = getServerURlIns();
 
         Response response = RestAssured.given()
                 .contentType(appJson)
@@ -45,12 +52,16 @@ public class CommonMethods {
         return response.body().jsonPath().get(xAuth).toString();
     }
 
-    public String getServerURlIns() {
-        return propRead.getServerURlProp();
+    public void sleep(long milliSec) {
+        try {
+            Thread.sleep(milliSec);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String getTitle() {
-        return BaseTest.driver.getTitle();
+    public String getServerURlIns() {
+        return propRead.getServerURlProp();
     }
 
     /**
@@ -85,6 +96,23 @@ public class CommonMethods {
             }
         }
         return values;
+    }
+
+    public static List<String> getRecordFromCSV(String path, int lineNumber) {
+        List<String> record = new ArrayList<>();
+        int count = 1;
+        try (Scanner scanner = new Scanner(new File(path));) {
+            while (scanner.hasNextLine()) {
+                if (count == lineNumber) {
+                    record = getRecordFromLine(scanner.nextLine());
+                    break;
+                } else
+                    count++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return record;
     }
 
     public String createScreenshotPath(String methodName) {
@@ -127,30 +155,61 @@ public class CommonMethods {
         return phoneNumber;
     }
 
+    /******************** Selenium Helper Methods *******************/
+
+    public static String getTitle() {
+        return BaseTest.driver.getTitle();
+    }
+
+    public static String getCurrentURL() {
+        return BaseTest.driver.getCurrentUrl();
+    }
+
+    public boolean IsElementPresentAndVisible(By element) {
+        boolean elementPresence = false;
+        try {
+            elementPresence = BaseTest.driver.findElement(element).isEnabled() && BaseTest.driver.findElement(element).isDisplayed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return elementPresence;
+    }
+
+    public boolean IsElementPresent(By element) {
+        boolean elementPresence = false;
+        try {
+            elementPresence = BaseTest.driver.findElement(element).isEnabled();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return elementPresence;
+    }
+
     public void waitForElementPresent(WebDriver driver, By item, int seconds) {
-        WebDriverWait wait = new WebDriverWait(driver, seconds);
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(item));
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, seconds);
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(item));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void waitForElementVisible(WebDriver driver, By item, int seconds) {
-        WebDriverWait wait = new WebDriverWait(driver, seconds);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(item));
-    }
-
-    public static List<String> getRecordFromCSV(String path, int lineNumber) {
-        List<String> record = new ArrayList<>();
-        int count = 1;
-        try (Scanner scanner = new Scanner(new File(path));) {
-            while (scanner.hasNextLine()) {
-                if (count == lineNumber) {
-                    record = getRecordFromLine(scanner.nextLine());
-                    break;
-                } else
-                    count++;
-            }
-        } catch (FileNotFoundException e) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, seconds);
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(item));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return record;
     }
+
+    public void waitForElementPresentAndVisible(WebDriver driver, By item, int seconds) {
+        try {
+            waitForElementPresent(driver, item, seconds);
+            waitForElementVisible(driver, item, seconds);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
