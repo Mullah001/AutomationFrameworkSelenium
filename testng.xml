@@ -9,6 +9,7 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="platform" value="WEB"/>
     <parameter name="headless" value="false"/>
+    <parameter name="testLevel" value="class"/>
 
     <test name="TicketLake - Test Automation">
         <groups>
@@ -40,10 +41,20 @@
             <class name="test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers"/>
 
 
-            <class name="test.Web.Register"/>
-            <class name="test.Web.Login"/>
-            <class name="test.Web.ForgetPassword"/>
-            <class name="test.Web.SocialLogins"/>
+<!--            <class name="test.Web.Register"/>-->
+<!--            <class name="test.Web.Login"/>-->
+<!--            <class name="test.Web.ForgetPassword"/>-->
+<!--            <class name="test.Web.SocialLogins"/>-->
+
+<!--            <class name="test.Web.Movies.SearchBarMovies"/>-->
+<!--            <class name="test.Web.Movies.ShowingInCinemas_Movies"/>-->
+<!--            <class name="test.Web.Movies.SliderMovies"/>-->
+<!--            <class name="test.Web.Movies.TopMovies_Movies"/>-->
+<!--            <class name="test.Web.Movies.TrendingMovies_Movies"/>-->
+<!--            <class name="test.Web.Movies.UpComingMovies_Movies"/>-->
+
+            <class name="test.Web.PurchaseFlowMovies.PurchaseFlowTest"/>
+
 
         </classes>
     </test>
@@ -54,7 +65,7 @@
             </run>
         </groups>
         <classes>
-            <!--            <class name="test.WEB.RegisterUser.SignUp"></class>-->
+            <!--            <class name="test.Web.RegisterUser.SignUp"></class>-->
         </classes>
     </test>
 </suite>
