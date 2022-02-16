@@ -2,6 +2,14 @@ package main.data.API;
 
 public interface ParentEventsListingData {
 
+    /*********** Fetch Parent Events *********/
+
+    String organizationId_all = "all";
+    String pageSize_15 = "15";
+    String type_all = "all";
+    String isPermission_false = "false";
+    String isPublished_false = "false";
+
     /************ Fetch Parent Events For Consumers **************/
     /************ Fetch Trending Events **************/
 

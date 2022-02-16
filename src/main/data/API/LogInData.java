@@ -1,7 +1,9 @@
 package main.data.API;
 
+import groovy.lang.GString;
+
 public interface LogInData {
-    /******** LogIn *******/
+    /******** LogIn - Consumer *******/
 
     /* Valid Data*/
     String email = "hamza.ashfaq@synavos.com";
@@ -14,6 +16,11 @@ public interface LogInData {
     /* Empty Data*/
     String emptyEmail = "";
     String emptyPassword = "";
+
+    /************** Log In - Admin ***************/
+
+    String userName_Admin = "master";
+    String password_Admin = "123456";
 
 
     /******* Log In With Google ******/

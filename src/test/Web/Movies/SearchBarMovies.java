@@ -33,9 +33,9 @@ public class SearchBarMovies extends BaseTest {
 
         moviesPageEvents.typeKeywordAndSearch(keywordText_Valid);
 
-        actualCount = moviesPageEvents.getKeywordCountByText_API(keywordText_Valid);
+        expectedCount = moviesPageEvents.getKeywordCountByText_API(keywordText_Valid);
 
-        expectedCount = moviesPageEvents.getMoviesListCount();
+        actualCount = moviesPageEvents.getMoviesListCount();
 
         Assert.assertEquals(actualCount, expectedCount, "Keyword Search result count should be equal to the API response count");
     }

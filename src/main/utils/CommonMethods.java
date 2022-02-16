@@ -1,9 +1,11 @@
 package main.utils;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.commons.io.FileUtils;
+
+import java.nio.file.*;
+
+import main.ApiConfigs.Body.LogInBODY;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,9 +17,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static main.ApiConfigs.EndPoints.LogInEP.loginEP;
+import static main.ApiConfigs.EndPoints.LogInEP.loginEP_Admin;
 import static main.utils.Constants.appJson;
 import static main.utils.Constants.xAuth;
 
@@ -32,6 +34,17 @@ public class CommonMethods {
     public static String screenshotPath;
 
     public static String screenshotName;
+
+    public String getBaseURL_Web(boolean isAdmin) {
+        String baseURL = Constants.baseUrl;
+
+        if (isAdmin) {
+            baseURL = Constants.adminBaseUrl;
+        }
+
+        return baseURL;
+
+    }
 
     /**
      * Get Authorization Token from API
@@ -62,6 +75,14 @@ public class CommonMethods {
 
     public String getServerURlIns() {
         return propRead.getServerURlProp();
+    }
+
+    public String getPaypalUserName_sb() {
+        return propRead.getPaypalUserName_sb();
+    }
+
+    public String getPaypalPassword_sb() {
+        return propRead.getPaypalPassword_sb();
     }
 
     /**
@@ -131,7 +152,8 @@ public class CommonMethods {
 
         try {
             File file = ((TakesScreenshot) BaseTest.driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(file, new File(fileName + ".png"));
+            Files.copy(file.toPath(), new File(fileName + ".png").toPath(), LinkOption.NOFOLLOW_LINKS, StandardCopyOption.REPLACE_EXISTING);
+            //FileUtils.copyFile(file, new File(fileName + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

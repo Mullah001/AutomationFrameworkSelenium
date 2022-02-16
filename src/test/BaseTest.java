@@ -10,17 +10,12 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 //import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
-import com.aventstack.extentreports.reporter.configuration.ViewOrder;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.response.Response;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import main.ApiConfigs.Body.ParentEventsListingBODY;
-import main.ApiConfigs.Params.CategoriesPARAMS;
 import main.utils.CommonMethods;
 import main.utils.Constants;
-import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -37,11 +32,8 @@ import org.testng.internal.TestResult;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import static main.ApiConfigs.EndPoints.CategoriesEP.fetchAllCategoriesEP;
-import static main.ApiConfigs.EndPoints.ParentEventsListingEP.fetchParentEventsForConsumerEP;
 import static main.data.WEB.MoviesData.moviesURL;
 import static main.utils.Constants.*;
 
@@ -52,6 +44,7 @@ public class BaseTest extends CommonMethods {
     public ExtentSparkReporter extentHtmlReporter;
     public static ExtentReports extentReports;
     public static ExtentTest extentTestLogger;
+    private String baseUrl_Web;
 
     private static RequestSpecification requestSpec;
 
@@ -60,6 +53,10 @@ public class BaseTest extends CommonMethods {
     }
 
     public String screenshotPAth = "";
+
+    private void setBaseUrl_Web(boolean isAdmin) {
+        baseUrl_Web = getBaseURL_Web(isAdmin);
+    }
 
     public String getServerURL() {
         return getServerURlIns();
@@ -85,7 +82,7 @@ public class BaseTest extends CommonMethods {
     }
 
     public void loadMoviesSearchURL() {
-        driver.navigate().to(Constants.baseUrl + moviesURL);
+        driver.navigate().to(baseUrl_Web + moviesURL);
     }
 
     @BeforeTest(alwaysRun = true)
@@ -114,22 +111,24 @@ public class BaseTest extends CommonMethods {
     }
 
     @BeforeClass(alwaysRun = true)
-    @Parameters(value = {"browser", "platform", "headless", "testLevel"})
-    public void beforeClassMethod(@Optional String browser, @Optional String platform, @Optional boolean headless, @Optional String testLevel) {
+    @Parameters(value = {"browser", "platform", "headless", "testLevel", "isAdmin"})
+    public void beforeClassMethod(@Optional String browser, String platform,
+                                  @Optional boolean headless, String testLevel, @Optional boolean isAdmin) {
         if (platform != null && platform.equalsIgnoreCase("WEB")) {
             if (testLevel.equalsIgnoreCase("class")) {
-                initializeBrowser(browser, headless);
+                initializeBrowser(browser, headless, isAdmin);
             }
         }
     }
 
     @BeforeMethod(alwaysRun = true)
-    @Parameters(value = {"browser", "platform", "headless", "testLevel"})
-    public void beforeMethodMethod(@Optional String browser, Method testMethod, @Optional String platform, @Optional boolean headless, @Optional String testLevel) {
+    @Parameters(value = {"browser", "platform", "headless", "testLevel", "isAdmin"})
+    public void beforeMethodMethod(@Optional String browser, Method testMethod, String platform,
+                                   @Optional boolean headless, String testLevel, @Optional boolean isAdmin) {
 
         if (platform != null && platform.equalsIgnoreCase("WEB")) {
             if (testLevel.equalsIgnoreCase("method")) {
-                initializeBrowser(browser, headless);
+                initializeBrowser(browser, headless, isAdmin);
             }
         }
 
@@ -139,11 +138,13 @@ public class BaseTest extends CommonMethods {
         extentTestLogger.log(Status.INFO, createMarkupText(testName, ExtentColor.WHITE));
     }
 
-    private void initializeBrowser(String browser, Boolean headless) {
+    private void initializeBrowser(String browser, Boolean headless, boolean isAdmin) {
         setDriver(browser, headless);
 
+        setBaseUrl_Web(isAdmin);
+
         driver.manage().window().maximize();
-        driver.navigate().to(Constants.baseUrl);
+        driver.navigate().to(baseUrl_Web);
         //driver.get(Constants.baseUrl);
         setMaxTimeout(30);
     }
@@ -169,7 +170,7 @@ public class BaseTest extends CommonMethods {
 
     @AfterMethod(alwaysRun = true)
     @Parameters(value = {"platform", "testLevel"})
-    public void afterMethodMethod(ITestResult result, String platform, @Optional String testLevel) {
+    public void afterMethodMethod(ITestResult result, String platform, String testLevel) {
         String testName = result.getMethod().getMethodName();
         if (result.getStatus() == TestResult.SUCCESS) {
             String logText = "Test Case: " + testName + " Passed";
@@ -205,7 +206,7 @@ public class BaseTest extends CommonMethods {
 
     @AfterClass(alwaysRun = true)
     @Parameters(value = {"platform", "testLevel"})
-    public void afterClassMethod(String platform, @Optional String testLevel) {
+    public void afterClassMethod(String platform, String testLevel) {
 
         if (platform.equalsIgnoreCase("WEB")) {
             if (testLevel.equalsIgnoreCase("class")) {

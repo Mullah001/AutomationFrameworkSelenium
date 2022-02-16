@@ -12,6 +12,23 @@ public class ParentEventsListingBODY {
 
     static Map<String, Object> map = new HashMap<>();
 
+    /********** Fetch Parent Events ************/
+
+    public static String fetchParentEvents_Body() {
+
+        map.put("isFeatured", Boolean.valueOf(isFeatured_false));
+        map.put("isPermission", Boolean.valueOf(isPermission_false));
+        map.put("isPublished", Boolean.valueOf(isPublished_false));
+        map.put("organizationId", organizationId_all);
+        map.put("paginate", Boolean.valueOf(paginate));
+        map.put("page", page);
+        map.put("type", type_all);
+        map.put("pageSize", new Integer(pageSize_15));
+
+
+        return JSONValue.toJSONString(map);
+    }
+
     /******** Fetch Parent Events For Consumers ********/
 
     public static String fetchParentEventsConsumers_Body() {

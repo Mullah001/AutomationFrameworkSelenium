@@ -4,7 +4,7 @@ public interface MoviesData {
 
     String moviesURL = "movies/search/6174af3692a109001a9dc6bc";
 
-    String keywordPlaceholder = "Movie Keyword …";
+    String keywordPlaceholder = "Movie Keyword";
 
     /* Valid Data */
     String keywordText_Valid = "God";

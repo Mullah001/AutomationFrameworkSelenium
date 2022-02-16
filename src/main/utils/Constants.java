@@ -2,6 +2,7 @@ package main.utils;
 
 public interface Constants {
     String baseUrl = "https://qa.ticketlake.com/";
+    String adminBaseUrl = "https://admin.qa.ticketlake.com/";
 
     //How Many times we will retry if Test fails
     int retryCount = 0;
@@ -11,6 +12,8 @@ public interface Constants {
     String username = "username";
     String password = "password";
     String email = "email";
+    String paypalUserName_sb = "paypalUserName_sb";
+    String paypalPassword_sb = "paypalPassword_sb";
 
     /* ContentTypes */
     String appJson = "application/json";
