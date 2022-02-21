@@ -39,6 +39,14 @@ public class PropertyFilesReader implements Constants {
         return properties.getProperty(serverURL);
     }
 
+    public String getPaypalUserName_sb(){
+        return properties.getProperty(paypalUserName_sb);
+    }
+
+    public String getPaypalPassword_sb(){
+        return properties.getProperty(paypalPassword_sb);
+    }
+
     public String getUserName() {
         return properties.getProperty(username);
     }

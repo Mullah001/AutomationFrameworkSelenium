@@ -2,7 +2,6 @@ package test.Web.Movies;
 
 import main.pageEvents.MoviesPageEvents;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -22,7 +21,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify Showing In Cinemas Movies Text")
     public void verifyShowingInCinemasMoviesText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getShowingInCinemasMoviesText_ShowingInCinemasMovies();
         expectedText = showingInCinemasMoviesText;
@@ -32,7 +31,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify Showing In Cinemas Movies List Items Count", priority = 1)
     public void verifyShowingInCinemasMoviesCount() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualCount = moviesPageEvents.getListItemsCount_ShowingInCinemasMovies();
 
@@ -43,7 +42,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Name from API response", priority = 2)
     public void verifyShowingInCinemasMovieName() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getFirstListItemName_ShowingInCinemasMovies().split("-")[0].trim();
         expectedText = moviesPageEvents.getFirstItemName_ShowingInCinemasMovies_API();
@@ -53,7 +52,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Item is navigating to the Movie Details page", priority = 3)
     public void verifyMovieItemNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         sleep(2000L);
         moviesPageEvents.clickFirstListItem_ShowingInCinemasMovies();
@@ -66,7 +65,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify See All Button Text", priority = 4, enabled = false)
     public void verifySeeAllBtnText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getSeeAllButtonText_ShowingInCinemasMovies();
         expectedText = seeAllText;
@@ -76,7 +75,7 @@ public class ShowingInCinemas_Movies extends BaseTest {
 
     @Test(testName = "Verify See All Button Navigating to the View More Movies Page", priority = 5, enabled = false)
     public void verifySeeAllNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         moviesPageEvents.clickSeeAllButton_ShowingInCinemasMovies();
 

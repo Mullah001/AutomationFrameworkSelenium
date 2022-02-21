@@ -2,7 +2,6 @@ package test.Web.Movies;
 
 import main.pageEvents.MoviesPageEvents;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -22,7 +21,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Trending Movies Text")
     public void verifyTrendingMoviesText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getTrendingMoviesText_TrendingMovies();
         expectedText = trendingMoviesText;
@@ -32,7 +31,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Trending Movies List Items Count", priority = 1)
     public void verifyTrendingMoviesCount() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualCount = moviesPageEvents.getListItemsCount_TrendingMovies();
 
@@ -43,7 +42,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Name from API response", priority = 2)
     public void verifyTrendingMovieName() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getFirstListItemName_TrendingMovies();
         expectedText = moviesPageEvents.getFirstItemName_TrendingMovies_API();
@@ -53,7 +52,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Item is navigating to the Movie Details page", priority = 3, enabled = false)
     public void verifyMovieItemNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         moviesPageEvents.clickFirstListItem_TrendingMovies();
 
@@ -65,7 +64,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify See All Button Text", priority = 4)
     public void verifySeeAllBtnText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getSeeAllButtonText_TrendingMovies();
         expectedText = seeAllText;
@@ -75,7 +74,7 @@ public class TrendingMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify See All Button Navigating to the View More Movies Page", priority = 5)
     public void verifySeeAllNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         moviesPageEvents.clickSeeAllButton_TrendingMovies();
 

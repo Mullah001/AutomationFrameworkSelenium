@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 161, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 9.745 sec <<< FAILURE!
+verifyEventsCount(test.API.ParentEventsListing.Post_FetchParentEventsForConsumers)  Time elapsed: 0.011 sec  <<< FAILURE!
+java.lang.AssertionError: Events count should be greater than '3' expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1413)
+	at org.testng.Assert.assertTrue(Assert.java:56)
+	at test.API.ParentEventsListing.Post_FetchParentEventsForConsumers.verifyEventsCount(Post_FetchParentEventsForConsumers.java:86)
+verifyEventsCount(test.API.ParentEventsListing.Post_FetchTrendingEvents)  Time elapsed: 0.01 sec  <<< FAILURE!
+java.lang.AssertionError: Events count should be greater than '3' expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1413)
+	at org.testng.Assert.assertTrue(Assert.java:56)
+	at test.API.ParentEventsListing.Post_FetchTrendingEvents.verifyEventsCount(Post_FetchTrendingEvents.java:86)
+verifyEventsCount_InValid_Country(test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers)  Time elapsed: 0.013 sec  <<< FAILURE!
+java.lang.AssertionError: Events count should be '0' expected [0] but found [5]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1413)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:149)
+	at org.testng.Assert.assertEquals(Assert.java:131)
+	at org.testng.Assert.assertEquals(Assert.java:1240)
+	at test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers.verifyEventsCount_InValid_Country(Post_FetchNearbyParentEventsForConsumers.java:200)

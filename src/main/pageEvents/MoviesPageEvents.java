@@ -17,8 +17,9 @@ public class MoviesPageEvents extends CommonMethods {
     FetchElement fetchElement = new FetchElement();
     API_DataMethods api_dataMethods = new API_DataMethods();
 
-    public void clickMoviesFromHeader() {
-        fetchElement.getWebElement(Locator.XPath, moviesLinkA_XPath).click();
+    public void loadMoviesURLFromHeader() {
+        String url = fetchElement.getWebElement(Locator.XPath, moviesLinkA_XPath).getAttribute("href");
+        BaseTest.driver.navigate().to(url);
     }
 
     /*********************** Search Bar *********************/
@@ -225,6 +226,7 @@ public class MoviesPageEvents extends CommonMethods {
     /******************************** Movies Details Page *************************/
 
     public String getTitle_MoviesDetails() {
+        waitForElementPresent(BaseTest.driver, By.className(movieTitleDiv_ClassName), 20);
         return fetchElement.getWebElement(Locator.ClassName, movieTitleDiv_ClassName).getText();
     }
 

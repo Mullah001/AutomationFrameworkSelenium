@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TicketLake Test Automation Suite">
+    <listeners>
+        <listener class-name="main.utils.SuiteListener"/>
+        <listener class-name="main.utils.RetryListener"/>
+    </listeners>
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="WEB"/>
+    <parameter name="headless" value="false"/>
+    <parameter name="testLevel" value="method"/>
+    <parameter name="isAdmin" value="true"/>
+
+    <test name="TicketLake - ADMIN">
+
+        <groups>
+            <run>
+                <include name="ADMIN"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="test.ADMIN.LogIn.LogInTest"/>
+        </classes>
+
+    </test>
+</suite>

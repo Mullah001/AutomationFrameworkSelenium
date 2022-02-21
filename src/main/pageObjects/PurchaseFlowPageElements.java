@@ -24,7 +24,9 @@ public interface PurchaseFlowPageElements {
 
     String walletDiv_XPath = "//div[@class='payment-wrp']//div[@class='payment-gateway-box false']";
 
-    String walletPromptPayButton_XPath = "//button[contains(@class,'wallet-prompt_layoutBtn')]";
+    String paypalDiv_XPath = "//img[@alt='paypal-logo']//ancestor::div[contains(@class,'payment-gateway-box')]";
+
+    String walletPromptPayButton_XPath = "//button[contains(@class,'wallet-prompt_submit')]";
 
     String successImg_XPath = "//img[@alt='Success']";
 

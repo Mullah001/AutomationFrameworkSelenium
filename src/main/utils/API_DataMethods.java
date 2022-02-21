@@ -1,17 +1,19 @@
 package main.utils;
 
-import groovy.lang.MetaClassImpl;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import main.ApiConfigs.Body.LogInBODY;
 import main.ApiConfigs.Body.ParentEventsListingBODY;
 import main.ApiConfigs.Params.CategoriesPARAMS;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-import static main.ApiConfigs.EndPoints.CategoriesEP.fetchAllCategoriesEP;
-import static main.ApiConfigs.EndPoints.ParentEventsListingEP.fetchParentEventsForConsumerEP;
-import static main.ApiConfigs.EndPoints.ParentEventsListingEP.fetchTrendingEventsEP;
+import static main.ApiConfigs.EndPoints.CategoriesEP.*;
+import static main.ApiConfigs.EndPoints.LogInEP.loginEP_Admin;
+import static main.ApiConfigs.EndPoints.ParentEventsListingEP.*;
 import static main.ApiConfigs.EndPoints.SubCategoriesEP.getAllSubCategoriesEP;
 import static main.data.API.SubCategoriesData.moviesId;
 import static main.utils.Constants.*;
@@ -21,7 +23,7 @@ public class API_DataMethods {
 
     /********** All Categories - HomePage - API *********/
 
-    public Response getResponse_AllCategories() {
+    private Response getResponse_AllCategories() {
         String token = CategoriesPARAMS.fetchAllCategories_Valid();
 
         return RestAssured.given()
@@ -99,7 +101,7 @@ public class API_DataMethods {
 
     /************* Sub Categories - Movies - API *************/
 
-    public Response getResponse_AllSubCategories_Movies() {
+    private Response getResponse_AllSubCategories_Movies() {
         String EP = getAllSubCategoriesEP + moviesId;
 
         return RestAssured.given()
@@ -161,7 +163,7 @@ public class API_DataMethods {
 
     /*********** Top Movies - Movies - API **************/
 
-    public Response getResponseForParentEventsForConsumers_TopMovies() {
+    private Response getResponseForParentEventsForConsumers_TopMovies() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_TopMovies();
 
@@ -178,7 +180,7 @@ public class API_DataMethods {
         return response;
     }
 
-    public int getMoviesCount_TopMovies(){
+    public int getMoviesCount_TopMovies() {
         Response response = getResponseForParentEventsForConsumers_TopMovies();
 
         ArrayList data = response.jsonPath().get("data");
@@ -186,7 +188,7 @@ public class API_DataMethods {
         return data.size();
     }
 
-    public String getFirstMovieName_TopMovies(){
+    public String getFirstMovieName_TopMovies() {
         Response response = getResponseForParentEventsForConsumers_TopMovies();
 
         ArrayList data = response.jsonPath().get("data.title");
@@ -196,7 +198,7 @@ public class API_DataMethods {
 
     /*********** Trending Movies - Movies - API *********/
 
-    public Response getResponseForParentEventsForConsumers_TrendingMovies() {
+    private Response getResponseForParentEventsForConsumers_TrendingMovies() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchTrendingEvents_Body_TrendingMovies();
 
@@ -213,7 +215,7 @@ public class API_DataMethods {
         return response;
     }
 
-    public int getMoviesCount_TrendingMovies(){
+    public int getMoviesCount_TrendingMovies() {
         Response response = getResponseForParentEventsForConsumers_TrendingMovies();
 
         ArrayList data = response.jsonPath().get("data");
@@ -221,7 +223,7 @@ public class API_DataMethods {
         return data.size();
     }
 
-    public String getFirstMovieName_TrendingMovies(){
+    public String getFirstMovieName_TrendingMovies() {
         Response response = getResponseForParentEventsForConsumers_TrendingMovies();
 
         ArrayList data = response.jsonPath().get("data.title");
@@ -231,7 +233,7 @@ public class API_DataMethods {
 
     /********** Top Events - HomePage - API *********/
 
-    public Response getResponseForParentEventsForConsumers_TopEvents() {
+    private Response getResponseForParentEventsForConsumers_TopEvents() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_TopEvents();
 
@@ -279,7 +281,7 @@ public class API_DataMethods {
 
     /********** Events for Category - Movies - API *********/
 
-    public Response getResponseForParentEventsForConsumers_Movies_Categories(String title) {
+    private Response getResponseForParentEventsForConsumers_Movies_Categories(String title) {
         String categoryID = getCategoryID_Movies_AllSubCategories(title);
 
         String[] categoryIDs = {categoryID};
@@ -307,7 +309,7 @@ public class API_DataMethods {
         return response.jsonPath().get("totalDocs");
     }
 
-    public Response getResponseForParentEventsForConsumers_Movies_Cities(String title) {
+    private Response getResponseForParentEventsForConsumers_Movies_Cities(String title) {
         String cityName = getCityName_Movies_AllSubCategories(title);
 
         String[] cityNames = {cityName};
@@ -335,7 +337,7 @@ public class API_DataMethods {
         return response.jsonPath().get("totalDocs");
     }
 
-    public Response getResponseForParentEventsConsumers_Movies_Search(String searchText) {
+    private Response getResponseForParentEventsConsumers_Movies_Search(String searchText) {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
 
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_Search(searchText);
@@ -358,7 +360,7 @@ public class API_DataMethods {
 
     /********* UpComing Movies - Movies - API ************/
 
-    public Response getResponseForParentEventsForConsumers_UpComingMovies(){
+    private Response getResponseForParentEventsForConsumers_UpComingMovies() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_UpComingMovies();
 
@@ -373,7 +375,7 @@ public class API_DataMethods {
         return response;
     }
 
-    public int getMoviesCount_UpComingMovies(){
+    public int getMoviesCount_UpComingMovies() {
         Response response = getResponseForParentEventsForConsumers_UpComingMovies();
 
         ArrayList data = response.jsonPath().get("data");
@@ -381,7 +383,7 @@ public class API_DataMethods {
         return data.size();
     }
 
-    public String getFirstMovieName_UpComingMovies(){
+    public String getFirstMovieName_UpComingMovies() {
         Response response = getResponseForParentEventsForConsumers_UpComingMovies();
 
         ArrayList data = response.jsonPath().get("data.title");
@@ -391,7 +393,7 @@ public class API_DataMethods {
 
     /********* Showing in Cinemas Movies - Movies - API ************/
 
-    public Response getResponseForParentEventsForConsumers_ShowingInCinemasMovies(){
+    private Response getResponseForParentEventsForConsumers_ShowingInCinemasMovies() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_ShowingInCinemasMovies();
 
@@ -406,7 +408,7 @@ public class API_DataMethods {
         return response;
     }
 
-    public int getMoviesCount_ShowingInCinemasMovies(){
+    public int getMoviesCount_ShowingInCinemasMovies() {
         Response response = getResponseForParentEventsForConsumers_ShowingInCinemasMovies();
 
         ArrayList data = response.jsonPath().get("data");
@@ -414,7 +416,7 @@ public class API_DataMethods {
         return data.size();
     }
 
-    public String getFirstMovieName_ShowingInCinemasMovies(){
+    public String getFirstMovieName_ShowingInCinemasMovies() {
         Response response = getResponseForParentEventsForConsumers_ShowingInCinemasMovies();
 
         ArrayList data = response.jsonPath().get("data.title");
@@ -424,7 +426,7 @@ public class API_DataMethods {
 
     /********** UpComing Events - HomePage - API *********/
 
-    public Response getResponseForParentEventsForConsumers_UpComingEvents() {
+    private Response getResponseForParentEventsForConsumers_UpComingEvents() {
         ParentEventsListingBODY parentEventsListingBODY = new ParentEventsListingBODY();
         String body = parentEventsListingBODY.fetchParentEventsConsumers_Body_Web_UpComingEvents();
 
@@ -517,5 +519,98 @@ public class API_DataMethods {
         for (int i = 0; i < eventsTitle.size(); i++) {
             System.out.println("Events Venue Name: " + eventsTitle.get(i));
         }
+    }
+
+    /***************** List of Organizations - ADMIN - Events - API *****************/
+
+    private Response getResponseForListOfOrganizations() {
+        Response response = RestAssured.given()
+                .contentType(appJson)
+                .when()
+                .get(listOfOrganizationsEP)
+                .then().extract().response();
+
+        return response;
+    }
+
+    public int getOrganizationsCount() {
+        Response response = getResponseForListOfOrganizations();
+
+        ArrayList organizations = response.jsonPath().get("data");
+
+        return organizations.size();
+    }
+
+    /************ Fetch All Parent Categories - ADMIN - Events - API *************/
+
+    private Response getResponseForFetchAllParentCategories() {
+        Response response = RestAssured.given()
+                .contentType(appJson)
+                .when()
+                .get(fetchAllParentCategoriesEP)
+                .then().extract().response();
+
+        return response;
+    }
+
+    public int getAllParentCategoriesCount() {
+        Response response = getResponseForFetchAllParentCategories();
+
+        ArrayList parentCategories = response.jsonPath().get("data");
+
+        return parentCategories.size();
+    }
+
+    /********** Get Auth Token - Admin - API ***********/
+
+    public String getAuthToken_Admin() {
+        String body = LogInBODY.logIn_Body_Admin();
+        PropertyFilesReader propertyFilesReader = new PropertyFilesReader();
+
+        if (RestAssured.baseURI == null || RestAssured.baseURI.isEmpty())
+            RestAssured.baseURI = propertyFilesReader.getServerURlProp();
+
+        Response response = RestAssured.given()
+                .contentType(appJson)
+                .body(body)
+                .post(loginEP_Admin);
+
+        return response.body().jsonPath().get(xAuth).toString();
+    }
+
+    /************ Fetch Parent Events - Admin - API *********/
+
+    private Response getResponseForParentEvents_Admin() {
+        String body = ParentEventsListingBODY.fetchParentEvents_Body();
+
+        RequestSpecification requestSpec;
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.addHeader(xAuth, getAuthToken_Admin());
+        requestSpec = builder.build();
+        RestAssured.requestSpecification = requestSpec;
+
+        Response response = RestAssured.given()
+                .contentType(appJson)
+                .and()
+                .body(body)
+                .when()
+                .post(fetchParentEventsEP)
+                .then()
+                .extract().response();
+
+        //System.out.println(response.prettyPrint());
+        return response;
+    }
+
+    public int getTotalParentEventsCount_Admin() {
+        Response response = getResponseForParentEvents_Admin();
+
+        return response.jsonPath().get("totalDocs");
+    }
+
+    public int getTotalPagesParentEventsCount_Admin() {
+        Response response = getResponseForParentEvents_Admin();
+
+        return response.jsonPath().get("totalPages");
     }
 }

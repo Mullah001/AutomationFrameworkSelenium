@@ -2,7 +2,6 @@ package test.Web.Movies;
 
 import main.pageEvents.MoviesPageEvents;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -22,7 +21,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Top Movies Text")
     public void verifyTopMoviesText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getTopMoviesText_TopMovies();
         expectedText = topMoviesText;
@@ -32,7 +31,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Top Movies List Items Count", priority = 1)
     public void verifyTopMoviesCount() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualCount = moviesPageEvents.getListItemsCount_TopMovies();
 
@@ -43,7 +42,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Name from API response", priority = 2)
     public void verifyTopMovieName() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getFirstListItemName_TopMovies();
         expectedText = moviesPageEvents.getFirstItemName_TopMovies_API();
@@ -53,7 +52,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Movie Item is navigating to the Movie Details page", priority = 3)
     public void verifyMovieItemNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         moviesPageEvents.clickFirstListItem_TopMovies();
 
@@ -65,7 +64,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Explore Movie Button Text", priority = 4)
     public void verifyExploreMovieBtnText() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         actualText = moviesPageEvents.getExploreMoviesButtonText_TopMovies();
         expectedText = exploreAllMoviesText;
@@ -75,7 +74,7 @@ public class TopMovies_Movies extends BaseTest {
 
     @Test(testName = "Verify Explore Movie Button Navigating to the View More Movies Page", priority = 5)
     public void verifyExploreMovieNavigation() {
-        moviesPageEvents.clickMoviesFromHeader();
+        moviesPageEvents.loadMoviesURLFromHeader();
 
         moviesPageEvents.clickExploreMoviesButton_TopMovies();
 
