@@ -261,4 +261,5 @@ public class BaseTest extends CommonMethods {
             driver = new ChromeDriver();
         }
     }
+
 }

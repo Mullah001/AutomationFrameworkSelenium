@@ -75,8 +75,9 @@ public class DProvider extends CommonMethods{
 
 //    Social Logins
 
-    String googleEmail = "shameem.akhtar@synavos.com";
-    String googlePasswrod = "synavos@*19";
+    String googleEmail = "synavos.solutions@gmail.com";
+    String googlePasswrod = "synavossolutions123";
+
     String facebookId = "tommyshelbyy88@gmail.com";
     String facebookPassword = "Peakyblinders12";
 

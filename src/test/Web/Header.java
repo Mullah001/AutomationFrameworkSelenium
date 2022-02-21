@@ -1,6 +1,7 @@
 package test.Web;
 
 import main.pageEvents.HeaderPageEvents;
+import main.utils.CommonMethods;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
