@@ -9,8 +9,7 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="platform" value="WEB"/>
     <parameter name="headless" value="false"/>
-<!--    <parameter name="testLevel" value="class"/>-->
-    <parameter name="testLevel" value="method"/>
+    <parameter name="testLevel" value="class"/>
 
     <test name="TicketLake - Test Automation">
         <groups>
@@ -42,12 +41,12 @@
             <class name="test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers"/>
 
 
-<!--           <class name="test.Web.Register"/>-->
-            <!--            <class name="test.Web.Login"/>-->
-            <!--            <class name="test.Web.ForgetPassword"/>-->
-            <!--            <class name="test.Web.SocialLogins"/>-->
-            <!--            <class name="test.Web.Header"/>-->
-            <class name="test.Web.HomePage"/>
+<!--            <class name="test.Web.Register"/>-->
+<!--            <class name="test.Web.Login"/>-->
+<!--            <class name="test.Web.ForgetPassword"/>-->
+<!--            <class name="test.Web.SocialLogins"/>-->
+<!--            <class name="test.Web.Header"/>-->
+<!--            <class name="test.Web.HomePage"/>-->
 
 
         </classes>

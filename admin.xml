@@ -9,7 +9,7 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="platform" value="WEB"/>
     <parameter name="headless" value="false"/>
-    <parameter name="testLevel" value="method"/>
+    <parameter name="testLevel" value="class"/>
     <parameter name="isAdmin" value="true"/>
 
     <test name="TicketLake - ADMIN">
@@ -21,7 +21,8 @@
         </groups>
 
         <classes>
-            <class name="test.ADMIN.LogIn.LogInTest"/>
+<!--            <class name="test.ADMIN.LogIn.LogInTest"/>-->
+            <class name="test.ADMIN.Venues.AddVenuesTest"/>
         </classes>
 
     </test>

@@ -36,10 +36,10 @@
 <!--            <class name="test.Web.MoviesDetailPage.BasicInfoCard_MoviesDetails"/>-->
 
                        <class name="test.Web.Register"/>
-                        <class name="test.Web.Login"/>
-                        <class name="test.Web.ForgetPassword"/>
-                        <class name="test.Web.SocialLogins"/>
-                        <class name="test.Web.Header"/>
+<!--                        <class name="test.Web.Login"/>-->
+<!--                        <class name="test.Web.ForgetPassword"/>-->
+<!--                        <class name="test.Web.SocialLogins"/>-->
+<!--                        <class name="test.Web.Header"/>-->
 
         </classes>
 
