@@ -10,6 +10,7 @@
     <parameter name="platform" value="WEB"/>
     <parameter name="headless" value="false"/>
     <parameter name="testLevel" value="class"/>
+    <parameter name="isAdmin" value="false"/>
 
     <test name="TicketLake - Test Automation">
         <groups>
@@ -41,24 +42,14 @@
             <class name="test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers"/>
 
 
-<!--            <class name="test.Web.Register"/>-->
-<!--            <class name="test.Web.Login"/>-->
-<!--            <class name="test.Web.ForgetPassword"/>-->
-<!--            <class name="test.Web.SocialLogins"/>-->
-<!--            <class name="test.Web.Header"/>-->
-<!--            <class name="test.Web.HomePage"/>-->
+<!--           <class name="test.Web.Register"/>-->
+            <!--            <class name="test.Web.Login"/>-->
+            <!--            <class name="test.Web.ForgetPassword"/>-->
+            <!--            <class name="test.Web.SocialLogins"/>-->
+            <!--            <class name="test.Web.Header"/>-->
+            <class name="test.Web.HomePage"/>
 
 
-        </classes>
-    </test>
-    <test name="TicketLake - WEB - Classes">
-        <groups>
-            <run>
-                <include name="WEB"/>
-            </run>
-        </groups>
-        <classes>
-            <!--            <class name="test.Web.RegisterUser.SignUp"></class>-->
         </classes>
     </test>
 </suite>

@@ -27,7 +27,7 @@
                 <configuration>
                     <suiteXmlFiles>
 <!--                        <systemPropertiesFiles>${platform}.xml</systemPropertiesFiles>-->
-                        <systemPropertiesFiles>admin.xml</systemPropertiesFiles>
+                        <systemPropertiesFiles>testng.xml</systemPropertiesFiles>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

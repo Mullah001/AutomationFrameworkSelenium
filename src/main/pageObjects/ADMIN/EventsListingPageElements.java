@@ -10,4 +10,6 @@ public interface EventsListingPageElements {
     String searchInput_XPath = "//label[text()='Search']/following-sibling::div/input";
 
     String addNewEventButton_XPath = "//button[text()='Add New Event']";
+
+    String listingTableDiv_Class = "table-responsive";
 }

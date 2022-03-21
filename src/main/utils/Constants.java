@@ -2,7 +2,8 @@ package main.utils;
 
 public interface Constants {
     String baseUrl = "https://qa.ticketlake.com/";
-    String adminBaseUrl = "https://admin.qa.ticketlake.com/";
+String adminBaseUrl = "https://admin.qa.ticketlake.com/";
+    //String adminBaseUrl = "https://swvl.com/travel";
 
     //How Many times we will retry if Test fails
     int retryCount = 0;
@@ -21,6 +22,9 @@ public interface Constants {
 
     /* Auth Types */
     String xAuth = "X-Auth";
+
+    String yesText = "Yes";
+    String noText = "No";
 
     /*  */
 //    String browser = "chrome";

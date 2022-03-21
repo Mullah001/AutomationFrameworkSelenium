@@ -20,6 +20,8 @@ import java.util.Scanner;
 
 import static main.ApiConfigs.EndPoints.LogInEP.loginEP;
 import static main.ApiConfigs.EndPoints.LogInEP.loginEP_Admin;
+import static main.data.ADMIN.CreateNewEventData.contactEmail;
+import static main.pageObjects.ADMIN.CreateNewEventPageElements.emailInput_XPAth;
 import static main.utils.Constants.appJson;
 import static main.utils.Constants.xAuth;
 
@@ -65,7 +67,7 @@ public class CommonMethods {
         return response.body().jsonPath().get(xAuth).toString();
     }
 
-    public void sleep(long milliSec) {
+    public static void sleep(long milliSec) {
         try {
             Thread.sleep(milliSec);
         } catch (InterruptedException e) {
@@ -187,6 +189,14 @@ public class CommonMethods {
         return BaseTest.driver.getCurrentUrl();
     }
 
+    public static void typeWithSpeed(By element, String value, long speedDelay) {
+        BaseTest.driver.findElement(element).click();
+        for (int i = 0; i < value.length(); i++) {
+            BaseTest.driver.findElement(element).sendKeys(value.substring(i, (i + 1)));
+            sleep(speedDelay);
+        }
+    }
+
     public boolean IsElementPresentAndVisible(By element) {
         boolean elementPresence = false;
         try {
@@ -232,6 +242,14 @@ public class CommonMethods {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void scrollElementIntoView(By webElement) {
+        WebElement element = BaseTest.driver.findElement(webElement);
+        ((JavascriptExecutor) BaseTest.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        sleep(500l);
+        ((JavascriptExecutor) BaseTest.driver).executeScript("window.scrollBy(250,-150);", element);
+        sleep(500l);
     }
 
 }
