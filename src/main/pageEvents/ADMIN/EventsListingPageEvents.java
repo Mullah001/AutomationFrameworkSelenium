@@ -7,6 +7,7 @@ import main.utils.Locator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import test.BaseTest;
 
 import java.util.List;
 
@@ -48,6 +49,9 @@ public class EventsListingPageEvents extends CommonMethods {
     public int getOrganizerSelectOptionsCount() {
         return getSelectOptions(Locator.Name, organizationIdSelect_Name).size();
     }
+
+    
+
     /******************* Helper Methods *********************/
 
     public List<WebElement> getSelectOptions(Locator locatorType, String locator){
