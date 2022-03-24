@@ -23,8 +23,8 @@ public interface CreateNewEventData {
 
 
     String imdbRatingLink = "";
-    String bannerImageAbsolutePath = "C:\\Users\\Hamza Ashfaq\\Pictures\\Picasa\\Exports\\Desktop\\World Wide Expo.jpg";
-
+    //String bannerImageAbsolutePath = "C:\\Users\\Hamza Ashfaq\\Pictures\\Picasa\\Exports\\Desktop\\World Wide Expo.jpg";
+    String bannerImageAbsolutePath = "C:\\Users\\Shameem Akhtar\\Downloads\\Events images\\painting.jpeg";
     /*** Event Contact Details ***/
     String contactEmail = "hamza@automation.com";
     String mobileNumber = "03123456789";
@@ -101,6 +101,7 @@ public interface CreateNewEventData {
 
     /*** Banner Image - Details ***/
 
-    String bannerImageAbsolutePath_Details = "C:\\Users\\Hamza Ashfaq\\Pictures\\Picasa\\Exports\\Desktop\\World Wide Expo.jpg";
+    //String bannerImageAbsolutePath_Details = "C:\\Users\\Hamza Ashfaq\\Pictures\\Picasa\\Exports\\Desktop\\World Wide Expo.jpg";
+    String bannerImageAbsolutePath_Details = "C:\\Users\\Shameem Akhtar\\Downloads\\Events images\\painting.jpeg";
 
 }

@@ -1,44 +1,40 @@
 package test.Web.PurchaseFlowMovies;
 
-import main.pageEvents.PurchaseFlowMoviesPageEvents;
-import org.openqa.selenium.By;
+import main.pageEvents.MoviesDetailPageEvents;
+import main.pageEvents.PurchaseFlowPageEvents;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
-import static main.pageObjects.PurchaseFlowPageElements.*;
-
 @Test(groups = {"WEB"})
 public class PurchaseFlowTest extends BaseTest {
-    PurchaseFlowMoviesPageEvents purchaseFlowMoviesPageEvents = new PurchaseFlowMoviesPageEvents();
+    PurchaseFlowPageEvents purchaseFlowPageEvents = new PurchaseFlowPageEvents();
+    MoviesDetailPageEvents moviesDetailPageEvents = new MoviesDetailPageEvents();
 
     @Test(testName = "Verify the Purchase Flow")
     public void verifyPurchaseFlow(){
-        purchaseFlowMoviesPageEvents.logInUser();
+        purchaseFlowPageEvents.logInUser();
 
-        purchaseFlowMoviesPageEvents.clickOnMoviesLink();
+        moviesDetailPageEvents.clickOnMoviesLink();
 
-        purchaseFlowMoviesPageEvents.scroll();
-        purchaseFlowMoviesPageEvents.clickGodFatherMovie();
+        purchaseFlowPageEvents.scroll();
+        moviesDetailPageEvents.clickGodFatherMovie();
 
-        purchaseFlowMoviesPageEvents.clickShowTimingSlot();
+        moviesDetailPageEvents.clickShowTimingSlot();
 
-        purchaseFlowMoviesPageEvents.clickShowTimingsBuyButton();
+        moviesDetailPageEvents.clickShowTimingsBuyButton();
 
-        purchaseFlowMoviesPageEvents.clickAutoSelect();
+        purchaseFlowPageEvents.clickAutoSelect();
 
-        purchaseFlowMoviesPageEvents.typeGoldenRegular();
-        purchaseFlowMoviesPageEvents.typeBusinessRegular();
-        purchaseFlowMoviesPageEvents.typeBusinessTableRegular();
-        purchaseFlowMoviesPageEvents.typeVIPTableRegular();
+        purchaseFlowPageEvents.ticketClassesSelection();
 
-        purchaseFlowMoviesPageEvents.clickOnProceedToCheckoutButton();
+        purchaseFlowPageEvents.clickOnProceedToCheckoutButton();
 
-        purchaseFlowMoviesPageEvents.clickOnWallet();
+        purchaseFlowPageEvents.clickOnWallet();
 
-        purchaseFlowMoviesPageEvents.clickOnWalletPromptPay();
+        purchaseFlowPageEvents.clickOnWalletPromptPay();
 
-        boolean isSuccess = purchaseFlowMoviesPageEvents.isSuccessImagePresent();
+        boolean isSuccess = purchaseFlowPageEvents.isSuccessImagePresent();
 
         Assert.assertTrue(isSuccess, "Success Message should be displayed");
     }

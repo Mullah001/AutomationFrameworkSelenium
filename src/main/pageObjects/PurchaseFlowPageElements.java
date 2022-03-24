@@ -2,23 +2,10 @@ package main.pageObjects;
 
 public interface PurchaseFlowPageElements {
 
-    String moviesLinkA_XPath = "//div[contains(@class,'main-menu')]/nav/ul/li/a[text()='Movies']";
-
-    String godFatherImg_XPath = "//div[@class='moviesImagesWrp']/div[1]//div[contains(@class,'topMoviesImageContainer')]/img[contains(@alt,'Godfather')]";
-
-    String showTimingSlotDiv_XPath = "//div[contains(@class,'cinemaTime')]//div[contains(@class,'showTimings')]";
-
-    String showTimingsBuyButton_XPath = "//div[contains(@class,'cinemaTime')]//button";
 
     String autoSelectInput_XPath = "//input[@name='autoSelection']";
 
-    String goldenRegularInput_XPath = "//input[@name='golden']";
-
-    String businessRegularInput_XPath = "//input[@name='business']";
-
-    String businessTableRegularInput_XPath = "//input[@name='business-table']";
-
-    String vipTableRegularInput_XPath = "//input[@name='vip-table']";
+    String ticketclasses = "//div[@class='butTicketClassContainer']/div/div/div[2]/div/input";
 
     String proceedToCheckoutButton_XPath = "//button[text()='Proceed to Checkout']";
 
