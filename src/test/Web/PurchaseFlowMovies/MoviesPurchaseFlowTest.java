@@ -1,7 +1,7 @@
 package test.Web.PurchaseFlowMovies;
 
-import main.pageEvents.MoviesDetailPageEvents;
-import main.pageEvents.PurchaseFlowPageEvents;
+import main.pageEvents.WEB.MoviesDetailPageEvents;
+import main.pageEvents.WEB.PurchaseFlowPageEvents;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.BaseTest;

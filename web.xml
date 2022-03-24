@@ -22,20 +22,20 @@
         <classes>
 
             <!-- Movies -->
-<!--            <class name="test.Web.Movies.SearchBarMovies"/>-->
-<!--            <class name="test.Web.Movies.UpComingMovies_Movies"/>-->
-<!--            <class name="test.Web.Movies.TrendingMovies_Movies"/>-->
-<!--            <class name="test.Web.Movies.TopMovies_Movies"/>-->
-<!--            <class name="test.Web.Movies.SliderMovies"/>-->
-<!--            <class name="test.Web.Movies.ShowingInCinemas_Movies"/>-->
+<!--            <class name="test.Web.Movies.SearchBarMoviesTest"/>-->
+<!--            <class name="test.Web.Movies.UpComingMovies_MoviesTest"/>-->
+<!--            <class name="test.Web.Movies.TrendingMovies_MoviesTest"/>-->
+<!--            <class name="test.Web.Movies.TopMovies_MoviesTest"/>-->
+<!--            <class name="test.Web.Movies.SliderMoviesTest"/>-->
+<!--            <class name="test.Web.Movies.ShowingInCinemas_MoviesTest"/>-->
 
 <!--             Purchase Flow -->
 <!--            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>-->
 
 <!--             Movie Details Page -->
-<!--            <class name="test.Web.MoviesDetailPage.BasicInfoCard_MoviesDetails"/>-->
+<!--            <class name="test.Web.MoviesDetailPage.BasicInfoCard_MoviesDetailsTest"/>-->
 
-                       <class name="test.Web.Register"/>
+                       <class name="test.Web.Register.RegisterTest"/>
 <!--                        <class name="test.Web.Login"/>-->
 <!--                        <class name="test.Web.ForgetPassword"/>-->
 <!--                        <class name="test.Web.SocialLogins"/>-->
