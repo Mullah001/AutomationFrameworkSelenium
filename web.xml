@@ -30,7 +30,7 @@
 <!--            <class name="test.Web.Movies.ShowingInCinemas_Movies"/>-->
 
 <!--             Purchase Flow -->
-<!--            <class name="test.Web.PurchaseFlowMovies.PurchaseFlowTest"/>-->
+<!--            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>-->
 
 <!--             Movie Details Page -->
 <!--            <class name="test.Web.MoviesDetailPage.BasicInfoCard_MoviesDetails"/>-->

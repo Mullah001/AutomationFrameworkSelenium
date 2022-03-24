@@ -53,7 +53,7 @@
 <!--        Admin Classes-->
 
 <!--            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>-->
-            <class name="test.Web.PurchaseFlowMovies.PurchaseFlowTest"/>
+            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>
 <!--            <class name="test.ADMIN.AddNewEvent.SeriesEventTest"/>-->
 <!--            <class name="test.ADMIN.AddNewEvent.RecurringEventTest"/>-->
 

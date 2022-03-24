@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
-public class PurchaseFlowTest extends BaseTest {
+public class MoviesPurchaseFlowTest extends BaseTest {
     PurchaseFlowPageEvents purchaseFlowPageEvents = new PurchaseFlowPageEvents();
     MoviesDetailPageEvents moviesDetailPageEvents = new MoviesDetailPageEvents();
 
