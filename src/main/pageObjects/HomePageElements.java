@@ -4,6 +4,10 @@ public interface HomePageElements {
     String signIn = ".sign-in";
     String heroTitle = "//div[@class='home-intro']/h2";
 
+    //Master Search
+
+    String searchEventName = "//input[@placeholder='Search']";
+    String searchEventResult = "//input[@placeholder='Search']/following-sibling::div//*[text()='" + "" +"']";
 
 //    Top events
 

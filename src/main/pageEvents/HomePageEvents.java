@@ -334,4 +334,8 @@ public class HomePageEvents {
         }
         return false;
     }
+
+    public void masterSearch(){
+
+    }
 }
