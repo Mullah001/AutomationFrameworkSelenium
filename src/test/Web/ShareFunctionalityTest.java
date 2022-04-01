@@ -2,6 +2,9 @@ package test.Web;
 
 import main.pageEvents.WEB.HomePageEvents;
 import main.pageEvents.WEB.ShareFunctionalityEvents;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 import test.Web.LogIn.LoginTest;
@@ -13,12 +16,22 @@ public class ShareFunctionalityTest extends BaseTest {
     HomePageEvents homePageEvents = new HomePageEvents();
     ShareFunctionalityEvents shareFunctionalityEvents = new ShareFunctionalityEvents();
 
+    private WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
 
     @Test(testName = "Verify the share functionality of ticket is working fine", priority = 1)
     public void verifyShareTicketFunctionality(){
 
         try {
-            loginTest.Login("shameem.akhtar@synavos.com", "12345678", "valid");
+            loginTest.Login("ataib.ahmad@synavos.com", "123456", "valid");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -28,9 +41,9 @@ public class ShareFunctionalityTest extends BaseTest {
         shareFunctionalityEvents.clickTicketTab();
         shareFunctionalityEvents.clickShareTicketButton();
         shareFunctionalityEvents.clickCheckBox();
-        shareFunctionalityEvents.enetrPhoneNumber();
-        shareFunctionalityEvents.enetrName();
-        shareFunctionalityEvents.enetrEmail();
+        shareFunctionalityEvents.enetrPhoneNumber(driver);
+        shareFunctionalityEvents.enetrName(driver);
+        shareFunctionalityEvents.enetrEmail(driver);
         shareFunctionalityEvents.clickShareButton();
     }
 
@@ -38,9 +51,9 @@ public class ShareFunctionalityTest extends BaseTest {
     public void verifySharePassFunctionality(){
         shareFunctionalityEvents.clickSharePassButton();
         shareFunctionalityEvents.clickCheckBox();
-        shareFunctionalityEvents.enetrPhoneNumber();
-        shareFunctionalityEvents.enetrName();
-        shareFunctionalityEvents.enetrEmail();
+        shareFunctionalityEvents.enetrPhoneNumber(driver);
+        shareFunctionalityEvents.enetrName(driver);
+        shareFunctionalityEvents.enetrEmail(driver);
         shareFunctionalityEvents.clickShareButton();
     }
 }

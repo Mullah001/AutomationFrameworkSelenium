@@ -3,9 +3,10 @@ package main.pageEvents.WEB;
 import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static main.data.Web.LogInData.email_Shameem;
+import static main.data.WEB.LogInData.email_Shameem;
 import static main.pageObjects.WEB.ShareFunctionalityElements.*;
 
 public class ShareFunctionalityEvents extends CommonMethods {
@@ -29,17 +30,17 @@ public class ShareFunctionalityEvents extends CommonMethods {
         sleep(2000L);
         fetchElement.getWebElement(Locator.XPath, checkBox).click();
     }
-    public void enetrPhoneNumber(){
+    public void enetrPhoneNumber(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(phoneNumberField, "0460730678");
+        clearAndTypeIfPresentAndVisible(phoneNumberField, "0460730678", driver);
     }
-    public void enetrName(){
+    public void enetrName(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(nameField, "email_Shameem");
+        clearAndTypeIfPresentAndVisible(nameField, "Shameem", driver);
     }
-    public void enetrEmail(){
+    public void enetrEmail(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(emailField, email_Shameem);
+        clearAndTypeIfPresentAndVisible(emailField, email_Shameem, driver);
     }
     public void clickShareButton(){
         sleep(2000L);

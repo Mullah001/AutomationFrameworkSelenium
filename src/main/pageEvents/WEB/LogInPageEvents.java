@@ -3,13 +3,14 @@ package main.pageEvents.WEB;
 import main.pageObjects.WEB.LogInPageElements;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 import test.BaseTest;
 
 public class LogInPageEvents {
     FetchElement fetchElement = new FetchElement();
 
-    public String getTitle(){
-        return BaseTest.driver.getTitle();
+    public String getTitle(WebDriver driver){
+        return driver.getTitle();
     }
 
     public void enterEmail(String email){

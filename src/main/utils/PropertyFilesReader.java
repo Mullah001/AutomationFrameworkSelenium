@@ -39,11 +39,11 @@ public class PropertyFilesReader implements Constants {
         return properties.getProperty(serverURL);
     }
 
-    public String getPaypalUserName_sb(){
+    public String getPaypalUserName_sb() {
         return properties.getProperty(paypalUserName_sb);
     }
 
-    public String getPaypalPassword_sb(){
+    public String getPaypalPassword_sb() {
         return properties.getProperty(paypalPassword_sb);
     }
 
@@ -68,5 +68,21 @@ public class PropertyFilesReader implements Constants {
                 "\t\"" + email + "\":\"" + e_mail + "\",\n" +
                 "\t\"" + password + "\":\"" + pass + "\"\n" +
                 "}";
+    }
+
+    public String getBrowser() {
+        return properties.getProperty(browser);
+    }
+
+    public String getPlatform() {
+        return properties.getProperty(platform);
+    }
+
+    public Boolean getHeadLess() {
+        return Boolean.valueOf(properties.getProperty(headless));
+    }
+
+    public Boolean getIsAdmin() {
+        return Boolean.valueOf(properties.getProperty(isAdmin));
     }
 }

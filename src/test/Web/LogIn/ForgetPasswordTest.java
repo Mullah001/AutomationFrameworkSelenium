@@ -3,13 +3,25 @@ package test.Web.LogIn;
 import main.pageEvents.WEB.ForgetPasswordEvents;
 import main.pageEvents.WEB.HomePageEvents;
 import main.pageEvents.WEB.LogInPageEvents;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class ForgetPasswordTest extends BaseTest {
+    private WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
 
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
     LogInPageEvents logInPageEvents = new LogInPageEvents();
     ForgetPasswordEvents forgetPasswordEvents = new ForgetPasswordEvents();
     HomePageEvents homePageEvents = new HomePageEvents();

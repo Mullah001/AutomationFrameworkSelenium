@@ -10,12 +10,14 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 //import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import main.utils.CommonMethods;
 import main.utils.Constants;
+import main.utils.PropertyFilesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +41,9 @@ import static main.utils.Constants.*;
 
 public class BaseTest extends CommonMethods {
 
-    public static WebDriver driver;
+    PropertyFilesReader propRead = new PropertyFilesReader();
+
+    public WebDriver driver;
     //public ExtentHtmlReporter extentHtmlReporter;
     public ExtentSparkReporter extentHtmlReporter;
     public static ExtentReports extentReports;
@@ -105,32 +109,14 @@ public class BaseTest extends CommonMethods {
         extentReports.attachReporter(sparkFail, extentHtmlReporter);
         extentReports.setSystemInfo("Automation Engineer", "Hamza Ashfaq");
 
-
         setRestAssuredBaseURL();
         //setRestAssuredAuthHeader();
     }
 
-    @BeforeClass(alwaysRun = true)
-    @Parameters(value = {"browser", "platform", "headless", "testLevel", "isAdmin"})
-    public void beforeClassMethod(@Optional String browser, String platform,
-                                  @Optional boolean headless, String testLevel, @Optional boolean isAdmin) {
-        if (platform != null && platform.equalsIgnoreCase("WEB")) {
-            if (testLevel.equalsIgnoreCase("class")) {
-                initializeBrowser(browser, headless, isAdmin);
-            }
-        }
-    }
-
     @BeforeMethod(alwaysRun = true)
-    @Parameters(value = {"browser", "platform", "headless", "testLevel", "isAdmin"})
+    @Parameters(value = {"browser", "platform", "headless", "isAdmin"})
     public void beforeMethodMethod(@Optional String browser, Method testMethod, String platform,
-                                   @Optional boolean headless, String testLevel, @Optional boolean isAdmin) {
-
-        if (platform != null && platform.equalsIgnoreCase("WEB")) {
-            if (testLevel.equalsIgnoreCase("method")) {
-                initializeBrowser(browser, headless, isAdmin);
-            }
-        }
+                                   @Optional boolean headless, @Optional boolean isAdmin) {
 
         String testName = testMethod.getAnnotation(Test.class).testName();
 
@@ -138,15 +124,21 @@ public class BaseTest extends CommonMethods {
         extentTestLogger.log(Status.INFO, createMarkupText(testName, ExtentColor.WHITE));
     }
 
-    private void initializeBrowser(String browser, Boolean headless, boolean isAdmin) {
-        setDriver(browser, headless);
+    public WebDriver initializeBrowser() {
+        String browser = propRead.getBrowser();
+        Boolean headless = propRead.getHeadLess();
+        Boolean isAdmin = propRead.getIsAdmin();
 
-        setBaseUrl_Web(isAdmin);
+        driver = setDriver(browser, headless);
+
+        baseUrl_Web = getBaseURL_Web(isAdmin);
 
         driver.manage().window().maximize();
         driver.navigate().to(baseUrl_Web);
         //driver.get(Constants.baseUrl);
         setMaxTimeout(30);
+
+        return driver;
     }
 
     public void setMaxTimeout(int seconds) {
@@ -169,8 +161,8 @@ public class BaseTest extends CommonMethods {
     }
 
     @AfterMethod(alwaysRun = true)
-    @Parameters(value = {"platform", "testLevel"})
-    public void afterMethodMethod(ITestResult result, String platform, String testLevel) {
+    @Parameters(value = {"platform"})
+    public void afterMethodMethod(ITestResult result, String platform) {
         String testName = result.getMethod().getMethodName();
         if (result.getStatus() == TestResult.SUCCESS) {
             String logText = "Test Case: " + testName + " Passed";
@@ -196,26 +188,9 @@ public class BaseTest extends CommonMethods {
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.ORANGE);
             extentTestLogger.log(Status.SKIP, markup);
         }
-
-        if (platform.equalsIgnoreCase("WEB")) {
-            if (testLevel.equalsIgnoreCase("method")) {
-                closeAndQuitBrowser();
-            }
-        }
     }
 
-    @AfterClass(alwaysRun = true)
-    @Parameters(value = {"platform", "testLevel"})
-    public void afterClassMethod(String platform, String testLevel) {
-
-        if (platform.equalsIgnoreCase("WEB")) {
-            if (testLevel.equalsIgnoreCase("class")) {
-                closeAndQuitBrowser();
-            }
-        }
-    }
-
-    private void closeAndQuitBrowser() {
+    public void closeAndQuitBrowser(WebDriver driver) {
         try {
             driver.close();
             driver.quit();
@@ -245,7 +220,7 @@ public class BaseTest extends CommonMethods {
         driver.manage().window().setSize(new Dimension(width, height));
     }
 
-    public void setDriver(String browser, boolean headless) {
+    public WebDriver setDriver(String browser, boolean headless) {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "chromedriver.exe");
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -261,6 +236,8 @@ public class BaseTest extends CommonMethods {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "chromedriver.exe");
             driver = new ChromeDriver();
         }
+
+        return driver;
     }
 
 }

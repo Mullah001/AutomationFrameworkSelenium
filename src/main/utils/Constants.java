@@ -15,6 +15,10 @@ String adminBaseUrl = "https://admin.qa.ticketlake.com/";
     String email = "email";
     String paypalUserName_sb = "paypalUserName_sb";
     String paypalPassword_sb = "paypalPassword_sb";
+    String browser = "browser";
+    String platform = "platform";
+    String headless = "headless";
+    String isAdmin = "isAdmin";
 
     /* ContentTypes */
     String appJson = "application/json";
@@ -26,8 +30,4 @@ String adminBaseUrl = "https://admin.qa.ticketlake.com/";
     String yesText = "Yes";
     String noText = "No";
 
-    /*  */
-//    String browser = "chrome";
-//    boolean headless = false;
-//    String platform = "WEB";
 }

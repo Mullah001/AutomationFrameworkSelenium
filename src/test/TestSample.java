@@ -13,7 +13,7 @@ public class TestSample extends BaseTest{
 
     @Test (enabled = false)
     public void verifyHomePageTitle(){
-        String title = CommonMethods.getTitle();
+        String title = CommonMethods.getTitle(driver);
 //        List<List<String>> records =  CommonMethods.ReadCSV("C:\\Users\\Hamza Ashfaq\\Downloads\\SampleCSV.csv");
 //
 //        for (List<String> recordsList:

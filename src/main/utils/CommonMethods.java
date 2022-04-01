@@ -145,11 +145,11 @@ public class CommonMethods {
         return screenshotPath;
     }
 
-    public void TakeScreenshot(String methodName) {
+    public void TakeScreenshot(String methodName, WebDriver driver) {
         String fileName = createScreenshotPath(methodName);
 
         try {
-            File file = ((TakesScreenshot) BaseTest.driver).getScreenshotAs(OutputType.FILE);
+            File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             Files.copy(file.toPath(), new File(fileName + ".png").toPath(), LinkOption.NOFOLLOW_LINKS, StandardCopyOption.REPLACE_EXISTING);
             //FileUtils.copyFile(file, new File(fileName + ".png"));
         } catch (IOException e) {
@@ -177,36 +177,36 @@ public class CommonMethods {
 
     /******************** Selenium Helper Methods *******************/
 
-    public static String getTitle() {
-        return BaseTest.driver.getTitle();
+    public static String getTitle(WebDriver driver) {
+        return driver.getTitle();
     }
 
-    public static String getCurrentURL() {
-        return BaseTest.driver.getCurrentUrl();
+    public static String getCurrentURL(WebDriver driver) {
+        return driver.getCurrentUrl();
     }
 
-    public static void typeWithSpeed(By element, String value, long speedDelay) {
-        BaseTest.driver.findElement(element).click();
+    public static void typeWithSpeed(WebDriver driver, By element, String value, long speedDelay) {
+        driver.findElement(element).click();
         for (int i = 0; i < value.length(); i++) {
-            BaseTest.driver.findElement(element).sendKeys(value.substring(i, (i + 1)));
+            driver.findElement(element).sendKeys(value.substring(i, (i + 1)));
             sleep(speedDelay);
         }
     }
 
-    public boolean IsElementPresentAndVisible(By element) {
+    public boolean IsElementPresentAndVisible(By element, WebDriver driver) {
         boolean elementPresence = false;
         try {
-            elementPresence = BaseTest.driver.findElement(element).isEnabled() && BaseTest.driver.findElement(element).isDisplayed();
+            elementPresence = driver.findElement(element).isEnabled() && driver.findElement(element).isDisplayed();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return elementPresence;
     }
 
-    public boolean IsElementPresent(By element) {
+    public boolean IsElementPresent(By element, WebDriver driver) {
         boolean elementPresence = false;
         try {
-            elementPresence = BaseTest.driver.findElement(element).isEnabled();
+            elementPresence = driver.findElement(element).isEnabled();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,18 +240,18 @@ public class CommonMethods {
         }
     }
 
-    public void scrollElementIntoView(By webElement) {
-        WebElement element = BaseTest.driver.findElement(webElement);
-        ((JavascriptExecutor) BaseTest.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    public void scrollElementIntoView(By webElement, WebDriver driver) {
+        WebElement element = driver.findElement(webElement);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         sleep(500l);
-        ((JavascriptExecutor) BaseTest.driver).executeScript("window.scrollBy(250,-150);", element);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(250,-150);", element);
         sleep(500l);
     }
 
-    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value) {
-        if (IsElementPresentAndVisible(By.xpath(locatorXPath))) {
-            BaseTest.driver.findElement(By.xpath(locatorXPath)).clear();
-            BaseTest.driver.findElement(By.xpath(locatorXPath)).sendKeys(value);
+    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value, WebDriver driver) {
+        if (IsElementPresentAndVisible(By.xpath(locatorXPath), driver)) {
+            driver.findElement(By.xpath(locatorXPath)).clear();
+            driver.findElement(By.xpath(locatorXPath)).sendKeys(value);
         }
     }
 

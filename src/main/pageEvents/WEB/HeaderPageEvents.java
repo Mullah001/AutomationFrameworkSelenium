@@ -3,6 +3,7 @@ package main.pageEvents.WEB;
 import main.pageObjects.WEB.HeaderpageElements;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -10,7 +11,6 @@ import org.testng.Assert;
 import java.util.ArrayList;
 
 import static main.pageObjects.WEB.HeaderpageElements.*;
-import static test.BaseTest.driver;
 
 public class HeaderPageEvents {
 
@@ -18,20 +18,20 @@ public class HeaderPageEvents {
     FetchElement fetchElement = new FetchElement();
 
 
-    public void hoverOnEvents() {
+    public void hoverOnEvents(WebDriver driver) {
         Actions action = new Actions(driver);
         WebElement events = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.events);
         action.moveToElement(events).build().perform();
     }
 
-    public WebElement getEventsDropdownVisiable(){
-        hoverOnEvents();
+    public WebElement getEventsDropdownVisiable(WebDriver driver){
+        hoverOnEvents(driver);
         WebElement eventsDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.eventsDropdown);
         return eventsDropdown;
     }
 
-    public ArrayList getEventsCategories() {
-        hoverOnEvents();
+    public ArrayList getEventsCategories(WebDriver driver) {
+        hoverOnEvents(driver);
         ArrayList eventSubCategories = new ArrayList();
 
         int eventCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.eventsCategories).size();
@@ -57,21 +57,21 @@ public class HeaderPageEvents {
     }
 
 
-    public void hoverOnMovies() {
+    public void hoverOnMovies(WebDriver driver) {
         Actions action = new Actions(driver);
         WebElement movies = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.movies);
         action.moveToElement(movies).build().perform();
 
     }
 
-    public WebElement getMoviesDropdownVisiable(){
-        hoverOnMovies();
+    public WebElement getMoviesDropdownVisiable(WebDriver driver){
+        hoverOnMovies(driver);
         WebElement moviesDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.moviesDropdown);
         return moviesDropdown;
     }
 
-    public ArrayList getMoviesCategories() {
-        hoverOnMovies();
+    public ArrayList getMoviesCategories(WebDriver driver) {
+        hoverOnMovies(driver);
         ArrayList movieSubCategories = new ArrayList();
 
         int moviesCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.moviesCategories).size();
@@ -99,20 +99,20 @@ public class HeaderPageEvents {
     }
 
 
-    public void hoverOnSports() {
+    public void hoverOnSports(WebDriver driver) {
         Actions action = new Actions(driver);
         WebElement sports = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.sports);
         action.moveToElement(sports).build().perform();
     }
 
-    public WebElement getSportsDropdownVisiable(){
-        hoverOnSports();
+    public WebElement getSportsDropdownVisiable(WebDriver driver){
+        hoverOnSports(driver);
         WebElement sportsDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.sportsDropdown);
         return sportsDropdown;
     }
 
-    public ArrayList getSportscategories(){
-        hoverOnSports();
+    public ArrayList getSportscategories(WebDriver driver){
+        hoverOnSports(driver);
         ArrayList sportsSubCategories = new ArrayList();
 
         int sportsCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.sportsCategories).size();
@@ -137,20 +137,20 @@ public class HeaderPageEvents {
 
     }
 
-    public void hoverOnGlobal() {
+    public void hoverOnGlobal(WebDriver driver) {
         Actions action = new Actions(driver);
         WebElement global = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.global);
         action.moveToElement(global).build().perform();
     }
 
-    public WebElement getGlobalDropdownVisiable(){
-        hoverOnGlobal();
+    public WebElement getGlobalDropdownVisiable(WebDriver driver){
+        hoverOnGlobal(driver);
         WebElement GlobalDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.globalDropdown);
         return GlobalDropdown;
     }
 
-    public ArrayList getGlobalscategories(){
-        hoverOnGlobal();
+    public ArrayList getGlobalscategories(WebDriver driver){
+        hoverOnGlobal(driver);
         ArrayList globalSubCategories = new ArrayList();
 
         int globalCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.globalCategories).size();
@@ -175,20 +175,20 @@ public class HeaderPageEvents {
 
     }
 
-    public void hoverOnNearby() {
+    public void hoverOnNearby(WebDriver driver) {
         Actions action = new Actions(driver);
         WebElement nearby = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.nearby);
         action.moveToElement(nearby).build().perform();
     }
 
-    public WebElement getNearbyDropdownVisiable(){
-        hoverOnNearby();
+    public WebElement getNearbyDropdownVisiable(WebDriver driver){
+        hoverOnNearby(driver);
         WebElement nearbyDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.nearbyDropdown);
         return nearbyDropdown;
     }
 
-    public ArrayList getNearybycategories(){
-        hoverOnNearby();
+    public ArrayList getNearybycategories(WebDriver driver){
+        hoverOnNearby(driver);
         ArrayList nearybySubCategories = new ArrayList();
 
         int nearybyCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.nearbyCategories).size();

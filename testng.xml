@@ -8,8 +8,7 @@
 
     <parameter name="browser" value="chrome"/>
     <parameter name="platform" value="WEB"/>
-    <parameter name="headless" value="true"/>
-    <parameter name="testLevel" value="class"/>
+    <parameter name="headless" value="false"/>
     <parameter name="isAdmin" value="false"/>
 
     <test name="TicketLake - Test Automation">
@@ -48,13 +47,13 @@
 <!--            <class name="test.Web.ForgetPassword"/>-->
 <!--            <class name="test.Web.SocialLogins"/>-->
 <!--            <class name="test.Web.Header"/>-->
-<!--            <class name="test.Web.HomePage"/>-->
+            <class name="test.Web.HomePage.HomePageTest"/>
 
 <!--        Admin Classes-->
 
 <!--            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>-->
 <!--            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>-->
-            <class name="test.Web.ShareFunctionalityTest"/>
+<!--            <class name="test.Web.ShareFunctionalityTest"/>-->
 <!--            <class name="test.ADMIN.AddNewEvent.SeriesEventTest"/>-->
 <!--            <class name="test.ADMIN.AddNewEvent.RecurringEventTest"/>-->
 

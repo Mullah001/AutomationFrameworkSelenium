@@ -4,6 +4,7 @@ import main.data.Web.HomePageData;
 import main.utils.API_DataMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -13,29 +14,27 @@ import static main.data.ADMIN.CreateNewEventData.*;
 import static main.data.Web.HomePageData.*;
 import static main.pageObjects.WEB.HomePageElements.*;
 import static main.utils.CommonMethods.sleep;
-import static test.BaseTest.driver;
 
 public class HomePageEvents {
-
 
     FetchElement fetchElement = new FetchElement();
     API_DataMethods apiDataMethods = new API_DataMethods();
 
-    public void clickOnSignIn(){
-        fetchElement.getWebElement(Locator.CssSelector, signIn).click();
+    public void clickOnSignIn(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.CssSelector, signIn).click();
     }
 
-    public String getTopEventsHeading(){
-        return fetchElement.getWebElement(Locator.XPath, topEventHeading).getText();
+    public String getTopEventsHeading(WebDriver driver){
+        return fetchElement.getWebElement(driver, Locator.XPath, topEventHeading).getText();
     }
 
-    public String getTopEventsSubHeading(){
-        return fetchElement.getWebElement(Locator.XPath, topEventSubHeading).getText();
+    public String getTopEventsSubHeading(WebDriver driver){
+        return fetchElement.getWebElement(driver, Locator.XPath, topEventSubHeading).getText();
     }
 
-    public ArrayList<String> getTopEventsTitles(){
+    public ArrayList<String> getTopEventsTitles(WebDriver driver){
         ArrayList topEventsTitlesArray = new ArrayList();
-        List <WebElement>  topEventsTitle = fetchElement.getListOfWebElements(Locator.XPath, topEventsTtile);
+        List <WebElement>  topEventsTitle = fetchElement.getListOfWebElements(driver, Locator.XPath, topEventsTtile);
         for (int i = 0; i < topEventsTitle.size(); i++){
             String name = topEventsTitle.get(i).getText();
             topEventsTitlesArray.add(name);
@@ -43,14 +42,14 @@ public class HomePageEvents {
         return topEventsTitlesArray;
     }
 
-    public boolean getTopEventsCategories(){
+    public boolean getTopEventsCategories(WebDriver driver){
         ArrayList topEventsCategoriesArray = new ArrayList();
         ArrayList topEventsCategoriesAPI = apiDataMethods.getCategories_Title_TopEvent();
-        int  topEventsCategoriesCount = fetchElement.getListOfWebElements(Locator.XPath,topEventsgalleryContent).size();
+        int  topEventsCategoriesCount = fetchElement.getListOfWebElements(driver, Locator.XPath,topEventsgalleryContent).size();
         for (int i = 0; i < topEventsCategoriesCount; i++){
             String name = topEventsCategoriesAPI.get(i).toString();
             String path = "//div[contains(@class,'gallery-items')]/a["+(i+1)+"]//div[@class='listing-item-cat']/p/span";
-            List<WebElement> elements = fetchElement.getListOfWebElements(Locator.XPath, path);
+            List<WebElement> elements = fetchElement.getListOfWebElements(driver, Locator.XPath, path);
             int count = elements.size();
             for (int j = 0; j < count; j++)
             {
@@ -64,26 +63,23 @@ public class HomePageEvents {
         return true;
     }
 
-    public String getUpComingEventsHeading(){
-        return fetchElement.getWebElement(Locator.XPath, upComingEventsHeadingXPath).getText();
+    public String getUpComingEventsHeading(WebDriver driver){
+        return fetchElement.getWebElement(driver, Locator.XPath, upComingEventsHeadingXPath).getText();
     }
 
-    public String getUpComingEventsSubHeading(){
-        return fetchElement.getWebElement(Locator.XPath, upComingEventsSubHeadingXPath).getText();
+    public String getUpComingEventsSubHeading(WebDriver driver){
+        return fetchElement.getWebElement(driver, Locator.XPath, upComingEventsSubHeadingXPath).getText();
     }
 
-    public boolean getUpcomingEventsSize() {
+    public boolean getUpcomingEventsSize(WebDriver driver) {
         int apiCount = apiDataMethods.getEvents_Title_UpComingEvents().size();
-        int webCount = fetchElement.getListOfWebElements(Locator.XPath, upcomingeventsCount).size();
-        if(apiCount == webCount){
-            return true;
-        }
-        return false;
+        int webCount = fetchElement.getListOfWebElements(driver, Locator.XPath, upcomingeventsCount).size();
+        return apiCount == webCount;
     }
 
-    public boolean getUpcomingEventstitle(){
+    public boolean getUpcomingEventstitle(WebDriver driver){
         ArrayList eventtitlesAPI = apiDataMethods.getEvents_Title_UpComingEvents();
-        String title = fetchElement.getWebElement(Locator.XPath, upcomingEventTitle).getAttribute("title");
+        String title = fetchElement.getWebElement(driver, Locator.XPath, upcomingEventTitle).getAttribute("title");
         for (int i = 0; i < eventtitlesAPI.size(); i++) {
             if(eventtitlesAPI.contains(title)){
                 return true;
@@ -93,26 +89,26 @@ public class HomePageEvents {
         return false;
     }
 
-    public void getUpcomingEventsVenues(){
+    public void getUpcomingEventsVenues(WebDriver driver){
         ArrayList webVenuesArray = new ArrayList();
         ArrayList apiVenues = apiDataMethods.getEvents_VenuesName_UpComingEvents();
         System.out.println(apiVenues);
-        int webVenuesCount = fetchElement.getListOfWebElements(Locator.XPath, upComingEventsVenue).size();
+        int webVenuesCount = fetchElement.getListOfWebElements(driver, Locator.XPath, upComingEventsVenue).size();
         for (int i = 0; i < webVenuesCount; i++) {
             String name = apiVenues.get(i).toString();
         }
 
     }
 
-    public void getUpcomingEventsDate(){
+    public void getUpcomingEventsDate(WebDriver driver){
         ArrayList apiDates = apiDataMethods.getEvents_Date_UpComingEvents();
         System.out.println("API "+apiDates);
-        String date = fetchElement.getWebElement(Locator.XPath, upComingEventsDate).getText();
+        String date = fetchElement.getWebElement(driver, Locator.XPath, upComingEventsDate).getText();
         System.out.println("Web "+date);
     }
 
-    public boolean getDescription(){
-        String description = fetchElement.getWebElement(Locator.XPath, upComingEventsDescription).getText();
+    public boolean getDescription(WebDriver driver){
+        String description = fetchElement.getWebElement(driver, Locator.XPath, upComingEventsDescription).getText();
         ArrayList apiDescription = apiDataMethods.getEvents_Description_UpComingEvents();
         for (int i = 0; i < apiDescription.size(); i++) {
             if(apiDescription.contains(description)){
@@ -124,8 +120,8 @@ public class HomePageEvents {
 
     }
 
-    public void getUpcomingEventsPrice(){
-        String price = fetchElement.getWebElement(Locator.XPath, upComingEventsPrice).getText();
+    public void getUpcomingEventsPrice(WebDriver driver){
+        String price = fetchElement.getWebElement(driver, Locator.XPath, upComingEventsPrice).getText();
         String sorprice =price.replace("-", "").replace("GHS", "").replace("Buy", "");
         System.out.println(sorprice);
         ArrayList apiMinPrices = apiDataMethods.getEvents_eventMinimumTicketClassPrice_UpComingEvents();
@@ -133,12 +129,12 @@ public class HomePageEvents {
         System.out.println(apiMinPrices +" " +apiMaxPrice);
     }
 
-    public boolean getEventsCategories(){
-        List<WebElement> eventsCategories = fetchElement.getListOfWebElements(Locator.XPath, eventsCategoriesXPath);
+    public boolean getEventsCategories(WebDriver driver){
+        List<WebElement> eventsCategories = fetchElement.getListOfWebElements(driver, Locator.XPath, eventsCategoriesXPath);
         ArrayList eventsCategoriesData = HomePageData.eventsCategories;
         for (int i = 0; i < eventsCategories.size(); i++) {
             String cat = eventsCategories.get(i).getText();
-            fetchElement.getWebElement(Locator.XPath, nextArrow).click();
+            fetchElement.getWebElement(driver, Locator.XPath, nextArrow).click();
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -154,8 +150,8 @@ public class HomePageEvents {
 
     //Footer events
 
-    public boolean getExploreLinksText() {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, exploreLinks);
+    public boolean getExploreLinksText(WebDriver driver) {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, exploreLinks);
         ArrayList exploreText = new ArrayList();
         for (int i = 0; i < links.size(); i++) {
             String text = links.get(i).getText();
@@ -167,8 +163,8 @@ public class HomePageEvents {
         return false;
     }
 
-    public boolean getExploreLinksTitle() throws InterruptedException {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, exploreLinks);
+    public boolean getExploreLinksTitle(WebDriver driver) throws InterruptedException {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, exploreLinks);
         ArrayList titleList = new ArrayList();
         for (int i = 0; i < links.size()-1; i++) {
             links.get(i).click();
@@ -182,8 +178,8 @@ public class HomePageEvents {
         return false;
     }
 
-    public void getExploreLinksWorking() throws InterruptedException {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, exploreLinks);
+    public void getExploreLinksWorking(WebDriver driver) throws InterruptedException {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, exploreLinks);
         for (int i = 0; i < links.size(); i++) {
             links.get(i).click();
             Thread.sleep(2000);
@@ -193,8 +189,8 @@ public class HomePageEvents {
     }
 
 
-    public boolean getcategoriesLinksText() {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, categoriesLinks);
+    public boolean getcategoriesLinksText(WebDriver driver) {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, categoriesLinks);
         ArrayList categoriesText = new ArrayList();
         for (int i = 0; i < links.size(); i++) {
             String text = links.get(i).getText();
@@ -206,8 +202,8 @@ public class HomePageEvents {
         return false;
     }
 
-    public boolean getCategoriesLinksTitle() throws InterruptedException {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, categoriesLinks);
+    public boolean getCategoriesLinksTitle(WebDriver driver) throws InterruptedException {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, categoriesLinks);
         ArrayList titleList = new ArrayList();
         for (int i = 0; i < links.size(); i++) {
             links.get(i).click();
@@ -221,8 +217,8 @@ public class HomePageEvents {
         return false;
     }
 
-    public void getCategoriesLinksWorking() throws InterruptedException {
-        List<WebElement> links = fetchElement.getListOfWebElements(Locator.XPath, categoriesLinks);
+    public void getCategoriesLinksWorking(WebDriver driver) throws InterruptedException {
+        List<WebElement> links = fetchElement.getListOfWebElements(driver, Locator.XPath, categoriesLinks);
         for (int i = 0; i < links.size(); i++) {
             links.get(i).click();
             Thread.sleep(2000);
@@ -230,8 +226,8 @@ public class HomePageEvents {
         }
     }
 
-    public boolean getFacebookLink() throws InterruptedException {
-        fetchElement.getWebElement(Locator.XPath, facebookLink).click();
+    public boolean getFacebookLink(WebDriver driver) throws InterruptedException {
+        fetchElement.getWebElement(driver,Locator.XPath, facebookLink).click();
         for (String winHandle : driver.getWindowHandles()) {
                 driver.switchTo().window(winHandle);
         }
@@ -243,8 +239,8 @@ public class HomePageEvents {
         return false;
     }
 
-    public boolean getInstaLink() throws InterruptedException {
-        fetchElement.getWebElement(Locator.XPath, instaLink).click();
+    public boolean getInstaLink(WebDriver driver) throws InterruptedException {
+        fetchElement.getWebElement(driver, Locator.XPath, instaLink).click();
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
@@ -257,8 +253,8 @@ public class HomePageEvents {
 
     }
 
-    public boolean getTwitterLink() throws InterruptedException {
-        fetchElement.getWebElement(Locator.XPath, twitterLink).click();
+    public boolean getTwitterLink(WebDriver driver) throws InterruptedException {
+        fetchElement.getWebElement(driver, Locator.XPath, twitterLink).click();
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
@@ -271,8 +267,8 @@ public class HomePageEvents {
 
     }
 
-    public boolean getYoutubeLink() throws InterruptedException {
-        fetchElement.getWebElement(Locator.XPath, youtubeLink).click();
+    public boolean getYoutubeLink(WebDriver driver) throws InterruptedException {
+        fetchElement.getWebElement(driver, Locator.XPath, youtubeLink).click();
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
@@ -285,8 +281,8 @@ public class HomePageEvents {
 
     }
 
-    public boolean getWhatsappLink() throws InterruptedException {
-        fetchElement.getWebElement(Locator.XPath, whatsappLink).click();
+    public boolean getWhatsappLink(WebDriver driver) throws InterruptedException {
+        fetchElement.getWebElement(driver, Locator.XPath, whatsappLink).click();
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
@@ -299,52 +295,52 @@ public class HomePageEvents {
 
     }
 
-    public boolean clicOnTermofConditionLink(){
-        fetchElement.getWebElement(Locator.XPath, termsOfService).click();
-        String text = fetchElement.getWebElement(Locator.XPath, termsServiceHeading).getText();
+    public boolean clicOnTermofConditionLink(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, termsOfService).click();
+        String text = fetchElement.getWebElement(driver, Locator.XPath, termsServiceHeading).getText();
         if(termServiceText.equals(text)){
             return true;
         }
         return false;
     }
 
-    public boolean clicOnPrivacyPolicyLink(){
-        fetchElement.getWebElement(Locator.XPath, privacyPolicy).click();
-        String text = fetchElement.getWebElement(Locator.XPath, privacyPolicyHeading).getText();
+    public boolean clicOnPrivacyPolicyLink(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, privacyPolicy).click();
+        String text = fetchElement.getWebElement(driver, Locator.XPath, privacyPolicyHeading).getText();
         if(privaciPolicy.equals(text)){
             return true;
         }
         return false;
     }
 
-    public boolean getRightReserved(){
-        String text = fetchElement.getWebElement(Locator.XPath, rightReserved).getText();
+    public boolean getRightReserved(WebDriver driver){
+        String text = fetchElement.getWebElement(driver, Locator.XPath, rightReserved).getText();
         if(rightReservedtext.equals(text)){
             return true;
         }
         return false;
     }
 
-    public boolean getAddress(){
-        String text = fetchElement.getWebElement(Locator.XPath, address).getText();
+    public boolean getAddress(WebDriver driver){
+        String text = fetchElement.getWebElement(driver, Locator.XPath, address).getText();
         if(ticktlakeAddress.equals(text)){
             return true;
         }
         return false;
     }
 
-    public void clickOnCountryDropdown(){
-        fetchElement.getWebElement(Locator.XPath, countryDropdown).click();
+    public void clickOnCountryDropdown(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, countryDropdown).click();
     }
-    public void clickOnCountrySearchField(){
-        fetchElement.getWebElement(Locator.XPath, countryField).click();
+    public void clickOnCountrySearchField(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, countryField).click();
     }
-    public void enterCountryName(){
-        fetchElement.getWebElement(Locator.XPath, countryField).sendKeys("United Arab Emirates");
+    public void enterCountryName(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, countryField).sendKeys("United Arab Emirates");
     }
 
-    public void clickOnCountryName(){
-        fetchElement.getWebElement(Locator.XPath, countryName).click();
+    public void clickOnCountryName(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, countryName).click();
     }
 
     private String getNewEventTitle(String title)
@@ -352,22 +348,22 @@ public class HomePageEvents {
         return "//input[@placeholder='Search']/following-sibling::div//*[text()='" + title +"']";
     }
 
-    public void typeTitleInMasterSearch(String search){
-        fetchElement.getWebElement(Locator.XPath, searchField).sendKeys(search);
+    public void typeTitleInMasterSearch(String search, WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, searchField).sendKeys(search);
     }
-    public void clickMasterSearchResult(String title) throws InterruptedException {
+    public void clickMasterSearchResult(String title, WebDriver driver) throws InterruptedException {
         Thread.sleep(3000);
-        fetchElement.getWebElement(Locator.XPath, getNewEventTitle(title)).click();
+        fetchElement.getWebElement(driver, Locator.XPath, getNewEventTitle(title)).click();
     }
 
 //  Profile dropdown
 
-    public void clickProfileDropdown(){
-        fetchElement.getWebElement(Locator.XPath, profileDropdown).click();
+    public void clickProfileDropdown(WebDriver driver){
+        fetchElement.getWebElement(driver, Locator.XPath, profileDropdown).click();
     }
 
-    public void clickProfile(){
+    public void clickProfile(WebDriver driver){
         sleep(3000L);
-        fetchElement.getWebElement(Locator.XPath, profile).click();
+        fetchElement.getWebElement(driver, Locator.XPath, profile).click();
     }
 }

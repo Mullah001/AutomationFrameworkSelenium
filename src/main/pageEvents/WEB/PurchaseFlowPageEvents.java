@@ -11,8 +11,8 @@ import test.BaseTest;
 
 import java.util.List;
 
-import static main.data.Web.LogInData.email_Shameem;
-import static main.data.Web.LogInData.password_Shameem;
+import static main.data.WEB.LogInData.email_Shameem;
+import static main.data.WEB.LogInData.password_Shameem;
 import static main.pageObjects.WEB.MoviesDetailPageElements.godFatherImg_XPath;
 import static main.pageObjects.WEB.PurchaseFlowPageElements.*;
 
