@@ -4,10 +4,17 @@ import main.data.DemoData;
 import main.pageObjects.DemoPageElements;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 
 public class DemoPageEvents {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public DemoPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
     long waitSeconds = 1500L;
 
     public void TypeUserNameLogIn(){

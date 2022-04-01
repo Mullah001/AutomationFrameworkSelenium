@@ -3,10 +3,17 @@ package main.pageEvents.WEB;
 import main.pageObjects.WEB.RegisterPageElements;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 
 public class RegisterPageEvents {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public RegisterPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
 
     public void clickRegisterTop(){
         fetchElement.getWebElement(Locator.XPath, RegisterPageElements.clickRegister).click();

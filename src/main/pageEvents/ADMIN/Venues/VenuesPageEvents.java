@@ -3,6 +3,7 @@ package main.pageEvents.ADMIN.Venues;
 
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -15,7 +16,13 @@ import static main.pageObjects.ADMIN.Venues.VenuesElements.description;
 
 public class VenuesPageEvents {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public VenuesPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
 
 
     public void clickOnAddVenue() {

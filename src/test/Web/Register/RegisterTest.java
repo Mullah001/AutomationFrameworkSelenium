@@ -3,15 +3,29 @@ package test.Web.Register;
 import main.pageEvents.WEB.HomePageEvents;
 import main.pageEvents.WEB.RegisterPageEvents;
 import main.utils.DProvider;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class RegisterTest extends BaseTest {
 
-    RegisterPageEvents registerPageEvents = new RegisterPageEvents();
-    HomePageEvents homePageEvents = new HomePageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    RegisterPageEvents registerPageEvents = new RegisterPageEvents(driver);
+    HomePageEvents homePageEvents = new HomePageEvents(driver);
 
     @Test(testName = "Verify that registration functionality is working with valid, invalid and empty data.",dataProvider = "signUpData",dataProviderClass = DProvider.class)
     public void Register(String email, String password, String name, String phoneNumber, boolean isValid) throws InterruptedException {

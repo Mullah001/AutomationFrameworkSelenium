@@ -9,7 +9,7 @@ public interface HomePageElements {
 
 //    Top events
 
-    String topEventContentContainer = "//section[@id='sec2']/div[@class=\"content-container\"]";
+    String topEventContentContainer = "//section[@id='sec2']/div[@class='content-container']";
     String topEventHeading = topEventContentContainer + "/div/div";
     String topEventSubHeading = topEventContentContainer + "/div/p";
 

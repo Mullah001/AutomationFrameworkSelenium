@@ -14,8 +14,8 @@ import java.util.Arrays;
 @Test(groups = {"WEB"})
 public class HeaderTest extends BaseTest {
 
-    private WebDriver driver;
-    HeaderPageEvents headerPageEvents = new HeaderPageEvents();
+    public WebDriver driver;
+    HeaderPageEvents headerPageEvents = new HeaderPageEvents(driver);
 
     @BeforeClass
     public void intialize(){
@@ -29,7 +29,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that when user hover on events then subcategories dropdown is visiable ")
     public void eventsDropdownVisiable(){
-        WebElement eventsDropdown = headerPageEvents.getEventsDropdownVisiable(driver);
+        WebElement eventsDropdown = headerPageEvents.getEventsDropdownVisiable();
         eventsDropdown.isDisplayed();
         Assert.assertTrue(true, "Events dropdown is visiable");
 
@@ -37,7 +37,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that Text of events subcategories are correct", priority = 1)
     public void printEventscategories(){
-        ArrayList actualEventsSubcategories = headerPageEvents.getEventsCategories(driver);
+        ArrayList actualEventsSubcategories = headerPageEvents.getEventsCategories();
         ArrayList expectedEventsArrayList = new ArrayList(Arrays.asList("Awards", "Seminars", "Conferences", "Tedx"));
 
         if (actualEventsSubcategories.equals(expectedEventsArrayList) == true) {
@@ -56,12 +56,12 @@ public class HeaderTest extends BaseTest {
         ArrayList subcategoriesPath = headerPageEvents.checkEventsLink();
         for (int i = 0; i < subcategoriesPath.size(); i ++){
             WebElement element = (WebElement) subcategoriesPath.get(i);
-            headerPageEvents.hoverOnEvents(driver);
+            headerPageEvents.hoverOnEvents();
             String categoriesname = element.getText();
             System.out.println("name: " +categoriesname);
 
             element.click();
-            String title = getTitle(driver);
+            String title = getTitle();
             Assert.assertEquals(title, categoriesname, "All subcategories of Events are working and redirect to the specific path");
         }
     }
@@ -69,7 +69,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that when user hover on movies then subcategories dropdown is visiable ")
     public void moviesDropdownVisiable(){
-        WebElement moviesDropdown = headerPageEvents.getMoviesDropdownVisiable(driver);
+        WebElement moviesDropdown = headerPageEvents.getMoviesDropdownVisiable();
         moviesDropdown.isDisplayed();
         Assert.assertTrue(true, "Movies dropdown is visiable");
 
@@ -77,7 +77,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that Text of movies subcategories are correct", priority = 2)
     public void printMoviescategories(){
-        ArrayList actualSubcategories = headerPageEvents.getMoviesCategories(driver);
+        ArrayList actualSubcategories = headerPageEvents.getMoviesCategories();
         ArrayList expectedArrayList = new ArrayList(Arrays.asList("Action", "Crime", "Romantic", "Thriller", "Suspense", "Sci-Fi", "Test", "Test 2", "Horror", "Romantic Comedy "));
 
         if (actualSubcategories.equals(expectedArrayList) == true) {
@@ -97,12 +97,12 @@ public class HeaderTest extends BaseTest {
         for (int i = 0; i < subcategoriesPath.size(); i ++){
             WebElement element = (WebElement) subcategoriesPath.get(i);
             //System.out.println();
-            headerPageEvents.hoverOnMovies(driver);
+            headerPageEvents.hoverOnMovies();
             String categoriesname = element.getText();
             System.out.println("name: " +categoriesname);
 
             element.click();
-            String title = getTitle(driver);
+            String title = getTitle();
             Assert.assertEquals(title, categoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -110,7 +110,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that when user hover on Sports then subcategories dropdown is visiable ")
     public void sportsDropdownVisiable(){
-        WebElement sportsDropdown = headerPageEvents.getSportsDropdownVisiable(driver);
+        WebElement sportsDropdown = headerPageEvents.getSportsDropdownVisiable();
         sportsDropdown.isDisplayed();
         Assert.assertTrue(true, "Sports dropdown is visiable");
 
@@ -119,7 +119,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that Text of Sports subcategories are correct", priority = 4)
     public void printSportsCategories(){
-        ArrayList actualSportsSubcategories = headerPageEvents.getSportscategories(driver);
+        ArrayList actualSportsSubcategories = headerPageEvents.getSportscategories();
         ArrayList expectedSportsArrayList = new ArrayList(Arrays.asList("Fitness"));
 
         if (actualSportsSubcategories.equals(expectedSportsArrayList)) {
@@ -139,12 +139,12 @@ public class HeaderTest extends BaseTest {
         for (int i = 0; i < sportsSubcategoriesPath.size(); i ++){
             WebElement element = (WebElement) sportsSubcategoriesPath.get(i);
             //System.out.println();
-            headerPageEvents.hoverOnSports(driver);
+            headerPageEvents.hoverOnSports();
             String sportsCategoriesname = element.getText();
             System.out.println("name: " +sportsCategoriesname);
 
             element.click();
-            String title = getTitle(driver);
+            String title = getTitle();
             Assert.assertEquals(title, sportsCategoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -152,7 +152,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that when user hover on Global then subcategories dropdown is visiable ")
     public void globalDropdownVisiable(){
-        WebElement globalDropdown = headerPageEvents.getGlobalDropdownVisiable(driver);
+        WebElement globalDropdown = headerPageEvents.getGlobalDropdownVisiable();
         globalDropdown.isDisplayed();
         Assert.assertTrue(true, "Global dropdown is visiable");
 
@@ -161,7 +161,7 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that Text of Global subcategories are correct", priority = 5)
     public void printGlobalCategories(){
-        ArrayList actualGlobalSubcategories = headerPageEvents.getGlobalscategories(driver);
+        ArrayList actualGlobalSubcategories = headerPageEvents.getGlobalscategories();
         ArrayList expectedGlobalArrayList = new ArrayList(Arrays.asList("Sports", "Tours", "Movies", "Events"));
 
         if (actualGlobalSubcategories.equals(expectedGlobalArrayList)) {
@@ -180,12 +180,12 @@ public class HeaderTest extends BaseTest {
         ArrayList globalSubcategoriesPath = headerPageEvents.CheckGlobalLinks();
         for (int i = 0; i < globalSubcategoriesPath.size(); i ++){
             WebElement element = (WebElement) globalSubcategoriesPath.get(i);
-            headerPageEvents.hoverOnGlobal(driver);
+            headerPageEvents.hoverOnGlobal();
             String globalCategoriesname = element.getText();
             System.out.println("name: " +globalCategoriesname);
 
             element.click();
-            String title = getTitle(driver);
+            String title = getTitle();
             Assert.assertEquals(title, globalCategoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -193,14 +193,14 @@ public class HeaderTest extends BaseTest {
 
     @Test(testName = "Verify that when user hover on Nearby then subcategories dropdown is visiable ")
     public void nearbyDropdownVisiable() {
-        WebElement nearbyDropdown = headerPageEvents.getNearbyDropdownVisiable(driver);
+        WebElement nearbyDropdown = headerPageEvents.getNearbyDropdownVisiable();
         nearbyDropdown.isDisplayed();
         Assert.assertTrue(true, "Nearby dropdown is visiable");
     }
 
     @Test(testName = "Verify that Text of Nearby subcategories are correct", priority = 6)
     public void printNearybyCategories(){
-        ArrayList actualNearybySubcategories = headerPageEvents.getNearybycategories(driver);
+        ArrayList actualNearybySubcategories = headerPageEvents.getNearybycategories();
         ArrayList expectedNearybyArrayList = new ArrayList(Arrays.asList("Nearby Events", "Nearby Cinemas"));
 
         if (actualNearybySubcategories.equals(expectedNearybyArrayList) == true) {
@@ -219,12 +219,12 @@ public class HeaderTest extends BaseTest {
         ArrayList nearbySubcategoriesPath = headerPageEvents.CheckNearbyLinks();
         for (int i = 0; i < nearbySubcategoriesPath.size(); i ++){
             WebElement element = (WebElement) nearbySubcategoriesPath.get(i);
-            headerPageEvents.hoverOnNearby(driver);
+            headerPageEvents.hoverOnNearby();
             String nearbyCategoriesname = element.getText();
             System.out.println("name: " +nearbyCategoriesname);
 
             element.click();
-            String title = getTitle(driver);
+            String title = getTitle();
             Assert.assertEquals(title, nearbyCategoriesname, "Verify that all Nearby sub categories links are working");
         }
     }

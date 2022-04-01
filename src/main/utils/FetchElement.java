@@ -9,7 +9,14 @@ import java.util.List;
 
 public class FetchElement {
 
-    public WebElement getWebElement(WebDriver driver, Locator locator, String locatorValue){
+    public WebDriver driver;
+
+    public FetchElement(WebDriver driver)
+    {
+        this.driver = driver;
+    }
+
+    public WebElement getWebElement(Locator locator, String locatorValue){
         switch (locator){
             case Id:
                 return driver.findElement(By.id(locatorValue));
@@ -29,7 +36,7 @@ public class FetchElement {
         }
     }
 
-    public List<WebElement> getListOfWebElements(WebDriver driver, Locator locator, String locatorValue){
+    public List<WebElement> getListOfWebElements(Locator locator, String locatorValue){
         switch (locator){
             case Id:
                 return driver.findElements(By.id(locatorValue));

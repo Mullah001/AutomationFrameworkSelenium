@@ -2,7 +2,10 @@ package test.ADMIN.LogIn;
 
 import main.pageEvents.ADMIN.LogInPageEvents;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -11,7 +14,18 @@ import static main.pageObjects.ADMIN.LogInPageElements.*;
 @Test(groups = {"ADMIN"})
 public class LogInTest extends BaseTest {
 
-    LogInPageEvents logInPageEvents = new LogInPageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
 
     @Test(testName = "Verify logIn with Valid Data")
     public void verifyLogIn_Valid(){

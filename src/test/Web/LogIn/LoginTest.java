@@ -12,18 +12,22 @@ import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class LoginTest extends BaseTest {
-    private WebDriver driver;
+    public WebDriver driver;
+    LogInPageEvents logInPageEvents = null;
+    HomePageEvents homePageEvents = null;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
+
+        logInPageEvents = new LogInPageEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
     }
 
     @AfterClass
     public void close(){
         closeAndQuitBrowser(driver);
     }
-    LogInPageEvents logInPageEvents = new LogInPageEvents();
-    HomePageEvents homePageEvents = new HomePageEvents();
+
 
     @Test(testName = "Verify that login functionality is working fine with valid, invalid and Empty data", dataProvider = "signInData", dataProviderClass = DProvider.class)
     public void Login(String email, String password, String check) throws InterruptedException {

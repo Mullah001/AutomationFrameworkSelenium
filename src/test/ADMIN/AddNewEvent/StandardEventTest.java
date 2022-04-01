@@ -2,13 +2,27 @@ package test.ADMIN.AddNewEvent;
 
 import main.pageEvents.ADMIN.CreateNewEventPageEvents;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class StandardEventTest extends BaseTest {
 
-    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents(driver);
 
     @Test(testName = "Verify Standard - Structured Event Creation Flow")
     public void verifyStandardEventCreation_Structured() {

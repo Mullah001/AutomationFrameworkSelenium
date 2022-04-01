@@ -5,6 +5,7 @@ import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import test.BaseTest;
 
@@ -14,12 +15,19 @@ import java.util.List;
 import static main.pageObjects.WEB.MoviesPageElements.*;
 
 public class MoviesPageEvents extends CommonMethods {
-    FetchElement fetchElement = new FetchElement();
+
+    public WebDriver driver;
+
+    public MoviesPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
     API_DataMethods api_dataMethods = new API_DataMethods();
 
     public void loadMoviesURLFromHeader() {
         String url = fetchElement.getWebElement(Locator.XPath, moviesLinkA_XPath).getAttribute("href");
-        BaseTest.driver.navigate().to(url);
+        driver.navigate().to(url);
     }
 
     /*********************** Search Bar *********************/
@@ -226,7 +234,7 @@ public class MoviesPageEvents extends CommonMethods {
     /******************************** Movies Details Page *************************/
 
     public String getTitle_MoviesDetails() {
-        waitForElementPresent(BaseTest.driver, By.className(movieTitleDiv_ClassName), 20);
+        waitForElementPresent(By.className(movieTitleDiv_ClassName), 20);
         return fetchElement.getWebElement(Locator.ClassName, movieTitleDiv_ClassName).getText();
     }
 

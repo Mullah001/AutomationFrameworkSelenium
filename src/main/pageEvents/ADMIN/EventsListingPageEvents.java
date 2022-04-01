@@ -5,6 +5,7 @@ import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import test.BaseTest;
@@ -15,7 +16,13 @@ import static main.pageObjects.ADMIN.EventsListingPageElements.*;
 
 public class EventsListingPageEvents extends CommonMethods {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public EventsListingPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
     API_DataMethods api_dataMethods = new API_DataMethods();
 
     /************ API **************/

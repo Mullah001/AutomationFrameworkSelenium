@@ -5,7 +5,10 @@ import main.pageEvents.WEB.HomePageEvents;
 import main.pageEvents.WEB.MoviesDetailPageEvents;
 import main.pageEvents.WEB.PurchaseFlowPageEvents;
 import main.utils.Constants;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -13,15 +16,26 @@ import static main.data.ADMIN.CreateNewEventData.*;
 
 @Test(groups = {"WEB"})
 public class MoviesPurchaseFlowTest extends BaseTest {
-    PurchaseFlowPageEvents purchaseFlowPageEvents = new PurchaseFlowPageEvents();
-    MoviesDetailPageEvents moviesDetailPageEvents = new MoviesDetailPageEvents();
-    HomePageEvents homePageEvents = new HomePageEvents();
-    EventsDetailPageEvents eventsDetailPageEvents = new EventsDetailPageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    PurchaseFlowPageEvents purchaseFlowPageEvents = new PurchaseFlowPageEvents(driver);
+    MoviesDetailPageEvents moviesDetailPageEvents = new MoviesDetailPageEvents(driver);
+    HomePageEvents homePageEvents = new HomePageEvents(driver);
+    EventsDetailPageEvents eventsDetailPageEvents = new EventsDetailPageEvents(driver);
 
     @Test(testName = "Verify the Purchase Flow")
     public void verifyPurchaseFlow() throws InterruptedException {
 
-        BaseTest.driver.navigate().to(Constants.WebBaseUrl);
+        driver.navigate().to(Constants.WebBaseUrl);
         purchaseFlowPageEvents.logInUser();
 
         homePageEvents.clickOnCountryDropdown();

@@ -12,7 +12,7 @@ import test.BaseTest;
 
 @Test(groups = "WEB")
 public class SocialLoginsTest extends BaseTest {
-    private WebDriver driver;
+    public WebDriver driver;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
@@ -22,9 +22,9 @@ public class SocialLoginsTest extends BaseTest {
     public void close(){
         closeAndQuitBrowser(driver);
     }
-    SocialLoginEvents socialLoginEvents = new SocialLoginEvents();
-    HomePageEvents homePageEvents = new HomePageEvents();
-    LogInPageEvents logInPageEvents = new LogInPageEvents();
+    SocialLoginEvents socialLoginEvents = new SocialLoginEvents(driver);
+    HomePageEvents homePageEvents = new HomePageEvents(driver);
+    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
 
     @Test(testName = "Verify that log in with google functionality is working", enabled = false)
     public void socialLoginWithGoogle() throws InterruptedException {

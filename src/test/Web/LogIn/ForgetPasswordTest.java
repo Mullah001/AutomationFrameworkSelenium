@@ -12,7 +12,7 @@ import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class ForgetPasswordTest extends BaseTest {
-    private WebDriver driver;
+    public WebDriver driver;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
@@ -22,9 +22,9 @@ public class ForgetPasswordTest extends BaseTest {
     public void close(){
         closeAndQuitBrowser(driver);
     }
-    LogInPageEvents logInPageEvents = new LogInPageEvents();
-    ForgetPasswordEvents forgetPasswordEvents = new ForgetPasswordEvents();
-    HomePageEvents homePageEvents = new HomePageEvents();
+    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
+    ForgetPasswordEvents forgetPasswordEvents = new ForgetPasswordEvents(driver);
+    HomePageEvents homePageEvents = new HomePageEvents(driver);
 
     @Test(testName = "Verify that forget password functionality is working fine")
     public void forgetPassword() throws InterruptedException {

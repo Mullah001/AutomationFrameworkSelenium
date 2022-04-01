@@ -8,7 +8,7 @@ String adminBaseUrl = "https://admin.qa.ticketlake.com/";
     //How Many times we will retry if Test fails
     int retryCount = 0;
 
-    String environment = "QA_Environment";
+    String environment = "web";
     String serverURL = "ServerURL";
     String username = "username";
     String password = "password";

@@ -4,12 +4,19 @@ import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import static main.pageObjects.EventsDetailPageElements.*;
 
 public class EventsDetailPageEvents extends CommonMethods {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public EventsDetailPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
 
     public void clickOnBuyNowAndSeeDetailsButton() {
         if (IsElementPresentAndVisible(By.xpath(buyNow))) {

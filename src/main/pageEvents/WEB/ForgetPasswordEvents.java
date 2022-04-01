@@ -6,10 +6,18 @@ import main.utils.DProvider;
 import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
 public class ForgetPasswordEvents extends DProvider {
+
+    public WebDriver driver;
+
+    public ForgetPasswordEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
     DProvider dProvider = new DProvider();
-    FetchElement fetchElement = new FetchElement();
+    FetchElement fetchElement = new FetchElement(driver);
 
     public void enterForgetPasswordEmail() {
         fetchElement.getWebElement(Locator.Id, ForgetPasswordElements.forgetEmail).sendKeys("shameem.akhtar@synavos.com");

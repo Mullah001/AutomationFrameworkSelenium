@@ -6,10 +6,17 @@ import main.pageObjects.WEB.SocialLoginElements;
 import main.utils.DProvider;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.WebDriver;
 
 public class SocialLoginEvents extends DProvider {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public SocialLoginEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
     DProvider dProvider = new DProvider();
 
 

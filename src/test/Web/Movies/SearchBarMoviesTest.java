@@ -2,7 +2,10 @@ package test.Web.Movies;
 
 import main.pageEvents.WEB.MoviesPageEvents;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -13,7 +16,18 @@ import static main.data.Web.MoviesData.*;
 @Test(groups = {"WEB"})
 public class SearchBarMoviesTest extends BaseTest {
 
-    MoviesPageEvents moviesPageEvents = new MoviesPageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    MoviesPageEvents moviesPageEvents = new MoviesPageEvents(driver);
     int actualCount, expectedCount;
 
     @Test(testName = "Verify that keyword field placeholder is '" + keywordPlaceholder + "'", priority = 0)

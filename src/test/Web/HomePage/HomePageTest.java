@@ -2,8 +2,8 @@ package test.Web.HomePage;
 
 import main.pageEvents.WEB.HomePageEvents;
 import main.utils.API_DataMethods;
+import main.utils.CommonMethods;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,21 +16,23 @@ import static main.data.Web.HomePageData.*;
 
 @Test(groups = {"WEB"})
 public class HomePageTest extends BaseTest {
-
-
-    HomePageEvents homePageEvents = new HomePageEvents();
-    API_DataMethods apiDataMethods = new API_DataMethods();
-
-    private WebDriver driver;
+    public WebDriver driver;
+    HomePageEvents homePageEvents = null;
     @BeforeClass
-    public void intialize(){
+    public void initialize(){
+
         driver = initializeBrowser();
+        homePageEvents = new HomePageEvents(driver);
     }
 
     @AfterClass
     public void close(){
         closeAndQuitBrowser(driver);
     }
+
+
+    CommonMethods commonMethods = new CommonMethods();
+    API_DataMethods apiDataMethods = new API_DataMethods();
 
     @Test(testName = "Verify that the heading of the Top events is according to the design")
     public void VerifyTopEventsHeading() {
@@ -133,13 +135,13 @@ public class HomePageTest extends BaseTest {
 
     @Test(testName = "Verify that explore links are redirected to the respective page.", enabled = false)
     public void VerifiedExploreLinksRedirectOnCorrectPage() throws InterruptedException {
-        boolean isTrue = homePageEvents.getExploreLinksTitle(driver);
+        boolean isTrue = homePageEvents.getExploreLinksTitle();
         Assert.assertTrue(isTrue, "Verified");
     }
 
     @Test(testName = "Verify that explore links are working fine", enabled = false)
     public void VerifiedExploreLinksWorking() throws InterruptedException {
-        homePageEvents.getExploreLinksWorking(driver);
+        homePageEvents.getExploreLinksWorking();
     }
 
     @Test(testName = "Verify that categories links text are according to the design", enabled = false)
@@ -151,41 +153,41 @@ public class HomePageTest extends BaseTest {
 
     @Test(testName = "Verify that Categories links are redirected to the respective page.", enabled = false)
     public void VerifiedCategoriesLinksRedirectOnCorrectPage() throws InterruptedException {
-        boolean isTrue = homePageEvents.getCategoriesLinksTitle(driver);
+        boolean isTrue = homePageEvents.getCategoriesLinksTitle();
         Assert.assertTrue(isTrue, "Verified");
     }
 
     @Test(testName = "Verify that explore links are working fine", enabled = false)
     public void VerifiedCategoriesLinksWorking() throws InterruptedException {
-        homePageEvents.getCategoriesLinksWorking(driver);
+        homePageEvents.getCategoriesLinksWorking();
     }
 
     @Test(testName = "Verify that by clicking on the facebook logo user us redirect to the facebook page of ticketlate")
     public void verifiedFacebookLink() throws InterruptedException {
-        boolean isTrue = homePageEvents.getFacebookLink(driver);
+        boolean isTrue = homePageEvents.getFacebookLink();
         Assert.assertTrue(isTrue, "verified");
     }
 
     @Test(testName = "Verify that by clicking on the Instagram logo user us redirect to the instagram page of ticketlate")
     public void verifiedInstaLink() throws InterruptedException {
-        boolean isTrue = homePageEvents.getInstaLink(driver);
+        boolean isTrue = homePageEvents.getInstaLink();
         Assert.assertTrue(isTrue, "verified");
     }
     @Test(testName = "Verify that by clicking on the Twitter logo user us redirect to the Twitter page of ticketlate")
     public void verifiedTwitterLink() throws InterruptedException {
-        boolean isTrue = homePageEvents.getTwitterLink(driver);
+        boolean isTrue = homePageEvents.getTwitterLink();
         Assert.assertTrue(isTrue, "verified");
     }
 
     @Test(testName = "Verify that by clicking on the Youtube logo user us redirect to the Youtube page of ticketlate")
     public void verifiedYoutubeLink() throws InterruptedException {
-        boolean isTrue = homePageEvents.getYoutubeLink(driver);
+        boolean isTrue = homePageEvents.getYoutubeLink();
         Assert.assertTrue(isTrue, "verified");
     }
 
     @Test(testName = "Verify that by clicking on the Whatsapp logo user us redirect to the Whatsapp page of ticketlate")
     public void verifiedWhatsappLink() throws InterruptedException {
-        boolean isTrue = homePageEvents.getWhatsappLink(driver);
+        boolean isTrue = homePageEvents.getWhatsappLink();
         Assert.assertTrue(isTrue, "verified");
     }
 

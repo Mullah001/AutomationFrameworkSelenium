@@ -23,6 +23,12 @@ import static main.utils.Constants.xAuth;
 
 public class CommonMethods {
 
+    public WebDriver driver;
+
+//    public CommonMethods(WebDriver driver){
+//        this.driver = driver;
+//    }
+
     PropertyFilesReader propRead = new PropertyFilesReader();
 
     static final String COMMA_DELIMITER = ",";
@@ -177,15 +183,15 @@ public class CommonMethods {
 
     /******************** Selenium Helper Methods *******************/
 
-    public static String getTitle(WebDriver driver) {
+    public String getTitle() {
         return driver.getTitle();
     }
 
-    public static String getCurrentURL(WebDriver driver) {
+    public String getCurrentURL() {
         return driver.getCurrentUrl();
     }
 
-    public static void typeWithSpeed(WebDriver driver, By element, String value, long speedDelay) {
+    public void typeWithSpeed( By element, String value, long speedDelay) {
         driver.findElement(element).click();
         for (int i = 0; i < value.length(); i++) {
             driver.findElement(element).sendKeys(value.substring(i, (i + 1)));
@@ -193,7 +199,7 @@ public class CommonMethods {
         }
     }
 
-    public boolean IsElementPresentAndVisible(By element, WebDriver driver) {
+    public boolean IsElementPresentAndVisible(By element) {
         boolean elementPresence = false;
         try {
             elementPresence = driver.findElement(element).isEnabled() && driver.findElement(element).isDisplayed();
@@ -203,7 +209,7 @@ public class CommonMethods {
         return elementPresence;
     }
 
-    public boolean IsElementPresent(By element, WebDriver driver) {
+    public boolean IsElementPresent(By element) {
         boolean elementPresence = false;
         try {
             elementPresence = driver.findElement(element).isEnabled();
@@ -213,7 +219,7 @@ public class CommonMethods {
         return elementPresence;
     }
 
-    public void waitForElementPresent(WebDriver driver, By item, int seconds) {
+    public void waitForElementPresent( By item, int seconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, seconds);
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(item));
@@ -222,7 +228,7 @@ public class CommonMethods {
         }
     }
 
-    public void waitForElementVisible(WebDriver driver, By item, int seconds) {
+    public void waitForElementVisible( By item, int seconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, seconds);
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(item));
@@ -231,16 +237,16 @@ public class CommonMethods {
         }
     }
 
-    public void waitForElementPresentAndVisible(WebDriver driver, By item, int seconds) {
+    public void waitForElementPresentAndVisible( By item, int seconds) {
         try {
-            waitForElementPresent(driver, item, seconds);
-            waitForElementVisible(driver, item, seconds);
+            waitForElementPresent(item, seconds);
+            waitForElementVisible( item, seconds);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void scrollElementIntoView(By webElement, WebDriver driver) {
+    public void scrollElementIntoView(By webElement) {
         WebElement element = driver.findElement(webElement);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         sleep(500l);
@@ -248,8 +254,8 @@ public class CommonMethods {
         sleep(500l);
     }
 
-    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value, WebDriver driver) {
-        if (IsElementPresentAndVisible(By.xpath(locatorXPath), driver)) {
+    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value) {
+        if (IsElementPresentAndVisible(By.xpath(locatorXPath))) {
             driver.findElement(By.xpath(locatorXPath)).clear();
             driver.findElement(By.xpath(locatorXPath)).sendKeys(value);
         }

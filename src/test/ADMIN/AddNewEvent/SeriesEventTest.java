@@ -3,14 +3,28 @@ package test.ADMIN.AddNewEvent;
 import main.pageEvents.ADMIN.CreateNewEventPageEvents;
 import main.pageEvents.ADMIN.EventsListingPageEvents;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class SeriesEventTest extends BaseTest {
 
-    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents();
-    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents(driver);
+    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents(driver);
 
     @Test(testName = "Verify Series - Structured Event Creation Flow", enabled = false)
     public void verifySeriesEvent_Structured(){

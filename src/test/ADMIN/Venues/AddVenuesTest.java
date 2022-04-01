@@ -2,6 +2,9 @@ package test.ADMIN.Venues;
 
 import main.pageEvents.ADMIN.DashboardEvents;
 import main.pageEvents.ADMIN.Venues.VenuesPageEvents;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.ADMIN.LogIn.LogInTest;
@@ -10,8 +13,19 @@ import test.BaseTest;
 @Test(groups = {"ADMIN"})
 public class AddVenuesTest extends BaseTest {
 
-    VenuesPageEvents venuesPageEvents = new VenuesPageEvents();
-    DashboardEvents dashboardEvents = new DashboardEvents();
+    public WebDriver driver;
+    @BeforeClass
+    public void intialize(){
+        driver = initializeBrowser();
+    }
+
+    @AfterClass
+    public void close(){
+        closeAndQuitBrowser(driver);
+    }
+
+    VenuesPageEvents venuesPageEvents = new VenuesPageEvents(driver);
+    DashboardEvents dashboardEvents = new DashboardEvents(driver);
 
     @Test(testName = "login")
     public void login(){

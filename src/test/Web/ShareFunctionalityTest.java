@@ -12,23 +12,27 @@ import test.Web.LogIn.LoginTest;
 @Test(groups = {"WEB"})
 public class ShareFunctionalityTest extends BaseTest {
 
-    LoginTest loginTest = new LoginTest();
-    HomePageEvents homePageEvents = new HomePageEvents();
-    ShareFunctionalityEvents shareFunctionalityEvents = new ShareFunctionalityEvents();
+    public WebDriver driver;
+    LoginTest loginTest = null;
+    HomePageEvents homePageEvents = null;
+    ShareFunctionalityEvents shareFunctionalityEvents = null;
 
-    private WebDriver driver;
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        loginTest = new LoginTest();
+        homePageEvents = new HomePageEvents(driver);
+        shareFunctionalityEvents = new ShareFunctionalityEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
+
     @Test(testName = "Verify the share functionality of ticket is working fine", priority = 1)
-    public void verifyShareTicketFunctionality(){
+    public void verifyShareTicketFunctionality() {
 
         try {
             loginTest.Login("ataib.ahmad@synavos.com", "123456", "valid");
@@ -48,7 +52,7 @@ public class ShareFunctionalityTest extends BaseTest {
     }
 
     @Test(testName = "Verify the share functionality of pass is working fine", priority = 2, dependsOnMethods = {"verifyShareTicketFunctionality"}, enabled = false)
-    public void verifySharePassFunctionality(){
+    public void verifySharePassFunctionality() {
         shareFunctionalityEvents.clickSharePassButton();
         shareFunctionalityEvents.clickCheckBox();
         shareFunctionalityEvents.enetrPhoneNumber(driver);

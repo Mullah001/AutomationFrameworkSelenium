@@ -11,7 +11,13 @@ import static main.pageObjects.WEB.ShareFunctionalityElements.*;
 
 public class ShareFunctionalityEvents extends CommonMethods {
 
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
+
+    public ShareFunctionalityEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
 
     public void clickTicketTab(){
         sleep(3000L);
@@ -32,15 +38,15 @@ public class ShareFunctionalityEvents extends CommonMethods {
     }
     public void enetrPhoneNumber(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(phoneNumberField, "0460730678", driver);
+        clearAndTypeIfPresentAndVisible(phoneNumberField, "0460730678");
     }
     public void enetrName(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(nameField, "Shameem", driver);
+        clearAndTypeIfPresentAndVisible(nameField, "Shameem");
     }
     public void enetrEmail(WebDriver driver){
         sleep(2000L);
-        clearAndTypeIfPresentAndVisible(emailField, email_Shameem, driver);
+        clearAndTypeIfPresentAndVisible(emailField, email_Shameem);
     }
     public void clickShareButton(){
         sleep(2000L);

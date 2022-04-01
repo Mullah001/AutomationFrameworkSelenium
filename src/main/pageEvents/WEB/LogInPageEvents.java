@@ -7,9 +7,15 @@ import org.openqa.selenium.WebDriver;
 import test.BaseTest;
 
 public class LogInPageEvents {
-    FetchElement fetchElement = new FetchElement();
+    public WebDriver driver;
 
-    public String getTitle(WebDriver driver){
+    public LogInPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
+
+    public String getTitle(){
         return driver.getTitle();
     }
 

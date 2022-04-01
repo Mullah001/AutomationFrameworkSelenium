@@ -5,6 +5,7 @@ import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import test.BaseTest;
@@ -18,12 +19,17 @@ import static main.utils.Constants.*;
 
 public class CreateNewEventPageEvents extends CommonMethods {
 
-    FetchElement fetchElement = new FetchElement();
-    LogInPageEvents logInPageEvents = new LogInPageEvents();
-    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents();
+    public WebDriver driver;
+    FetchElement fetchElement = new FetchElement(driver);
+    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
+    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents(driver);
 
     private final int waitForElementSeconds = 15;
     private final long sleepSeconds = 1500l;
+
+    public CreateNewEventPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
 
     /**************** Standard - Structured *************/
 
@@ -406,11 +412,11 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void waitForModalHeaderToPresentAndVisible() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(modalHeaderH5_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(modalHeaderH5_XPath), waitForElementSeconds);
     }
 
     public void waitForEventsListing() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.name(categoriesSelect_Name), 15);
+        waitForElementPresentAndVisible(By.name(categoriesSelect_Name), 15);
     }
 
     public void preCreateEventFlow() {
@@ -506,22 +512,22 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public boolean isErrorPopupPresentAndVisible() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(errorPopupDiv_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(errorPopupDiv_XPath), waitForElementSeconds);
         return IsElementPresentAndVisible(By.xpath(errorPopupDiv_XPath));
     }
 
     public void isSavedMessagePresentAndVisible() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(savedMessageDiv_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(savedMessageDiv_XPath), waitForElementSeconds);
         IsElementPresentAndVisible(By.xpath(savedMessageDiv_XPath));
     }
 
     public boolean isEventSlotSavedSuccessfullyPresentAndVisible() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(eventSlotSavedSuccessfullyDiv_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath), waitForElementSeconds);
         return IsElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath));
     }
 
     public boolean isEventListingPresent() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.className(listingTableDiv_Class), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.className(listingTableDiv_Class), waitForElementSeconds);
         return IsElementPresentAndVisible(By.className(listingTableDiv_Class));
     }
 
@@ -589,8 +595,8 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void typeTicketClassColor() {
-        JavascriptExecutor js = (JavascriptExecutor) BaseTest.driver;
-        WebElement ColorElement = BaseTest.driver.findElement(By.xpath(emptyColorTicketClassInput_XPath));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement ColorElement = driver.findElement(By.xpath(emptyColorTicketClassInput_XPath));
         js.executeScript("arguments[0].setAttribute('value', '#FF0000')", ColorElement);
         //fetchElement.getWebElement(Locator.XPath, emptyColorTicketClassInput_XPath).sendKeys(ticketClassColor);
     }
@@ -728,12 +734,12 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void clickOnlySaveButton() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(onlySaveEventButton_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(onlySaveEventButton_XPath), waitForElementSeconds);
         fetchElement.getWebElement(Locator.XPath, onlySaveEventButton_XPath).click();
     }
 
     public void clickSaveAndPublishButton() {
-        waitForElementPresentAndVisible(BaseTest.driver, By.xpath(saveAndPublishEventButton_XPath), waitForElementSeconds);
+        waitForElementPresentAndVisible(By.xpath(saveAndPublishEventButton_XPath), waitForElementSeconds);
         fetchElement.getWebElement(Locator.XPath, saveAndPublishEventButton_XPath).click();
     }
 

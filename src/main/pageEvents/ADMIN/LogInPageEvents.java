@@ -4,13 +4,21 @@ import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import test.BaseTest;
 
 import static main.data.ADMIN.LogInData.*;
 import static main.pageObjects.ADMIN.LogInPageElements.*;
 
 public class LogInPageEvents extends CommonMethods {
-    FetchElement fetchElement = new FetchElement();
+
+    public WebDriver driver;
+
+    public LogInPageEvents(WebDriver driver){
+        this.driver = driver;
+    }
+
+    FetchElement fetchElement = new FetchElement(driver);
 
     public void enterUserName(String userName) {
         fetchElement.getWebElement(Locator.XPath, userName_XPath).sendKeys(userName);
@@ -25,7 +33,7 @@ public class LogInPageEvents extends CommonMethods {
     }
 
     public void waitForDashboardToLoad(){
-        waitForElementPresentAndVisible(BaseTest.driver, By.id(dashboardSideBar_Id), 15);
+        waitForElementPresentAndVisible(By.id(dashboardSideBar_Id), 15);
     }
 
     public void logIn_Valid(){
