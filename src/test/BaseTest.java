@@ -34,7 +34,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-import static main.data.WEB.MoviesData.moviesURL;
+import static main.data.Web.MoviesData.moviesURL;
 import static main.utils.Constants.*;
 
 public class BaseTest extends CommonMethods {

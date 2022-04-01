@@ -6,15 +6,13 @@ import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.WebElement;
 
-import javax.sound.midi.ShortMessage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
+import static main.data.ADMIN.CreateNewEventData.*;
 import static main.data.Web.HomePageData.*;
 import static main.pageObjects.WEB.HomePageElements.*;
+import static main.utils.CommonMethods.sleep;
 import static test.BaseTest.driver;
 
 public class HomePageEvents {
@@ -335,7 +333,41 @@ public class HomePageEvents {
         return false;
     }
 
-    public void masterSearch(){
+    public void clickOnCountryDropdown(){
+        fetchElement.getWebElement(Locator.XPath, countryDropdown).click();
+    }
+    public void clickOnCountrySearchField(){
+        fetchElement.getWebElement(Locator.XPath, countryField).click();
+    }
+    public void enterCountryName(){
+        fetchElement.getWebElement(Locator.XPath, countryField).sendKeys("United Arab Emirates");
+    }
 
+    public void clickOnCountryName(){
+        fetchElement.getWebElement(Locator.XPath, countryName).click();
+    }
+
+    private String getNewEventTitle(String title)
+    {
+        return "//input[@placeholder='Search']/following-sibling::div//*[text()='" + title +"']";
+    }
+
+    public void typeTitleInMasterSearch(String search){
+        fetchElement.getWebElement(Locator.XPath, searchField).sendKeys(search);
+    }
+    public void clickMasterSearchResult(String title) throws InterruptedException {
+        Thread.sleep(3000);
+        fetchElement.getWebElement(Locator.XPath, getNewEventTitle(title)).click();
+    }
+
+//  Profile dropdown
+
+    public void clickProfileDropdown(){
+        fetchElement.getWebElement(Locator.XPath, profileDropdown).click();
+    }
+
+    public void clickProfile(){
+        sleep(3000L);
+        fetchElement.getWebElement(Locator.XPath, profile).click();
     }
 }

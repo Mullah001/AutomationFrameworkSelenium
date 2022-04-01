@@ -8,7 +8,7 @@ import test.BaseTest;
 
 import java.util.List;
 
-import static main.data.WEB.MoviesData.*;
+import static main.data.Web.MoviesData.*;
 
 @Test(groups = {"WEB"})
 public class SearchBarMoviesTest extends BaseTest {

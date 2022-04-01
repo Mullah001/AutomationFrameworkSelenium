@@ -29,7 +29,7 @@ public interface CreateNewEventPageElements {
     String titleInput_Name = "title";
     String currencySelect_Name = "currency";
     String categoriesSpan_XPath = "//span[text()='Please Select Category']/..";
-    String eventsCategorySpan_XPath = "//*[@id='SvgjsSvg1001']/following-sibling::div//ul//span[@title='Events']";
+    String eventsCategorySpan_XPath = "//*[@id='SvgjsSvg1001']/following-sibling::div//ul//span[@title='" +eventCategory +"']";
     String categoriesTextLabel_XPath = "//label[text()='Categories']";
     String descriptionTextArea_Name = "description";
     String imdbUrlInput_Name = "imdbUrl";
@@ -58,13 +58,13 @@ public interface CreateNewEventPageElements {
 
     //Sample Date Time Format - 02/22/2022 12:00 AM
     String eventStartDateInput_XPath = "//label[text()='Event Starting Date Time']/parent::div/following-sibling::div//input";
-    String eventStartDateDayTd_XPath = "//label[text()='Event Starting Date Time']/parent::div/following-sibling::div//td[text()='" + eventStartDateTime_Day + "']";
+    String eventStartDateDayTd_XPath = "//label[text()='Event Starting Date Time']/parent::div/following-sibling::div//td[text()='" + eventStartDateTime_Day + "' and not(contains(@class,'rdtDisabled'))]";
     String eventEndDateInput_XPath = "//label[text()='Event Ending Date Time']/parent::div/following-sibling::div//input";
-    String eventEndDateDayTd_XPath = "//label[text()='Event Ending Date Time']/parent::div/following-sibling::div//td[text()='" + eventEndDateTime_Day + "']";
+    String eventEndDateDayTd_XPath = "//label[text()='Event Ending Date Time']/parent::div/following-sibling::div//td[text()='" + eventEndDateTime_Day + "' and not(contains(@class,'rdtDisabled'))]";
     String entryStartDateInput_XPath = "//label[text()='Entry Starting Date Time']/parent::div/following-sibling::div//input";
-    String entryStartDateDayTd_XPath = "//label[text()='Entry Starting Date Time']/parent::div/following-sibling::div//td[text()='" + entryStartDateTime_Day + "']";
+    String entryStartDateDayTd_XPath = "//label[text()='Entry Starting Date Time']/parent::div/following-sibling::div//td[text()='" + entryStartDateTime_Day + "' and not(contains(@class,'rdtDisabled'))]";
     String entryCloseDateInput_XPath = "//label[text()='Entry Closing Date Time']/parent::div/following-sibling::div//input";
-    String entryCloseDateDayTd_XPath = "//label[text()='Entry Closing Date Time']/parent::div/following-sibling::div//td[text()='" + entryCloseDateTime_Day + "']";
+    String entryCloseDateDayTd_XPath = "//label[text()='Entry Closing Date Time']/parent::div/following-sibling::div//td[text()='" + entryCloseDateTime_Day + "' and not(contains(@class,'rdtDisabled'))]";
 
     String eventStart_Details_Label_XPath = "//label[text()='Event Start Date']";
     String eventStart_Details_DateInput_XPath = "//label[text()='Event Start Date']/parent::div//input";
@@ -99,6 +99,9 @@ public interface CreateNewEventPageElements {
     String customTicketBasePriceInput_XPath = "//input[@value='" + ticketClassName + "']/../following-sibling::div/input[@name='ticketClassBasePrice']";
 
     /*** Available Tickets ***/
+    String eventSalePriceses = "//div[contains(text(),'Class Name')]/parent::div/following-sibling::div//input[@name='ticketClassPrice']";
+    String eventBasePriceses = "//div[contains(text(),'Class Name')]/parent::div/following-sibling::div//input[@name='ticketClassBasePrice']";
+
 
     String businessTicketAvailableTicketsInput_XPath = "//input[@value='BUSINESS']/../following-sibling::div/input[@name='availableTickets']";
     String standardTicketAvailableTicketsInput_XPath = "//input[@value='STANDARD']/../following-sibling::div/input[@name='availableTickets']";

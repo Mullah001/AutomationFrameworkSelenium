@@ -1,13 +1,11 @@
 package main.pageObjects.WEB;
 
+import static main.data.ADMIN.CreateNewEventData.*;
+
 public interface HomePageElements {
     String signIn = ".sign-in";
     String heroTitle = "//div[@class='home-intro']/h2";
 
-    //Master Search
-
-    String searchEventName = "//input[@placeholder='Search']";
-    String searchEventResult = "//input[@placeholder='Search']/following-sibling::div//*[text()='" + "" +"']";
 
 //    Top events
 
@@ -65,4 +63,21 @@ public interface HomePageElements {
     String privacyPolicyHeading = "//h5[@class='top-heading']";
     String rightReserved = "//div[@class='copyright']";
     String address = innerFooter + "//ul[@class='footer-contacts fl-wrap footer-second-widget']/li[2]";
+
+//  Country Selection
+
+    String countryDropdown = "//button[@id='select_flag_button']";
+    String countryField = "//div[@class='filterBox']/input";
+    String countryName = "//div[@class='filterBox']/following-sibling::li/span/span";
+
+    //Master Search
+
+    String searchField = "//div[@role='combobox']/input[@placeholder='Search']";
+    String searchResult = "//input[@placeholder='Search']/following-sibling::div//*[text()='" + eventTitle_Standard_Structured +"']";
+
+//  Profile Dropdown
+
+    String profileDropdown = "//span[@class='username-wrp']";
+    String profile = "//ul[@class='hu-menu-vis']/li/a[contains(text(),'Profile')]";
+
 }

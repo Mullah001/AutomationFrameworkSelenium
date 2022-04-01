@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
-import static main.data.WEB.MoviesData.*;
+import static main.data.Web.MoviesData.*;
 
 @Test(groups = {"WEB"})
 public class TopMovies_MoviesTest extends BaseTest {

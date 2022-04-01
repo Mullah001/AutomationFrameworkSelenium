@@ -1,7 +1,7 @@
 package main.utils;
 
 public interface Constants {
-    String baseUrl = "https://qa.ticketlake.com/";
+    String WebBaseUrl = "https://qa.ticketlake.com/";
 String adminBaseUrl = "https://admin.qa.ticketlake.com/";
     //String adminBaseUrl = "https://swvl.com/travel";
 

@@ -1,4 +1,4 @@
-package main.data.WEB;
+package main.data.Web;
 
 public interface MoviesData {
 

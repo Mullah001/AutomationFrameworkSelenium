@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import test.BaseTest;
 
+import java.util.List;
+
 import static main.data.ADMIN.CreateNewEventData.*;
 import static main.pageObjects.ADMIN.CreateNewEventPageElements.*;
 import static main.pageObjects.ADMIN.EventsListingPageElements.*;
@@ -82,7 +84,8 @@ public class CreateNewEventPageEvents extends CommonMethods {
         clickSaveButton();
         sleep(sleepSeconds);
 
-        clickOnlySaveButton();
+//        clickOnlySaveButton();
+        clickSaveAndPublishButton();
     }
 
     /**************** Standard - UnStructured *************/
@@ -157,18 +160,20 @@ public class CreateNewEventPageEvents extends CommonMethods {
         typeVIPAvailablePrice();
         sleep(sleepSeconds);
 
-        typeBusinessSalePrice();
-        sleep(sleepSeconds);
-        typeStandardSalePrice();
-        sleep(sleepSeconds);
-        typeVIPSalePrice();
-        sleep(sleepSeconds);
+        setEventBasePricess();
 
-        typeBusinessBasePrice();
-        sleep(sleepSeconds);
-        typeStandardBasePrice();
-        sleep(sleepSeconds);
-        typeVIPBasePrice();
+//        typeBusinessSalePrice();
+//        sleep(sleepSeconds);
+//        typeStandardSalePrice();
+//        sleep(sleepSeconds);
+//        typeVIPSalePrice();
+//        sleep(sleepSeconds);
+//
+//        typeBusinessBasePrice();
+//        sleep(sleepSeconds);
+//        typeStandardBasePrice();
+//        sleep(sleepSeconds);
+//        typeVIPBasePrice();
         sleep(sleepSeconds);
 
         uploadBannerImage_Details();
@@ -308,18 +313,8 @@ public class CreateNewEventPageEvents extends CommonMethods {
         typeVIPAvailablePrice();
         sleep(sleepSeconds);
 
-        typeBusinessSalePrice();
-        sleep(sleepSeconds);
-        typeStandardSalePrice();
-        sleep(sleepSeconds);
-        typeVIPSalePrice();
-        sleep(sleepSeconds);
+        setEventSalePricess();
 
-        typeBusinessBasePrice();
-        sleep(sleepSeconds);
-        typeStandardBasePrice();
-        sleep(sleepSeconds);
-        typeVIPBasePrice();
         sleep(sleepSeconds);
 
         uploadBannerImage_Details();
@@ -392,28 +387,10 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void typeTicketPrices() {
-        long sleepSeconds = 1000l;
-        typeEconomySalePrice();
-        sleep(sleepSeconds);
-        typeGoldenSalePrice();
-        sleep(sleepSeconds);
-        typeBusinessSalePrice();
-        sleep(sleepSeconds);
-        typeBusinessTableSalePrice();
-        sleep(sleepSeconds);
-        typeVIPTableSalePrice();
-        sleep(sleepSeconds);
-
-        typeEconomyBasePrice();
-        sleep(sleepSeconds);
-        typeGoldenBasePrice();
-        sleep(sleepSeconds);
-        typeBusinessBasePrice();
-        sleep(sleepSeconds);
-        typeBusinessTableBasePrice();
-        sleep(sleepSeconds);
-        typeVIPTableBasePrice();
-        sleep(sleepSeconds);
+        sleep(5000L);
+        setEventSalePricess();
+        sleep(5000L);
+        setEventBasePricess();
     }
 
     public void clickStandardEvent() {
@@ -693,14 +670,14 @@ public class CreateNewEventPageEvents extends CommonMethods {
 
     public void selectVenue() {
         Select element = new Select(fetchElement.getWebElement(Locator.Name, venueSelect_Name));
-        element.selectByVisibleText(zaidiStudioText);
+        element.selectByVisibleText(venueName);
     }
 
     /*** Seating Plan ***/
 
     public void selectSeatingPlan() {
         Select element = new Select(fetchElement.getWebElement(Locator.Name, seatingPlanSelect_Name));
-        element.selectByVisibleText(zaidisStudioText);
+        element.selectByVisibleText(seatingPlan);
     }
 
     /*** Available Tickets ***/
@@ -719,71 +696,30 @@ public class CreateNewEventPageEvents extends CommonMethods {
 
     /*** Sale Price ***/
 
-    public void typeEconomySalePrice() {
-        clearAndTypeIfPresentAndVisible(economyTicketSalePriceInput_XPath, economySalePrice);
+    public void setEventSalePricess(){
+        List<WebElement> salePricessList = fetchElement.getListOfWebElements(Locator.XPath, eventSalePriceses);
+        int salePrice = 2;
+        for (int i = 0; i < salePricessList.size(); i++) {
+            salePricessList.get(i).sendKeys(String.valueOf(salePrice));
+            sleep(8000L);
+            salePrice = salePrice + 2;
+        }
     }
 
-    public void typeGoldenSalePrice() {
-        clearAndTypeIfPresentAndVisible(goldenTicketSalePriceInput_XPath, goldenSalePrice);
-    }
-
-    public void typeBusinessSalePrice() {
-        clearAndTypeIfPresentAndVisible(businessTicketSalePriceInput_XPath, businessSalePrice);
-    }
-
-    public void typeBusinessTableSalePrice() {
-        clearAndTypeIfPresentAndVisible(businessTableTicketSalePriceInput_XPath, businessTableSalePrice);
-    }
-
-    public void typeVIPTableSalePrice() {
-        clearAndTypeIfPresentAndVisible(vipTableTicketSalePriceInput_XPath, vipSalePrice);
-    }
-
-    public void typeStandardSalePrice() {
-        clearAndTypeIfPresentAndVisible(standardTicketSalePriceInput_XPath, vipTableSalePrice);
-    }
-
-    public void typeVIPSalePrice() {
-        clearAndTypeIfPresentAndVisible(vipTicketSalePriceInput_XPath, standardSalePrice);
-    }
-
-    public void typeCustomTicketSalePrice() {
-        clearAndTypeIfPresentAndVisible(customTicketSalePriceInput_XPath, customTicketSalePrice);
-    }
 
     /*** Base Price ***/
 
-    public void typeEconomyBasePrice() {
-        clearAndTypeIfPresentAndVisible(economyTicketBasePriceInput_XPath, economyBasePrice);
+    public void setEventBasePricess(){
+        List<WebElement> basePricessList = fetchElement.getListOfWebElements(Locator.XPath, eventBasePriceses);
+        int basePrice = 1;
+        for (int i = 0; i < basePricessList.size(); i++) {
+            basePricessList.get(i).sendKeys(String.valueOf(basePrice));
+            sleep(8000L);
+            basePrice = basePrice + 1;
+        }
     }
 
-    public void typeGoldenBasePrice() {
-        clearAndTypeIfPresentAndVisible(goldenTicketBasePriceInput_XPath, goldenBasePrice);
-    }
 
-    public void typeBusinessBasePrice() {
-        clearAndTypeIfPresentAndVisible(businessTicketBasePriceInput_XPath, businessBasePrice);
-    }
-
-    public void typeBusinessTableBasePrice() {
-        clearAndTypeIfPresentAndVisible(businessTableTicketBasePriceInput_XPath, businessTableBasePrice);
-    }
-
-    public void typeVIPTableBasePrice() {
-        clearAndTypeIfPresentAndVisible(vipTableTicketBasePriceInput_XPath, vipBasePrice);
-    }
-
-    public void typeStandardBasePrice() {
-        clearAndTypeIfPresentAndVisible(standardTicketBasePriceInput_XPath, vipTableBasePrice);
-    }
-
-    public void typeVIPBasePrice() {
-        clearAndTypeIfPresentAndVisible(vipTicketBasePriceInput_XPath, standardBasePrice);
-    }
-
-    public void typeCustomTicketBasePrice() {
-        clearAndTypeIfPresentAndVisible(customTicketBasePriceInput_XPath, customTicketBasePrice);
-    }
 
     /*** Banner Image - Details ***/
 
@@ -799,15 +735,6 @@ public class CreateNewEventPageEvents extends CommonMethods {
     public void clickSaveAndPublishButton() {
         waitForElementPresentAndVisible(BaseTest.driver, By.xpath(saveAndPublishEventButton_XPath), waitForElementSeconds);
         fetchElement.getWebElement(Locator.XPath, saveAndPublishEventButton_XPath).click();
-    }
-
-    /*********** Helper Methods ********/
-
-    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value) {
-        if (IsElementPresentAndVisible(By.xpath(locatorXPath))) {
-            fetchElement.getWebElement(Locator.XPath, locatorXPath).clear();
-            fetchElement.getWebElement(Locator.XPath, locatorXPath).sendKeys(value);
-        }
     }
 
 }

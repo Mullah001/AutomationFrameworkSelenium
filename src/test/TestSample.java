@@ -1,8 +1,8 @@
 package test;
 
 import com.aventstack.extentreports.Status;
-import main.pageEvents.HomePageEvents;
-import main.pageEvents.LogInPageEvents;
+import main.pageEvents.WEB.HomePageEvents;
+import main.pageEvents.WEB.LogInPageEvents;
 import main.utils.CommonMethods;
 import org.testng.Assert;
 import org.testng.annotations.Test;

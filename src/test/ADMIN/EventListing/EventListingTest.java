@@ -1,7 +1,7 @@
 package test.ADMIN.EventListing;
 
 import main.pageEvents.ADMIN.EventsListingPageEvents;
-import main.pageEvents.MoviesPageEvents;
+import main.pageEvents.WEB.MoviesPageEvents;
 import org.testng.annotations.Test;
 import test.BaseTest;
 

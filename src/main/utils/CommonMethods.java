@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 
 import java.nio.file.*;
 
-import main.ApiConfigs.Body.LogInBODY;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,9 +18,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import static main.ApiConfigs.EndPoints.LogInEP.loginEP;
-import static main.ApiConfigs.EndPoints.LogInEP.loginEP_Admin;
-import static main.data.ADMIN.CreateNewEventData.contactEmail;
-import static main.pageObjects.ADMIN.CreateNewEventPageElements.emailInput_XPAth;
 import static main.utils.Constants.appJson;
 import static main.utils.Constants.xAuth;
 
@@ -38,7 +34,7 @@ public class CommonMethods {
     public static String screenshotName;
 
     public String getBaseURL_Web(boolean isAdmin) {
-        String baseURL = Constants.baseUrl;
+        String baseURL = Constants.WebBaseUrl;
 
         if (isAdmin) {
             baseURL = Constants.adminBaseUrl;
@@ -250,6 +246,13 @@ public class CommonMethods {
         sleep(500l);
         ((JavascriptExecutor) BaseTest.driver).executeScript("window.scrollBy(250,-150);", element);
         sleep(500l);
+    }
+
+    public void clearAndTypeIfPresentAndVisible(String locatorXPath, String value) {
+        if (IsElementPresentAndVisible(By.xpath(locatorXPath))) {
+            BaseTest.driver.findElement(By.xpath(locatorXPath)).clear();
+            BaseTest.driver.findElement(By.xpath(locatorXPath)).sendKeys(value);
+        }
     }
 
 }

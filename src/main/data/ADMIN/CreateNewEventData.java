@@ -1,11 +1,13 @@
 package main.data.ADMIN;
 
+import java.time.LocalDate;
+
 public interface CreateNewEventData {
 
     /********** Basic Information **********/
 
     /*** Basic Info ***/
-    String eventTitle_Standard_Structured = "Automation Standard Structured";
+    String eventTitle_Standard_Structured = "New painting event";
     String eventTitle_Standard_UnStructured = "Automation Standard UnStructured";
     String eventTitle_Series_Structured = "Automation Series Structured";
     String eventTitle_Series_UnStructured = "Automation Series UnStructured";
@@ -14,6 +16,7 @@ public interface CreateNewEventData {
 
 
     String currency = "GHS";
+    String eventCategory = "Events";
     String eventDescription_Standard_Structured = "Standard - Structured Event Description.";
     String eventDescription_Standard_UnStructured = "Standard - UnStructured Event Description.";
     String eventDescription_Series_Structured = "Series - Structured Event Description.";
@@ -54,10 +57,16 @@ public interface CreateNewEventData {
 
     /*** Schedule ***/
 
-    String eventStartDateTime_Day = "23";
-    String eventEndDateTime_Day = "26";
-    String entryStartDateTime_Day = "23";
-    String entryCloseDateTime_Day = "26";
+    LocalDate today = LocalDate.now();
+    String eventStartDateTime_Day = String.valueOf(today.getDayOfMonth());
+    LocalDate endDate = LocalDate.now().plusDays(2);
+
+    String eventEndDateTime_Day = String.valueOf(endDate.getDayOfMonth());
+    String entryStartDateTime_Day = String.valueOf(today.getDayOfMonth());
+    String entryCloseDateTime_Day = String.valueOf(endDate.getDayOfMonth());
+
+    //String entryStartDateTime_Day = "23";
+    //String entryCloseDateTime_Day = "26";
 
     String eventStartDateTime_Day2 = "24";
     String eventEndDateTime_Day2 = "25";
@@ -66,10 +75,10 @@ public interface CreateNewEventData {
 
     /*** Venue ***/
 
-    String zaidiStudioText = "Zaidi studios";
+    String venueName = "Burj Al Arab, Dubai.";
 
     /*** Seating Plan ***/
-    String zaidisStudioText = "Zaidi's Studio";
+    String seatingPlan = "Queen's Court Event Centre";
 
     /*** Available Tickets ***/
 
@@ -77,27 +86,6 @@ public interface CreateNewEventData {
     String vipAvailablePrice = "20";
     String standardAvailablePrice = "100";
 
-    /*** Sale Price ***/
-
-    String economySalePrice = "3.00";
-    String goldenSalePrice = "5.50";
-    String businessSalePrice = "10.70";
-    String businessTableSalePrice = "13.20";
-    String vipSalePrice = "16";
-    String vipTableSalePrice = "19";
-    String standardSalePrice = "8";
-    String customTicketSalePrice = "15";
-
-    /*** Base Price ***/
-
-    String economyBasePrice = "2";
-    String goldenBasePrice = "4";
-    String businessBasePrice = "9";
-    String businessTableBasePrice = "12";
-    String vipBasePrice = "15";
-    String vipTableBasePrice = "18";
-    String standardBasePrice = "7";
-    String customTicketBasePrice = "12";
 
     /*** Banner Image - Details ***/
 

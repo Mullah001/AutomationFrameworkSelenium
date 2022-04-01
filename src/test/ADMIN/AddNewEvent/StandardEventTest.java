@@ -19,7 +19,7 @@ public class StandardEventTest extends BaseTest {
         Assert.assertTrue(createNewEventPageEvents.isEventListingPresent());
     }
 
-    @Test(testName = "Verify Standard - UnStructured Event Creation Flow", priority = 1)
+    @Test(testName = "Verify Standard - UnStructured Event Creation Flow", priority = 1, enabled = false)
     public void verifyStandardEventCreation_UnStructured() {
 
         createNewEventPageEvents.FillBasicInformation_Standard_UnStructured();
