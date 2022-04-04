@@ -1,6 +1,7 @@
 package test.Web;
 
 import main.pageEvents.WEB.HomePageEvents;
+import main.pageEvents.WEB.LogInPageEvents;
 import main.pageEvents.WEB.ShareFunctionalityEvents;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -13,14 +14,14 @@ import test.Web.LogIn.LoginTest;
 public class ShareFunctionalityTest extends BaseTest {
 
     public WebDriver driver;
-    LoginTest loginTest = null;
+    LogInPageEvents logInPageEvents = null;
     HomePageEvents homePageEvents = null;
     ShareFunctionalityEvents shareFunctionalityEvents = null;
 
     @BeforeClass
     public void intialize() {
         driver = initializeBrowser();
-        loginTest = new LoginTest();
+        logInPageEvents = new LogInPageEvents(driver);
         homePageEvents = new HomePageEvents(driver);
         shareFunctionalityEvents = new ShareFunctionalityEvents(driver);
     }
@@ -31,15 +32,14 @@ public class ShareFunctionalityTest extends BaseTest {
     }
 
 
-    @Test(testName = "Verify the share functionality of ticket is working fine", priority = 1)
+    @Test(testName = "Verify the share functionality of ticket is working fine")
     public void verifyShareTicketFunctionality() {
 
-        try {
-            loginTest.Login("ataib.ahmad@synavos.com", "123456", "valid");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sleep(3000);
+        homePageEvents.clickOnSignIn();
+        logInPageEvents.enterEmail("ataib.ahmad@synavos.com");
+        logInPageEvents.enterPassword("123456");
+        logInPageEvents.clickLogInButton();
+
         homePageEvents.clickProfileDropdown();
         homePageEvents.clickProfile();
         shareFunctionalityEvents.clickTicketTab();

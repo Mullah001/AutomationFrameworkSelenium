@@ -2,10 +2,13 @@ package main.pageEvents.WEB;
 
 import main.data.Web.HomePageData;
 import main.utils.API_DataMethods;
+import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import test.BaseTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,7 @@ import static main.data.Web.HomePageData.*;
 import static main.pageObjects.WEB.HomePageElements.*;
 import static main.utils.CommonMethods.sleep;
 
-public class HomePageEvents {
+public class HomePageEvents extends CommonMethods {
 
     public WebDriver driver;
     FetchElement fetchElement = null;
@@ -365,6 +368,7 @@ public class HomePageEvents {
 //  Profile dropdown
 
     public void clickProfileDropdown(){
+        waitForElementPresentAndVisible(By.xpath(profileDropdown), 10);
         fetchElement.getWebElement(Locator.XPath, profileDropdown).click();
     }
 

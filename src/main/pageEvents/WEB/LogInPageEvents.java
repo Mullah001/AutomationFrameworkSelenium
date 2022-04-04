@@ -8,12 +8,11 @@ import test.BaseTest;
 
 public class LogInPageEvents {
     public WebDriver driver;
-
+    FetchElement fetchElement = null;
     public LogInPageEvents(WebDriver driver){
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
 
     public String getTitle(){
         return driver.getTitle();
@@ -42,6 +41,5 @@ public class LogInPageEvents {
     public void clickOnFacebookLogo(){
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.getSocialLoginWithFacebook).click();
     }
-
 
 }

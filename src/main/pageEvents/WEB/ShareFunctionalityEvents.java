@@ -12,12 +12,12 @@ import static main.pageObjects.WEB.ShareFunctionalityElements.*;
 public class ShareFunctionalityEvents extends CommonMethods {
 
     public WebDriver driver;
+    FetchElement fetchElement;
 
     public ShareFunctionalityEvents(WebDriver driver){
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
 
     public void clickTicketTab(){
         sleep(3000L);
