@@ -1,18 +1,24 @@
 package main.pageEvents.WEB;
 
 import main.pageObjects.WEB.LogInPageElements;
+import main.utils.CommonMethods;
 import main.utils.FetchElement;
 import main.utils.Locator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import test.BaseTest;
+
+import static main.pageObjects.WEB.LogInPageElements.corssButton;
 
 public class LogInPageEvents {
     public WebDriver driver;
     FetchElement fetchElement;
+    CommonMethods commonMethods;
 
     public LogInPageEvents(WebDriver driver){
         this.driver = driver;
         fetchElement = new FetchElement(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
     public String getTitle(){
@@ -29,6 +35,10 @@ public class LogInPageEvents {
 
     public void clickLogInButton(){
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.logInButton).click();
+    }
+    public void clickCrossButton(){
+        commonMethods.IsElementPresentAndVisible(By.xpath(corssButton));
+        fetchElement.getWebElement(Locator.XPath, corssButton).click();
     }
 
     public void clickOnForgetPassword(){

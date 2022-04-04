@@ -1,6 +1,7 @@
 package test.Web.Movies;
 
 import main.pageEvents.WEB.MoviesPageEvents;
+import main.utils.CommonMethods;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -9,29 +10,30 @@ import org.testng.annotations.Test;
 import test.BaseTest;
 
 import static main.data.Web.MoviesData.*;
+import static main.utils.CommonMethods.sleep;
 
 @Test(groups = {"WEB"})
 public class TopMovies_MoviesTest extends BaseTest {
 
     public WebDriver driver;
+    MoviesPageEvents moviesPageEvents;
+    CommonMethods commonMethods;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        moviesPageEvents = new MoviesPageEvents(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    MoviesPageEvents moviesPageEvents = new MoviesPageEvents(driver);
     int actualCount, expectedCount;
     String actualText, expectedText;
-//
-//    @BeforeMethod
-//    public void beforeMethodMethod() {
-//        moviesPageEvents.clickMoviesFromHeader();
-//    }
+
 
     @Test(testName = "Verify Top Movies Text")
     public void verifyTopMoviesText() {
@@ -94,7 +96,7 @@ public class TopMovies_MoviesTest extends BaseTest {
 
         sleep(3000L);
 
-        actualText = getCurrentURL();
+        actualText = commonMethods.getCurrentURL();
         expectedText = viewMoreMoviesURL;
 
         Assert.assertEquals(actualText, expectedText, "Explore Movie Button should navigate to View More Movies Page");

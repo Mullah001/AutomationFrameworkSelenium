@@ -12,21 +12,24 @@ import test.BaseTest;
 public class SliderMoviesTest extends BaseTest {
 
     public WebDriver driver;
+    MoviesPageEvents moviesPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        moviesPageEvents = new MoviesPageEvents(driver);
+
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    MoviesPageEvents moviesPageEvents = new MoviesPageEvents(driver);
     int actualCount, expectedCount;
 
     @Test(testName = "Verify Sub Categories - Movies")
-    public void verifySubCategories_Movies(){
+    public void verifySubCategories_Movies() {
         actualCount = moviesPageEvents.getSliderChildCount();
 
         expectedCount = moviesPageEvents.getSliderChildCount_API();

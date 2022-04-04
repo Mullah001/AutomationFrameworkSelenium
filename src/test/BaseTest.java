@@ -37,13 +37,15 @@ import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 import static main.data.Web.MoviesData.moviesURL;
+import static main.utils.CommonMethods.screenshotPath;
 import static main.utils.Constants.*;
 
-public class BaseTest extends CommonMethods {
+public class BaseTest{
 
     PropertyFilesReader propRead = new PropertyFilesReader();
 
     public WebDriver driver;
+    CommonMethods commonMethods = new CommonMethods(driver);
     //public ExtentHtmlReporter extentHtmlReporter;
     public ExtentSparkReporter extentHtmlReporter;
     public static ExtentReports extentReports;
@@ -53,17 +55,17 @@ public class BaseTest extends CommonMethods {
     private static RequestSpecification requestSpec;
 
     public String getToken() {
-        return getTokenInst();
+        return commonMethods.getTokenInst();
     }
 
     public String screenshotPAth = "";
 
     private void setBaseUrl_Web(boolean isAdmin) {
-        baseUrl_Web = getBaseURL_Web(isAdmin);
+        baseUrl_Web = commonMethods.getBaseURL_Web(isAdmin);
     }
 
     public String getServerURL() {
-        return getServerURlIns();
+        return commonMethods.getServerURlIns();
     }
 
     public void setRestAssuredBaseURL() {
@@ -72,7 +74,7 @@ public class BaseTest extends CommonMethods {
 
     public void setScreenshotPath() {
         System.out.println("Setting ScreenshotPAth Value");
-        screenshotPAth = getScreenshotName();
+        screenshotPAth = commonMethods.getScreenshotName();
         System.out.println("ScreenshotPath Variable Value " + screenshotPAth);
     }
 
@@ -91,7 +93,7 @@ public class BaseTest extends CommonMethods {
 
     @BeforeTest(alwaysRun = true)
     public void beforeTestMethod() {
-        String localDateTime = getLocalDateAndTimeString();
+        String localDateTime = commonMethods.getLocalDateAndTimeString();
         extentHtmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + File.separator + "reports" + File.separator + "AutomationReport - " + localDateTime + ".html");
         extentHtmlReporter.config().setEncoding("utf-8");
         extentHtmlReporter.config().setDocumentTitle("TicketLake - Automation Report - " + localDateTime);
@@ -131,7 +133,7 @@ public class BaseTest extends CommonMethods {
 
         driver = setDriver(browser, headless);
 
-        baseUrl_Web = getBaseURL_Web(isAdmin);
+        baseUrl_Web = commonMethods.getBaseURL_Web(isAdmin);
 
         driver.manage().window().maximize();
         driver.navigate().to(baseUrl_Web);
@@ -169,7 +171,7 @@ public class BaseTest extends CommonMethods {
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
             extentTestLogger.log(Status.PASS, markup);
         } else if (result.getStatus() == TestResult.FAILURE) {
-            screenshotPAth = getScreenshotName();
+            screenshotPAth = commonMethods.getScreenshotName();
 
             String logText = ((TestResult) result).getThrowable().getMessage();
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.RED);

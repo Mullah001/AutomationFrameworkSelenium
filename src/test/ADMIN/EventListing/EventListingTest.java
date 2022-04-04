@@ -9,19 +9,22 @@ import org.testng.annotations.Test;
 import test.BaseTest;
 
 @Test(groups = {"WEB"})
-public class EventListingTest  extends BaseTest {
+public class EventListingTest extends BaseTest {
 
     public WebDriver driver;
+    EventsListingPageEvents eventsListingPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        eventsListingPageEvents = new EventsListingPageEvents(driver);
+
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents(driver);
     int actualCount, expectedCount;
 }

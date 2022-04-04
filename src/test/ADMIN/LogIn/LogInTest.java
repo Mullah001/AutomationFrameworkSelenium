@@ -1,6 +1,7 @@
 package test.ADMIN.LogIn;
 
 import main.pageEvents.ADMIN.LogInPageEvents;
+import main.utils.CommonMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -9,15 +10,22 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
+import javax.sql.CommonDataSource;
+
 import static main.pageObjects.ADMIN.LogInPageElements.*;
 
 @Test(groups = {"ADMIN"})
 public class LogInTest extends BaseTest {
 
     public WebDriver driver;
+    LogInPageEvents logInPageEvents;
+    CommonMethods commonMethods;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
+        logInPageEvents = new LogInPageEvents(driver);
+        commonMethods = new CommonMethods(driver);
+
     }
 
     @AfterClass
@@ -25,7 +33,6 @@ public class LogInTest extends BaseTest {
         closeAndQuitBrowser(driver);
     }
 
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
 
     @Test(testName = "Verify logIn with Valid Data")
     public void verifyLogIn_Valid(){
@@ -33,7 +40,7 @@ public class LogInTest extends BaseTest {
 
         logInPageEvents.waitForDashboardToLoad();
 
-        boolean isDashboardLoaded = logInPageEvents.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
+        boolean isDashboardLoaded = commonMethods.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
 
         Assert.assertTrue(isDashboardLoaded, "Dashboard should be loaded with Valid Data");
     }
@@ -44,7 +51,7 @@ public class LogInTest extends BaseTest {
 
         logInPageEvents.waitForDashboardToLoad();
 
-        boolean isDashboardLoaded = logInPageEvents.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
+        boolean isDashboardLoaded = commonMethods.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
 
         Assert.assertFalse(isDashboardLoaded, "Dashboard should not be loaded with InValid Data");
     }
@@ -55,7 +62,7 @@ public class LogInTest extends BaseTest {
 
         logInPageEvents.waitForDashboardToLoad();
 
-        boolean isDashboardLoaded = logInPageEvents.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
+        boolean isDashboardLoaded = commonMethods.IsElementPresentAndVisible(By.id(dashboardSideBar_Id));
 
         Assert.assertFalse(isDashboardLoaded, "Dashboard should not be loaded with Empty Data");
     }

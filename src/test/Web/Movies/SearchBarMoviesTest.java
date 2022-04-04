@@ -17,9 +17,12 @@ import static main.data.Web.MoviesData.*;
 public class SearchBarMoviesTest extends BaseTest {
 
     public WebDriver driver;
+    MoviesPageEvents moviesPageEvents;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
+        moviesPageEvents = new MoviesPageEvents(driver);
+
     }
 
     @AfterClass
@@ -27,7 +30,6 @@ public class SearchBarMoviesTest extends BaseTest {
         closeAndQuitBrowser(driver);
     }
 
-    MoviesPageEvents moviesPageEvents = new MoviesPageEvents(driver);
     int actualCount, expectedCount;
 
     @Test(testName = "Verify that keyword field placeholder is '" + keywordPlaceholder + "'", priority = 0)

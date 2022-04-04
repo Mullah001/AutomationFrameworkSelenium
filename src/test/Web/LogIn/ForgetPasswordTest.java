@@ -12,19 +12,24 @@ import test.BaseTest;
 
 @Test(groups = {"WEB"})
 public class ForgetPasswordTest extends BaseTest {
+
     public WebDriver driver;
+    LogInPageEvents logInPageEvents;
+    ForgetPasswordEvents forgetPasswordEvents;
+    HomePageEvents homePageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        logInPageEvents = new LogInPageEvents(driver);
+        forgetPasswordEvents = new ForgetPasswordEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
-    ForgetPasswordEvents forgetPasswordEvents = new ForgetPasswordEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
 
     @Test(testName = "Verify that forget password functionality is working fine")
     public void forgetPassword() throws InterruptedException {
@@ -59,6 +64,7 @@ public class ForgetPasswordTest extends BaseTest {
         Assert.assertEquals(congratulationsText, "Congratulations!", "Password has been updated successfully.");
 
     }
+
     @Test(testName = "Verify that after successfull forget password user ia able to login with new password")
     public void loginwithNewPassword() throws InterruptedException {
         driver.get("https://qa.ticketlake.com/");

@@ -10,25 +10,29 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class TestSample extends BaseTest{
+public class TestSample extends BaseTest {
 
     public WebDriver driver;
+    CommonMethods commonMethods;
+    HomePageEvents homePageEvents;
+    LogInPageEvents logInPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        commonMethods = new CommonMethods(driver);
+        homePageEvents = new HomePageEvents(driver);
+        logInPageEvents = new LogInPageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
-
-    @Test (enabled = false)
-    public void verifyHomePageTitle(){
-        String title = getTitle();
+    @Test(enabled = false)
+    public void verifyHomePageTitle() {
+        String title = commonMethods.getTitle();
 //        List<List<String>> records =  CommonMethods.ReadCSV("C:\\Users\\Hamza Ashfaq\\Downloads\\SampleCSV.csv");
 //
 //        for (List<String> recordsList:
@@ -38,7 +42,7 @@ public class TestSample extends BaseTest{
 //
 //        System.out.println(records);
 
-        extentTestLogger.log(Status.INFO,"Got Title from the Website: " + title);
+        extentTestLogger.log(Status.INFO, "Got Title from the Website: " + title);
         //extentTestLogger.log(Status.INFO, "Test Data Title: " + HomePageData.title);
         //Assert.assertEquals(title,HomePageData.title);
     }

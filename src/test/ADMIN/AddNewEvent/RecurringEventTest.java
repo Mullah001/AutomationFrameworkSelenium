@@ -12,17 +12,18 @@ import test.BaseTest;
 public class RecurringEventTest extends BaseTest {
 
     public WebDriver driver;
+    CreateNewEventPageEvents createNewEventPageEvents;
     @BeforeClass
     public void intialize(){
         driver = initializeBrowser();
+        createNewEventPageEvents = new CreateNewEventPageEvents(driver);
+
     }
 
     @AfterClass
     public void close(){
         closeAndQuitBrowser(driver);
     }
-
-    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents(driver);
 
     @Test (testName = "Verify Recurring - Structured Event Creation Flow")
     public void verifyRecurring_Structured(){

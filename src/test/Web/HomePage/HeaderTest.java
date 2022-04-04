@@ -1,6 +1,7 @@
 package test.Web.HomePage;
 
 import main.pageEvents.WEB.HeaderPageEvents;
+import main.utils.CommonMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -17,11 +18,13 @@ public class HeaderTest extends BaseTest {
 
     public WebDriver driver;
     HeaderPageEvents headerPageEvents;
+    CommonMethods commonMethods;
 
     @BeforeClass
     public void intialize() {
         driver = initializeBrowser();
         headerPageEvents = new HeaderPageEvents(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
     @AfterClass
@@ -61,7 +64,7 @@ public class HeaderTest extends BaseTest {
             System.out.println("name: " + categoriesname);
 
             element.click();
-            String title = getTitle();
+            String title = commonMethods.getTitle();
             Assert.assertEquals(title, categoriesname, "All subcategories of Events are working and redirect to the specific path");
         }
     }
@@ -100,7 +103,7 @@ public class HeaderTest extends BaseTest {
             System.out.println("name: " + categoriesname);
 
             element.click();
-            String title = getTitle();
+            String title = commonMethods.getTitle();
             Assert.assertEquals(title, categoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -140,7 +143,7 @@ public class HeaderTest extends BaseTest {
             System.out.println("name: " + sportsCategoriesname);
 
             element.click();
-            String title = getTitle();
+            String title = commonMethods.getTitle();
             Assert.assertEquals(title, sportsCategoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -179,7 +182,7 @@ public class HeaderTest extends BaseTest {
             System.out.println("name: " + globalCategoriesname);
 
             element.click();
-            String title = getTitle();
+            String title = commonMethods.getTitle();
             Assert.assertEquals(title, globalCategoriesname, "All subcategories of Movies are working and redirect to the specific path");
         }
     }
@@ -216,7 +219,7 @@ public class HeaderTest extends BaseTest {
             System.out.println("name: " + nearbyCategoriesname);
 
             element.click();
-            String title = getTitle();
+            String title = commonMethods.getTitle();
             Assert.assertEquals(title, nearbyCategoriesname, "Verify that all Nearby sub categories links are working");
         }
     }

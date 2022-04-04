@@ -14,37 +14,40 @@ import test.BaseTest;
 public class AddVenuesTest extends BaseTest {
 
     public WebDriver driver;
+    VenuesPageEvents venuesPageEvents;
+    DashboardEvents dashboardEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+
+        venuesPageEvents = new VenuesPageEvents(driver);
+        dashboardEvents = new DashboardEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    VenuesPageEvents venuesPageEvents = new VenuesPageEvents(driver);
-    DashboardEvents dashboardEvents = new DashboardEvents(driver);
-
     @Test(testName = "login")
-    public void login(){
+    public void login() {
         LogInTest log = new LogInTest();
         log.verifyLogIn_Valid();
     }
 
     @Test(priority = 1, testName = "Verify that By Venues module navigation lin is working")
-    public void verifyVenueLink(){
+    public void verifyVenueLink() {
         dashboardEvents.clickOnVenuesModule();
     }
 
-    @Test(priority = 2,testName = "Click on the add new venues button")
+    @Test(priority = 2, testName = "Click on the add new venues button")
     public void verifyNameField() {
         venuesPageEvents.clickOnAddVenue();
     }
 
     @Test(priority = 3, testName = "Filling venues form")
-    public void verifyVenuesForm(){
+    public void verifyVenuesForm() {
         venuesPageEvents.enterName();
         venuesPageEvents.enterDecription();
         venuesPageEvents.enterLatitude();

@@ -4,6 +4,7 @@ import main.pageEvents.WEB.EventsDetailPageEvents;
 import main.pageEvents.WEB.HomePageEvents;
 import main.pageEvents.WEB.MoviesDetailPageEvents;
 import main.pageEvents.WEB.PurchaseFlowPageEvents;
+import main.utils.CommonMethods;
 import main.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -13,24 +14,33 @@ import org.testng.annotations.Test;
 import test.BaseTest;
 
 import static main.data.ADMIN.CreateNewEventData.*;
+import static main.utils.CommonMethods.sleep;
 
 @Test(groups = {"WEB"})
 public class MoviesPurchaseFlowTest extends BaseTest {
+
     public WebDriver driver;
+    CommonMethods commonMethods;
+    PurchaseFlowPageEvents purchaseFlowPageEvents;
+    MoviesDetailPageEvents moviesDetailPageEvents;
+    HomePageEvents homePageEvents;
+    EventsDetailPageEvents eventsDetailPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        commonMethods = new CommonMethods(driver);
+        purchaseFlowPageEvents = new PurchaseFlowPageEvents(driver);
+        moviesDetailPageEvents = new MoviesDetailPageEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
+        eventsDetailPageEvents = new EventsDetailPageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    PurchaseFlowPageEvents purchaseFlowPageEvents = new PurchaseFlowPageEvents(driver);
-    MoviesDetailPageEvents moviesDetailPageEvents = new MoviesDetailPageEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
-    EventsDetailPageEvents eventsDetailPageEvents = new EventsDetailPageEvents(driver);
 
     @Test(testName = "Verify the Purchase Flow")
     public void verifyPurchaseFlow() throws InterruptedException {
@@ -45,7 +55,7 @@ public class MoviesPurchaseFlowTest extends BaseTest {
 
         sleep(5000l);
 
-        if(eventCategory == "Movies"){
+        if (eventCategory == "Movies") {
 
 //          MOVIES PURCHASE FLOW PREREQUISTIES
             homePageEvents.typeTitleInMasterSearch(eventTitle_Standard_Structured);
@@ -53,7 +63,7 @@ public class MoviesPurchaseFlowTest extends BaseTest {
             purchaseFlowPageEvents.scroll();
             moviesDetailPageEvents.clickShowTimingSlot();
             moviesDetailPageEvents.clickShowTimingsBuyButton();
-        }else if(eventCategory == "Events"){
+        } else if (eventCategory == "Events") {
 
 //          EVENTS PURCHASE FLOW PREREQUISTIES
             homePageEvents.typeTitleInMasterSearch(eventTitle_Standard_Structured);

@@ -13,12 +13,11 @@ import test.BaseTest;
 @Test(groups = {"WEB"})
 public class LoginTest extends BaseTest {
     public WebDriver driver;
-    LogInPageEvents logInPageEvents = null;
-    HomePageEvents homePageEvents = null;
+    LogInPageEvents logInPageEvents;
+    HomePageEvents homePageEvents;
     @BeforeClass
-    public void intialize(){
+    public void initialize(){
         driver = initializeBrowser();
-
         logInPageEvents = new LogInPageEvents(driver);
         homePageEvents = new HomePageEvents(driver);
     }
@@ -36,14 +35,16 @@ public class LoginTest extends BaseTest {
         logInPageEvents.enterEmail(email);
         logInPageEvents.enterPassword(password);
         logInPageEvents.clickLogInButton();
-        Thread.sleep(10000);
+        Thread.sleep(3000);
         String homePageTitle = driver.getTitle();
         switch (check) {
             case "inValid":
                 Assert.assertEquals(homePageTitle, "Sign in", "Email and phone number are invalid");
+                logInPageEvents.clickCrossButton();
                 break;
             case "empty":
                 Assert.assertEquals(homePageTitle, "Sign in", "Email and phone number are required");
+                logInPageEvents.clickCrossButton();
                 break;
             case "valid":
                 Assert.assertEquals(homePageTitle, "Home", "User is login successfully");

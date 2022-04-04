@@ -13,21 +13,24 @@ import test.BaseTest;
 public class SeriesEventTest extends BaseTest {
 
     public WebDriver driver;
+    CreateNewEventPageEvents createNewEventPageEvents;
+    EventsListingPageEvents eventsListingPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        createNewEventPageEvents = new CreateNewEventPageEvents(driver);
+        eventsListingPageEvents = new EventsListingPageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    CreateNewEventPageEvents createNewEventPageEvents = new CreateNewEventPageEvents(driver);
-    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents(driver);
 
     @Test(testName = "Verify Series - Structured Event Creation Flow", enabled = false)
-    public void verifySeriesEvent_Structured(){
+    public void verifySeriesEvent_Structured() {
         createNewEventPageEvents.FillBasicInformation_Series_Structured();
         createNewEventPageEvents.FillDetails_Series_Structured();
 
@@ -37,7 +40,7 @@ public class SeriesEventTest extends BaseTest {
     }
 
     @Test(testName = "Verify Series - UnStructured Event Creation Flow", priority = 1)
-    public void verifySeriesEvent_UnStructured(){
+    public void verifySeriesEvent_UnStructured() {
         createNewEventPageEvents.FillBasicInformation_Series_UnStructured();
         createNewEventPageEvents.FillTicketClass_Series_UnStructured();
         createNewEventPageEvents.FillDetails_Series_UnStructured();

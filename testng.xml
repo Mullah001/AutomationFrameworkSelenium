@@ -11,7 +11,7 @@
     <parameter name="headless" value="false"/>
     <parameter name="isAdmin" value="false"/>
 
-    <test name="TicketLake - Test Automation">
+    <test name="TicketLake - Test Automation" parallel="true">
         <groups>
             <run>
                 <include name="WEB"/>
@@ -43,7 +43,7 @@
 <!--        Website classes-->
 <!---->
 <!--            <class name="test.Web.Register"/>-->
-<!--            <class name="test.Web.Login"/>-->
+            <class name="test.Web.LogIn.LoginTest"/>
 <!--            <class name="test.Web.ForgetPassword"/>-->
 <!--            <class name="test.Web.SocialLogins"/>-->
 <!--            <class name="test.Web.Header"/>-->
@@ -60,4 +60,9 @@
         </classes>
     </test>
 
+<!--    <test name="TicketLake - Test Automation 1">-->
+<!--        <classes>-->
+<!--            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

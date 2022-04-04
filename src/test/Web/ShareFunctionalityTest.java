@@ -14,9 +14,9 @@ import test.Web.LogIn.LoginTest;
 public class ShareFunctionalityTest extends BaseTest {
 
     public WebDriver driver;
-    LogInPageEvents logInPageEvents = null;
-    HomePageEvents homePageEvents = null;
-    ShareFunctionalityEvents shareFunctionalityEvents = null;
+    LogInPageEvents logInPageEvents;
+    HomePageEvents homePageEvents;
+    ShareFunctionalityEvents shareFunctionalityEvents;
 
     @BeforeClass
     public void intialize() {

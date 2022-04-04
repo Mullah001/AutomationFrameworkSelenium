@@ -14,20 +14,23 @@ import test.BaseTest;
 public class RegisterTest extends BaseTest {
 
     public WebDriver driver;
+    RegisterPageEvents registerPageEvents;
+    HomePageEvents homePageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        registerPageEvents = new RegisterPageEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    RegisterPageEvents registerPageEvents = new RegisterPageEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
 
-    @Test(testName = "Verify that registration functionality is working with valid, invalid and empty data.",dataProvider = "signUpData",dataProviderClass = DProvider.class)
+    @Test(testName = "Verify that registration functionality is working with valid, invalid and empty data.", dataProvider = "signUpData", dataProviderClass = DProvider.class)
     public void Register(String email, String password, String name, String phoneNumber, boolean isValid) throws InterruptedException {
         homePageEvents.clickOnSignIn();
         registerPageEvents.clickRegisterTop();
@@ -39,9 +42,9 @@ public class RegisterTest extends BaseTest {
         registerPageEvents.clickOnRegisterButton();
         Thread.sleep(10000);
         String homePageTitle = driver.getTitle();
-        if(isValid){
+        if (isValid) {
             Assert.assertEquals(homePageTitle, "Home", "Verify that user is able to sign up");
-        }else{
+        } else {
             Assert.assertEquals(homePageTitle, "Sign in", "Verify that user is able to sign up");
 
         }

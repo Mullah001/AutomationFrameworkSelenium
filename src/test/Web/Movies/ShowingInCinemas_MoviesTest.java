@@ -1,6 +1,7 @@
 package test.Web.Movies;
 
 import main.pageEvents.WEB.MoviesPageEvents;
+import main.utils.CommonMethods;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -8,30 +9,34 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
+import javax.smartcardio.CommandAPDU;
+
 import static main.data.Web.MoviesData.*;
+import static main.utils.CommonMethods.sleep;
 
 @Test(groups = {"WEB"})
 public class ShowingInCinemas_MoviesTest extends BaseTest {
 
     public WebDriver driver;
+    MoviesPageEvents moviesPageEvents;
+    CommonMethods commonMethods;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        moviesPageEvents = new MoviesPageEvents(driver);
+         commonMethods = new CommonMethods(driver);
+
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
 
-    MoviesPageEvents moviesPageEvents = new MoviesPageEvents(driver);
     int actualCount, expectedCount;
     String actualText, expectedText;
 
-//    @BeforeMethod
-//    public void beforeMethodMethod() {
-//        moviesPageEvents.clickMoviesFromHeader();
-//    }
 
     @Test(testName = "Verify Showing In Cinemas Movies Text")
     public void verifyShowingInCinemasMoviesText() {
@@ -95,7 +100,7 @@ public class ShowingInCinemas_MoviesTest extends BaseTest {
 
         sleep(3000L);
 
-        actualText = getCurrentURL();
+        actualText = commonMethods.getCurrentURL();
         expectedText = viewMoreMoviesURL;
 
         Assert.assertEquals(actualText, expectedText, "See All Button should navigate to View More Movies Page");

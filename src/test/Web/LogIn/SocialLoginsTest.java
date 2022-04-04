@@ -12,19 +12,25 @@ import test.BaseTest;
 
 @Test(groups = "WEB")
 public class SocialLoginsTest extends BaseTest {
+
     public WebDriver driver;
+    SocialLoginEvents socialLoginEvents;
+    HomePageEvents homePageEvents;
+    LogInPageEvents logInPageEvents;
+
     @BeforeClass
-    public void intialize(){
+    public void intialize() {
         driver = initializeBrowser();
+        socialLoginEvents = new SocialLoginEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
+        logInPageEvents = new LogInPageEvents(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
-    SocialLoginEvents socialLoginEvents = new SocialLoginEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
+
 
     @Test(testName = "Verify that log in with google functionality is working", enabled = false)
     public void socialLoginWithGoogle() throws InterruptedException {
@@ -33,7 +39,7 @@ public class SocialLoginsTest extends BaseTest {
         logInPageEvents.clickOnGoogleLogo();
 
         String winHandleBefore = driver.getWindowHandle();
-        for(String winHandle : driver.getWindowHandles()){
+        for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
 
@@ -47,7 +53,7 @@ public class SocialLoginsTest extends BaseTest {
         driver.switchTo().window(winHandleBefore);
         Thread.sleep(5000);
         String homePageTitle = driver.getTitle();
-        Assert.assertEquals(homePageTitle , "Home", "User is logged in with there google email");
+        Assert.assertEquals(homePageTitle, "Home", "User is logged in with there google email");
     }
 
 //    @Test
