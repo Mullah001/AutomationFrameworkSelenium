@@ -8,16 +8,17 @@ import main.utils.Locator;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class ForgetPasswordEvents extends DProvider {
+public class ForgetPasswordEvents {
 
     public WebDriver driver;
+    DProvider dProvider;
+    FetchElement fetchElement;
 
-    public ForgetPasswordEvents(WebDriver driver){
+    public ForgetPasswordEvents(WebDriver driver) {
         this.driver = driver;
+        dProvider = new DProvider(driver);
+        fetchElement = new FetchElement(driver);
     }
-
-    DProvider dProvider = new DProvider();
-    FetchElement fetchElement = new FetchElement(driver);
 
     public void enterForgetPasswordEmail() {
         fetchElement.getWebElement(Locator.Id, ForgetPasswordElements.forgetEmail).sendKeys("shameem.akhtar@synavos.com");
@@ -86,15 +87,15 @@ public class ForgetPasswordEvents extends DProvider {
         return ongratulations;
     }
 
-    public void enterEmail(){
+    public void enterEmail() {
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.email).sendKeys(dProvider.getResetEmail());
     }
 
-    public void enterPassword(){
+    public void enterPassword() {
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.password).sendKeys(dProvider.getResetNewPassword());
     }
 
-    public void clickLogInButton(){
+    public void clickLogInButton() {
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.logInButton).click();
     }
 }

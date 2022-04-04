@@ -8,17 +8,17 @@ import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.WebDriver;
 
-public class SocialLoginEvents extends DProvider {
+public class SocialLoginEvents {
 
     public WebDriver driver;
+    FetchElement fetchElement;
+    DProvider dProvider;
 
-    public SocialLoginEvents(WebDriver driver){
+    public SocialLoginEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        dProvider = new DProvider(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
-    DProvider dProvider = new DProvider();
-
 
     public void enterGoogleEmail() {
         fetchElement.getWebElement(Locator.XPath, SocialLoginElements.googleEmail).sendKeys(dProvider.getGoogleEmail());
@@ -38,25 +38,23 @@ public class SocialLoginEvents extends DProvider {
 
     //Facebook Events
 
-
-
-    public void clickonCreateNewAccount(){
+    public void clickonCreateNewAccount() {
         fetchElement.getWebElement(Locator.XPath, SocialLoginElements.createNewAccount).click();
     }
 
-    public void clickOnAlreadyHaveAnAccount(){
+    public void clickOnAlreadyHaveAnAccount() {
         fetchElement.getWebElement(Locator.XPath, SocialLoginElements.alreadyHaveAnAccount).click();
     }
 
-    public void clickOnFacebookEmail(){
+    public void clickOnFacebookEmail() {
         fetchElement.getWebElement(Locator.Id, SocialLoginElements.facebookEmail).sendKeys(dProvider.getFacebookId());
     }
 
-    public void clickOnFacebookPassword(){
+    public void clickOnFacebookPassword() {
         fetchElement.getWebElement(Locator.Id, SocialLoginElements.facebookPassword).sendKeys(dProvider.getEmailPassword());
     }
 
-    public void clickOnFacebookLoginButton(){
+    public void clickOnFacebookLoginButton() {
         fetchElement.getWebElement(Locator.Id, SocialLoginElements.facebookLoginButton).click();
     }
 }

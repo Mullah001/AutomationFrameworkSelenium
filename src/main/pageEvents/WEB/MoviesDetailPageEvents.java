@@ -5,38 +5,43 @@ import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import test.BaseTest;
 
 import static main.pageObjects.WEB.MoviesDetailPageElements.*;
+import static main.utils.CommonMethods.sleep;
 
-public class MoviesDetailPageEvents extends CommonMethods {
+public class MoviesDetailPageEvents {
 
     public WebDriver driver;
+    CommonMethods commonMethods;
 
-    public MoviesDetailPageEvents(WebDriver driver){
+    public MoviesDetailPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        logInPageEvents = new LogInPageEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
-    FetchElement fetchElement = new FetchElement(driver);
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
+    FetchElement fetchElement;
+    LogInPageEvents logInPageEvents;
+    HomePageEvents homePageEvents;
     long sleepSeconds = 1500L;
     int waitSeconds = 20;
 
     public void clickOnMoviesLink() {
-        waitForElementPresent( By.xpath(moviesLinkA_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(moviesLinkA_XPath), waitSeconds);
         fetchElement.getWebElement(Locator.XPath, moviesLinkA_XPath).click();
         sleep(sleepSeconds);
     }
 
     public void clickGodFatherMovie() {
-        waitForElementPresent( By.xpath(godFatherImg_XPath), 15);
+        commonMethods.waitForElementPresent(By.xpath(godFatherImg_XPath), 15);
         fetchElement.getWebElement(Locator.XPath, godFatherImg_XPath).click();
         sleep(sleepSeconds);
     }
 
     public void clickShowTimingSlot() {
-        waitForElementPresent( By.xpath(showTimingSlotDiv_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(showTimingSlotDiv_XPath), waitSeconds);
         fetchElement.getWebElement(Locator.XPath, showTimingSlotDiv_XPath).click();
         sleep(sleepSeconds);
     }

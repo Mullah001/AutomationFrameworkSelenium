@@ -8,7 +8,8 @@ import test.BaseTest;
 
 public class LogInPageEvents {
     public WebDriver driver;
-    FetchElement fetchElement = null;
+    FetchElement fetchElement;
+
     public LogInPageEvents(WebDriver driver){
         this.driver = driver;
         fetchElement = new FetchElement(driver);

@@ -5,20 +5,21 @@ import main.utils.FetchElement;
 import main.utils.Locator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import test.BaseTest;
 
 import static main.data.ADMIN.LogInData.*;
 import static main.pageObjects.ADMIN.LogInPageElements.*;
 
-public class LogInPageEvents extends CommonMethods {
+public class LogInPageEvents {
 
     public WebDriver driver;
+    CommonMethods commonMethods;
+    FetchElement fetchElement;
 
-    public LogInPageEvents(WebDriver driver){
+    public LogInPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        commonMethods = new CommonMethods(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
 
     public void enterUserName(String userName) {
         fetchElement.getWebElement(Locator.XPath, userName_XPath).sendKeys(userName);
@@ -32,25 +33,25 @@ public class LogInPageEvents extends CommonMethods {
         fetchElement.getWebElement(Locator.XPath, logInButton_XPath).click();
     }
 
-    public void waitForDashboardToLoad(){
-        waitForElementPresentAndVisible(By.id(dashboardSideBar_Id), 15);
+    public void waitForDashboardToLoad() {
+        commonMethods.waitForElementPresentAndVisible(By.id(dashboardSideBar_Id), 15);
     }
 
-    public void logIn_Valid(){
+    public void logIn_Valid() {
         enterUserName(userName_Master);
         enterPassword(password_Master);
 
         clickLogInButton();
     }
 
-    public void logIn_InValid(){
+    public void logIn_InValid() {
         enterUserName(inValidUserName);
         enterPassword(inValidPassword);
 
         clickLogInButton();
     }
 
-    public void logIn_Empty(){
+    public void logIn_Empty() {
         enterUserName(emptyUserName);
         enterPassword(emptyPassword);
 

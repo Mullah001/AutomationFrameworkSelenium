@@ -1,11 +1,21 @@
 
 package main.utils;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 
-public class DProvider extends CommonMethods{
+public class DProvider {
 
-    static String email = CommonMethods.generateRandomEmail();
-    static String phoneNumber = CommonMethods.generateRandomPhoneNumber().replace("+92", "");
+    public WebDriver driver;
+    static CommonMethods commonMethods;
+
+    public DProvider(WebDriver driver)
+    {
+        this.driver = driver;
+        commonMethods = new CommonMethods(driver);
+    }
+
+    static String email = commonMethods.generateRandomEmail();
+    static String phoneNumber = commonMethods.generateRandomPhoneNumber().replace("+92", "");
 
     @DataProvider(name = "signUpData")
     public static Object[][] signUpData(){

@@ -17,14 +17,16 @@ import static main.data.Web.HomePageData.*;
 import static main.pageObjects.WEB.HomePageElements.*;
 import static main.utils.CommonMethods.sleep;
 
-public class HomePageEvents extends CommonMethods {
+public class HomePageEvents {
 
     public WebDriver driver;
     FetchElement fetchElement = null;
+    CommonMethods commonMethods;
 
     public HomePageEvents(WebDriver driver){
         this.driver = driver;
        fetchElement = new FetchElement(driver);
+       commonMethods = new CommonMethods(driver);
     }
 
     API_DataMethods apiDataMethods = new API_DataMethods();
@@ -368,7 +370,7 @@ public class HomePageEvents extends CommonMethods {
 //  Profile dropdown
 
     public void clickProfileDropdown(){
-        waitForElementPresentAndVisible(By.xpath(profileDropdown), 10);
+        commonMethods.waitForElementPresentAndVisible(By.xpath(profileDropdown), 10);
         fetchElement.getWebElement(Locator.XPath, profileDropdown).click();
     }
 

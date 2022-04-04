@@ -8,30 +8,32 @@ import org.openqa.selenium.WebDriver;
 
 import static main.pageObjects.EventsDetailPageElements.*;
 
-public class EventsDetailPageEvents extends CommonMethods {
+public class EventsDetailPageEvents {
 
     public WebDriver driver;
+    CommonMethods commonMethods;
+    FetchElement fetchElement;
 
-    public EventsDetailPageEvents(WebDriver driver){
+    public EventsDetailPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
-    FetchElement fetchElement = new FetchElement(driver);
-
     public void clickOnBuyNowAndSeeDetailsButton() {
-        if (IsElementPresentAndVisible(By.xpath(buyNow))) {
+        if (commonMethods.IsElementPresentAndVisible(By.xpath(buyNow))) {
             fetchElement.getWebElement(Locator.XPath, buyNow).click();
         } else
             fetchElement.getWebElement(Locator.XPath, seeDetailsButton).click();
     }
 
     public void getSlotSelection() {
-        if (IsElementPresentAndVisible(By.xpath(slotSelection)))
+        if (commonMethods.IsElementPresentAndVisible(By.xpath(slotSelection)))
             fetchElement.getWebElement(Locator.XPath, slotSelection).click();
     }
 
     public void getProcssedToCheckout() {
-        if (IsElementPresentAndVisible(By.xpath(procssedToCheckout)))
+        if (commonMethods.IsElementPresentAndVisible(By.xpath(procssedToCheckout)))
             fetchElement.getWebElement(Locator.XPath, procssedToCheckout).click();
     }
 }

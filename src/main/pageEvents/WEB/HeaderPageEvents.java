@@ -6,7 +6,6 @@ import main.utils.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 
@@ -15,13 +14,12 @@ import static main.pageObjects.WEB.HeaderpageElements.*;
 public class HeaderPageEvents {
 
     public WebDriver driver;
+    FetchElement fetchElement;
 
-    public HeaderPageEvents(WebDriver driver){
+    public HeaderPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
-
 
     public void hoverOnEvents() {
         Actions action = new Actions(driver);
@@ -29,10 +27,9 @@ public class HeaderPageEvents {
         action.moveToElement(events).build().perform();
     }
 
-    public WebElement getEventsDropdownVisiable(){
+    public WebElement getEventsDropdownVisible() {
         hoverOnEvents();
-        WebElement eventsDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.eventsDropdown);
-        return eventsDropdown;
+        return fetchElement.getWebElement(Locator.XPath, HeaderpageElements.eventsDropdown);
     }
 
     public ArrayList getEventsCategories() {
@@ -49,7 +46,7 @@ public class HeaderPageEvents {
     }
 
 
-    public ArrayList checkEventsLink(){
+    public ArrayList checkEventsLink() {
 
         ArrayList eventsSubCategories = new ArrayList();
         int eventsCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.eventsCategories).size();
@@ -69,7 +66,7 @@ public class HeaderPageEvents {
 
     }
 
-    public WebElement getMoviesDropdownVisiable(){
+    public WebElement getMoviesDropdownVisible() {
         hoverOnMovies();
         WebElement moviesDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.moviesDropdown);
         return moviesDropdown;
@@ -84,14 +81,14 @@ public class HeaderPageEvents {
 
 
             String name = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.moviesCategories + "[" + (i + 1) + "]").getText();
-           //System.out.println("n: " + name);
+            //System.out.println("n: " + name);
             movieSubCategories.add(name);
         }
 
         return movieSubCategories;
     }
 
-    public ArrayList CheckMoviesLinks(){
+    public ArrayList CheckMoviesLinks() {
 
         ArrayList subCategories = new ArrayList();
         int categoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.moviesCategories).size();
@@ -110,13 +107,13 @@ public class HeaderPageEvents {
         action.moveToElement(sports).build().perform();
     }
 
-    public WebElement getSportsDropdownVisiable(){
+    public WebElement getSportsDropdownVisible() {
         hoverOnSports();
         WebElement sportsDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.sportsDropdown);
         return sportsDropdown;
     }
 
-    public ArrayList getSportscategories(){
+    public ArrayList getSportsCategories() {
         hoverOnSports();
         ArrayList sportsSubCategories = new ArrayList();
 
@@ -130,7 +127,7 @@ public class HeaderPageEvents {
         return sportsSubCategories;
     }
 
-    public ArrayList CheckSportsLinks(){
+    public ArrayList CheckSportsLinks() {
 
         ArrayList sportsSubCategories = new ArrayList();
         int sportsCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.sportsCategories).size();
@@ -148,13 +145,13 @@ public class HeaderPageEvents {
         action.moveToElement(global).build().perform();
     }
 
-    public WebElement getGlobalDropdownVisiable(){
+    public WebElement getGlobalDropdownVisiable() {
         hoverOnGlobal();
         WebElement GlobalDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.globalDropdown);
         return GlobalDropdown;
     }
 
-    public ArrayList getGlobalscategories(){
+    public ArrayList getGlobalscategories() {
         hoverOnGlobal();
         ArrayList globalSubCategories = new ArrayList();
 
@@ -168,7 +165,7 @@ public class HeaderPageEvents {
         return globalSubCategories;
     }
 
-    public ArrayList CheckGlobalLinks(){
+    public ArrayList CheckGlobalLinks() {
 
         ArrayList globalSubCategories = new ArrayList();
         int globalCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.globalCategories).size();
@@ -186,13 +183,13 @@ public class HeaderPageEvents {
         action.moveToElement(nearby).build().perform();
     }
 
-    public WebElement getNearbyDropdownVisiable(){
+    public WebElement getNearbyDropdownVisiable() {
         hoverOnNearby();
         WebElement nearbyDropdown = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.nearbyDropdown);
         return nearbyDropdown;
     }
 
-    public ArrayList getNearybycategories(){
+    public ArrayList getNearybycategories() {
         hoverOnNearby();
         ArrayList nearybySubCategories = new ArrayList();
 
@@ -207,7 +204,7 @@ public class HeaderPageEvents {
     }
 
 
-    public ArrayList CheckNearbyLinks(){
+    public ArrayList CheckNearbyLinks() {
 
         ArrayList nearbySubCategories = new ArrayList();
         int nearybyCategoriesSize = fetchElement.getListOfWebElements(Locator.XPath, HeaderpageElements.nearbyCategories).size();
@@ -219,37 +216,36 @@ public class HeaderPageEvents {
 
     }
 
-    public String getVotingText(){
+    public String getVotingText() {
         String votingText = fetchElement.getWebElement(Locator.XPath, HeaderpageElements.voting).getText();
         return votingText;
     }
 
-    public void clickOnVoting(){
+    public void clickOnVoting() {
         fetchElement.getWebElement(Locator.XPath, HeaderpageElements.voting).click();
     }
 
-    public boolean getMasterSearch(){
+    public boolean getMasterSearch() {
         fetchElement.getWebElement(Locator.XPath, masterSearch).sendKeys("learn");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(fetchElement.getWebElement(Locator.XPath, masterSearchResult).isDisplayed()){
+        if (fetchElement.getWebElement(Locator.XPath, masterSearchResult).isDisplayed()) {
             return true;
         }
         return false;
     }
 
-    public boolean getCountryFilter(){
+    public boolean getCountryFilter() {
         fetchElement.getWebElement(Locator.XPath, countryFilter).click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(fetchElement.getWebElement(Locator.XPath, countryFilterListing).isDisplayed())
-        {
+        if (fetchElement.getWebElement(Locator.XPath, countryFilterListing).isDisplayed()) {
             return true;
         }
         return false;
@@ -264,7 +260,7 @@ public class HeaderPageEvents {
         String newCountry = fetchElement.getWebElement(Locator.XPath, getNewCountryName).getText();
         System.out.println(newCountry);
         String n = "GH";
-        if(newCountry.equals(n)){
+        if (newCountry.equals(n)) {
             return true;
         }
         return false;

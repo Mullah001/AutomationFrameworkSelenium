@@ -16,27 +16,32 @@ import static main.data.WEB.LogInData.email_Shameem;
 import static main.data.WEB.LogInData.password_Shameem;
 import static main.pageObjects.WEB.MoviesDetailPageElements.godFatherImg_XPath;
 import static main.pageObjects.WEB.PurchaseFlowPageElements.*;
+import static main.utils.CommonMethods.sleep;
 
-public class PurchaseFlowPageEvents extends CommonMethods {
+public class PurchaseFlowPageEvents {
 
     public WebDriver driver;
-
-    public PurchaseFlowPageEvents(WebDriver driver){
-        this.driver = driver;
-    }
-
-    FetchElement fetchElement = new FetchElement(driver);
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
-    HomePageEvents homePageEvents = new HomePageEvents(driver);
+    CommonMethods commonMethods;
+    FetchElement fetchElement;
+    LogInPageEvents logInPageEvents;
+    HomePageEvents homePageEvents;
     long sleepSeconds = 1500L;
     int waitSeconds = 20;
 
-    public void logInUser(){
+    public PurchaseFlowPageEvents(WebDriver driver) {
+        this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        logInPageEvents = new LogInPageEvents(driver);
+        homePageEvents = new HomePageEvents(driver);
+        commonMethods = new CommonMethods(driver);
+    }
+
+    public void logInUser() {
         homePageEvents.clickOnSignIn();
 
         sleep(sleepSeconds);
 
-        waitForElementPresent( By.xpath(LogInPageElements.email),waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(LogInPageElements.email), waitSeconds);
         logInPageEvents.enterEmail(email_Shameem);
         sleep(sleepSeconds);
         logInPageEvents.enterPassword(password_Shameem);
@@ -47,15 +52,15 @@ public class PurchaseFlowPageEvents extends CommonMethods {
 
 
     public void clickAutoSelect() {
-        waitForElementPresent( By.xpath(autoSelectInput_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(autoSelectInput_XPath), waitSeconds);
         fetchElement.getWebElement(Locator.XPath, autoSelectInput_XPath).click();
         sleep(sleepSeconds);
     }
 
     public void ticketClassesSelection() {
-        waitForElementPresent( By.xpath(ticketclasses), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(ticketclasses), waitSeconds);
         List<WebElement> ticketClasses = fetchElement.getListOfWebElements(Locator.XPath, ticketclasses);
-        for (int i = 0; i<ticketClasses.size(); i++){
+        for (int i = 0; i < ticketClasses.size(); i++) {
             ticketClasses.get(i).sendKeys("2");
         }
         sleep(sleepSeconds);
@@ -63,31 +68,31 @@ public class PurchaseFlowPageEvents extends CommonMethods {
 
 
     public void clickOnProceedToCheckoutButton() {
-        waitForElementPresent( By.xpath(proceedToCheckoutButton_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(proceedToCheckoutButton_XPath), waitSeconds);
         sleep(sleepSeconds);
         fetchElement.getWebElement(Locator.XPath, proceedToCheckoutButton_XPath).click();
         sleep(sleepSeconds);
     }
 
     public void clickOnWallet() {
-        waitForElementPresent( By.xpath(walletDiv_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(walletDiv_XPath), waitSeconds);
         fetchElement.getWebElement(Locator.XPath, walletDiv_XPath).click();
         sleep(sleepSeconds);
     }
 
     public void clickOnWalletPromptPay() {
-        waitForElementPresent( By.xpath(walletPromptPayButton_XPath), waitSeconds);
+        commonMethods.waitForElementPresent(By.xpath(walletPromptPayButton_XPath), waitSeconds);
         fetchElement.getWebElement(Locator.XPath, walletPromptPayButton_XPath).click();
         sleep(sleepSeconds);
     }
 
-    public boolean isSuccessImagePresent(){
-        waitForElementPresent( By.xpath(successImg_XPath), waitSeconds);
-        return IsElementPresent(By.xpath(successImg_XPath));
+    public boolean isSuccessImagePresent() {
+        commonMethods.waitForElementPresent(By.xpath(successImg_XPath), waitSeconds);
+        return commonMethods.IsElementPresent(By.xpath(successImg_XPath));
     }
 
-    public void scroll(){
-        waitForElementPresent( By.xpath(godFatherImg_XPath), waitSeconds);
+    public void scroll() {
+        commonMethods.waitForElementPresent(By.xpath(godFatherImg_XPath), waitSeconds);
         sleep(sleepSeconds);
         if (driver instanceof JavascriptExecutor) {
             ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 500);");
@@ -95,7 +100,6 @@ public class PurchaseFlowPageEvents extends CommonMethods {
             throw new IllegalStateException("This driver does not support JavaScript!");
         }
     }
-
 
 
 }

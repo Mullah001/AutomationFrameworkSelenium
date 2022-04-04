@@ -13,18 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static main.pageObjects.WEB.MoviesPageElements.*;
+import static main.utils.CommonMethods.sleep;
 
-public class MoviesPageEvents extends CommonMethods {
+public class MoviesPageEvents {
 
     public WebDriver driver;
-
-    public MoviesPageEvents(WebDriver driver){
-        this.driver = driver;
-    }
-
-    FetchElement fetchElement = new FetchElement(driver);
+    CommonMethods commonMethods;
+    FetchElement fetchElement;
     API_DataMethods api_dataMethods = new API_DataMethods();
 
+    public MoviesPageEvents(WebDriver driver) {
+        this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        commonMethods = new CommonMethods(driver);
+    }
+    
     public void loadMoviesURLFromHeader() {
         String url = fetchElement.getWebElement(Locator.XPath, moviesLinkA_XPath).getAttribute("href");
         driver.navigate().to(url);
@@ -166,7 +169,7 @@ public class MoviesPageEvents extends CommonMethods {
     /************ Error Message *************/
 
     public boolean isErrorMessagePresent() {
-        return IsElementPresent(By.xpath(noRecordErrorDiv_XPath));
+        return commonMethods.IsElementPresent(By.xpath(noRecordErrorDiv_XPath));
     }
 
     /******************************** Slider *********************************/
@@ -234,7 +237,7 @@ public class MoviesPageEvents extends CommonMethods {
     /******************************** Movies Details Page *************************/
 
     public String getTitle_MoviesDetails() {
-        waitForElementPresent(By.className(movieTitleDiv_ClassName), 20);
+        commonMethods.waitForElementPresent(By.className(movieTitleDiv_ClassName), 20);
         return fetchElement.getWebElement(Locator.ClassName, movieTitleDiv_ClassName).getText();
     }
 

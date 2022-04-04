@@ -14,16 +14,19 @@ import java.util.List;
 
 import static main.pageObjects.ADMIN.EventsListingPageElements.*;
 
-public class EventsListingPageEvents extends CommonMethods {
+public class EventsListingPageEvents {
 
     public WebDriver driver;
+    CommonMethods commonMethods;
+    FetchElement fetchElement;
+    API_DataMethods api_dataMethods;
 
-    public EventsListingPageEvents(WebDriver driver){
+    public EventsListingPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        api_dataMethods = new API_DataMethods();
+        commonMethods = new CommonMethods(driver);
     }
-
-    FetchElement fetchElement = new FetchElement(driver);
-    API_DataMethods api_dataMethods = new API_DataMethods();
 
     /************ API **************/
 
@@ -41,11 +44,11 @@ public class EventsListingPageEvents extends CommonMethods {
 
     /**************** Web ******************/
 
-    public void clickEventsSideBar(){
+    public void clickEventsSideBar() {
         fetchElement.getWebElement(Locator.XPath, eventSideBarA_XPath).click();
     }
 
-    public void clickAddNewEventButton(){
+    public void clickAddNewEventButton() {
         fetchElement.getWebElement(Locator.XPath, addNewEventButton_XPath).click();
     }
 
@@ -57,11 +60,10 @@ public class EventsListingPageEvents extends CommonMethods {
         return getSelectOptions(Locator.Name, organizationIdSelect_Name).size();
     }
 
-    
 
     /******************* Helper Methods *********************/
 
-    public List<WebElement> getSelectOptions(Locator locatorType, String locator){
+    public List<WebElement> getSelectOptions(Locator locatorType, String locator) {
         Select select = new Select(fetchElement.getWebElement(locatorType, locator));
         List<WebElement> options = select.getAllSelectedOptions();
         return options;

@@ -16,23 +16,23 @@ import static main.data.Web.HomePageData.*;
 
 @Test(groups = {"WEB"})
 public class HomePageTest extends BaseTest {
+
     public WebDriver driver;
     HomePageEvents homePageEvents = null;
-    @BeforeClass
-    public void initialize(){
+    CommonMethods commonMethods;
+    API_DataMethods apiDataMethods = new API_DataMethods();
 
+    @BeforeClass
+    public void initialize() {
         driver = initializeBrowser();
         homePageEvents = new HomePageEvents(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
     @AfterClass
-    public void close(){
+    public void close() {
         closeAndQuitBrowser(driver);
     }
-
-
-    CommonMethods commonMethods = new CommonMethods();
-    API_DataMethods apiDataMethods = new API_DataMethods();
 
     @Test(testName = "Verify that the heading of the Top events is according to the design")
     public void VerifyTopEventsHeading() {
@@ -86,40 +86,40 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test(testName = "Verify that the title of the Upcoming Events is correct. ", enabled = false)
-    public void upcomingEvenetsTitle(){
+    public void upcomingEvenetsTitle() {
         homePageEvents.getUpcomingEventstitle();
         Assert.assertTrue(true, "Verified");
     }
 
     @Test(testName = "Verify that the all Upcoming Events are displayed.", enabled = false)
-    public void upcomingEvenetsCount(){
+    public void upcomingEvenetsCount() {
         homePageEvents.getUpcomingEventsSize();
         Assert.assertTrue(true, "Verified");
     }
 
     @Test(testName = "Verify that the venues of the upcoming events are correct. ", enabled = false)
-    public void upcomingEvenetsVenues(){
+    public void upcomingEvenetsVenues() {
         homePageEvents.getUpcomingEventsVenues();
     }
 
     @Test(testName = "Verify that the start and end date of the upcoming events are correct.", enabled = false)
-    public void upcomingEvenetsDate(){
+    public void upcomingEvenetsDate() {
         homePageEvents.getUpcomingEventsDate();
     }
 
     @Test(testName = "Verify that the Description of the upcoming events are correct.", enabled = false)
-    public void upcomingEvenetsDescription(){
+    public void upcomingEvenetsDescription() {
         homePageEvents.getDescription();
         Assert.assertTrue(true, "Verified");
     }
 
     @Test(testName = "Verify that the Price of the upcoming events are correct.", enabled = false)
-    public void upcomingEvenetsPrice(){
+    public void upcomingEvenetsPrice() {
         homePageEvents.getUpcomingEventsPrice();
     }
 
     @Test(testName = "Verify that the events categories are displaying correct. ", enabled = false)
-    public void eventsCategories(){
+    public void eventsCategories() {
         homePageEvents.getEventsCategories();
         Assert.assertTrue(true, "The Events categories are correct");
     }
@@ -173,6 +173,7 @@ public class HomePageTest extends BaseTest {
         boolean isTrue = homePageEvents.getInstaLink();
         Assert.assertTrue(isTrue, "verified");
     }
+
     @Test(testName = "Verify that by clicking on the Twitter logo user us redirect to the Twitter page of ticketlate")
     public void verifiedTwitterLink() throws InterruptedException {
         boolean isTrue = homePageEvents.getTwitterLink();
@@ -192,25 +193,25 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test(testName = "Verify that by clicking on the Terms of Service link user navigate to the respective page", enabled = false)
-    public void verifyTermsServiceLink(){
+    public void verifyTermsServiceLink() {
         boolean isTrue = homePageEvents.clicOnTermofConditionLink();
         Assert.assertTrue(isTrue, "Verified");
     }
 
     @Test(testName = "Verify that by clicking on the Privacy Policy link user navigate to the respective page", enabled = false)
-    public void verifyPrivacyPolicyLink(){
+    public void verifyPrivacyPolicyLink() {
         boolean isTrue = homePageEvents.clicOnPrivacyPolicyLink();
         Assert.assertTrue(isTrue, "Verified");
     }
 
     @Test(testName = "Verify that Right reserved text is © Ticketlake 2020 - All Rights Reserved", enabled = false)
-    public void verifyRightReservedText(){
+    public void verifyRightReservedText() {
         boolean isTrue = homePageEvents.getRightReserved();
         Assert.assertTrue(isTrue, "Verified");
     }
 
     @Test(testName = "Verify that the address of the ticketlake is correct", enabled = false)
-    public void verifyTicketlakeddress(){
+    public void verifyTicketlakeddress() {
         boolean isTrue = homePageEvents.getAddress();
         Assert.assertTrue(isTrue, "Verified");
     }
