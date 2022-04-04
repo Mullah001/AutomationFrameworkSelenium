@@ -25,9 +25,9 @@ public class CommonMethods {
 
     public WebDriver driver;
 
-//    public CommonMethods(WebDriver driver){
-//        this.driver = driver;
-//    }
+    public CommonMethods(WebDriver driver){
+        this.driver = driver;
+    }
 
     PropertyFilesReader propRead = new PropertyFilesReader();
 

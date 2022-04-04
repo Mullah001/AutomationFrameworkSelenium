@@ -15,20 +15,26 @@ import java.util.List;
 import static main.data.ADMIN.CreateNewEventData.*;
 import static main.pageObjects.ADMIN.CreateNewEventPageElements.*;
 import static main.pageObjects.ADMIN.EventsListingPageElements.*;
+import static main.utils.CommonMethods.sleep;
 import static main.utils.Constants.*;
 
-public class CreateNewEventPageEvents extends CommonMethods {
+public class CreateNewEventPageEvents {
 
     public WebDriver driver;
-    FetchElement fetchElement = new FetchElement(driver);
-    LogInPageEvents logInPageEvents = new LogInPageEvents(driver);
-    EventsListingPageEvents eventsListingPageEvents = new EventsListingPageEvents(driver);
+    FetchElement fetchElement;
+    LogInPageEvents logInPageEvents;
+    EventsListingPageEvents eventsListingPageEvents;
+    CommonMethods commonMethods;
 
     private final int waitForElementSeconds = 15;
     private final long sleepSeconds = 1500l;
 
-    public CreateNewEventPageEvents(WebDriver driver){
+    public CreateNewEventPageEvents(WebDriver driver) {
         this.driver = driver;
+        fetchElement = new FetchElement(driver);
+        logInPageEvents = new LogInPageEvents(driver);
+        eventsListingPageEvents = new EventsListingPageEvents(driver);
+        commonMethods = new CommonMethods(driver);
     }
 
     /**************** Standard - Structured *************/
@@ -412,11 +418,11 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void waitForModalHeaderToPresentAndVisible() {
-        waitForElementPresentAndVisible(By.xpath(modalHeaderH5_XPath), waitForElementSeconds);
+        commonMethods.waitForElementPresentAndVisible(By.xpath(modalHeaderH5_XPath), waitForElementSeconds);
     }
 
     public void waitForEventsListing() {
-        waitForElementPresentAndVisible(By.name(categoriesSelect_Name), 15);
+        commonMethods.waitForElementPresentAndVisible(By.name(categoriesSelect_Name), 15);
     }
 
     public void preCreateEventFlow() {
@@ -457,7 +463,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
     /*** Basic Info ***/
 
     public void typeEventTitle(String title) {
-        typeWithSpeed(By.name(titleInput_Name), title, 10l);
+        commonMethods.typeWithSpeed(By.name(titleInput_Name), title, 10l);
     }
 
     public void selectCurrency() {
@@ -485,7 +491,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void typeDescription(String description) {
-        typeWithSpeed(By.name(descriptionTextArea_Name), description, 1l);
+        commonMethods.typeWithSpeed(By.name(descriptionTextArea_Name), description, 1l);
     }
 
     public void typeIMDBRatingLink() {
@@ -499,12 +505,12 @@ public class CreateNewEventPageEvents extends CommonMethods {
     /*** Event Contact Details ***/
 
     public void typeEmail() {
-        scrollElementIntoView(By.xpath(emailInput_XPAth));
-        typeWithSpeed(By.xpath(emailInput_XPAth), contactEmail, 150l);
+        commonMethods.scrollElementIntoView(By.xpath(emailInput_XPAth));
+        commonMethods.typeWithSpeed(By.xpath(emailInput_XPAth), contactEmail, 150l);
     }
 
     public void typeMobile() {
-        typeWithSpeed(By.name(mobileInput_Name), mobileNumber, 150l);
+        commonMethods.typeWithSpeed(By.name(mobileInput_Name), mobileNumber, 150l);
     }
 
     public void clickSaveButton() {
@@ -512,23 +518,23 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public boolean isErrorPopupPresentAndVisible() {
-        waitForElementPresentAndVisible(By.xpath(errorPopupDiv_XPath), waitForElementSeconds);
-        return IsElementPresentAndVisible(By.xpath(errorPopupDiv_XPath));
+        commonMethods.waitForElementPresentAndVisible(By.xpath(errorPopupDiv_XPath), waitForElementSeconds);
+        return commonMethods.IsElementPresentAndVisible(By.xpath(errorPopupDiv_XPath));
     }
 
     public void isSavedMessagePresentAndVisible() {
-        waitForElementPresentAndVisible(By.xpath(savedMessageDiv_XPath), waitForElementSeconds);
-        IsElementPresentAndVisible(By.xpath(savedMessageDiv_XPath));
+        commonMethods.waitForElementPresentAndVisible(By.xpath(savedMessageDiv_XPath), waitForElementSeconds);
+        commonMethods.IsElementPresentAndVisible(By.xpath(savedMessageDiv_XPath));
     }
 
     public boolean isEventSlotSavedSuccessfullyPresentAndVisible() {
-        waitForElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath), waitForElementSeconds);
-        return IsElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath));
+        commonMethods.waitForElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath), waitForElementSeconds);
+        return commonMethods.IsElementPresentAndVisible(By.xpath(eventSlotSavedSuccessfullyDiv_XPath));
     }
 
     public boolean isEventListingPresent() {
-        waitForElementPresentAndVisible(By.className(listingTableDiv_Class), waitForElementSeconds);
-        return IsElementPresentAndVisible(By.className(listingTableDiv_Class));
+        commonMethods.waitForElementPresentAndVisible(By.className(listingTableDiv_Class), waitForElementSeconds);
+        return commonMethods.IsElementPresentAndVisible(By.className(listingTableDiv_Class));
     }
 
     public void clickNextButton() {
@@ -581,7 +587,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void typeEventAgenda_Slot(String agenda) {
-        typeWithSpeed(By.name(agendaSlotInput_Name), agenda, 100l);
+        commonMethods.typeWithSpeed(By.name(agendaSlotInput_Name), agenda, 100l);
     }
 
     /*************** Ticket Classes *************/
@@ -591,7 +597,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void typeTicketClassName() {
-        typeWithSpeed(By.xpath(emptyNameTicketClassInput_XPath), ticketClassName, 100l);
+        commonMethods.typeWithSpeed(By.xpath(emptyNameTicketClassInput_XPath), ticketClassName, 100l);
     }
 
     public void typeTicketClassColor() {
@@ -629,7 +635,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
         clickEventStartDateLabel();
     }
 
-    public void clickEventStartDateLabel(){
+    public void clickEventStartDateLabel() {
         fetchElement.getWebElement(Locator.XPath, eventStart_Details_Label_XPath).click();
         sleep(500l);
     }
@@ -689,20 +695,20 @@ public class CreateNewEventPageEvents extends CommonMethods {
     /*** Available Tickets ***/
 
     public void typeBusinessAvailablePrice() {
-        clearAndTypeIfPresentAndVisible(businessTicketAvailableTicketsInput_XPath, businessAvailablePrice);
+        commonMethods.clearAndTypeIfPresentAndVisible(businessTicketAvailableTicketsInput_XPath, businessAvailablePrice);
     }
 
     public void typeStandardAvailablePrice() {
-        clearAndTypeIfPresentAndVisible(standardTicketAvailableTicketsInput_XPath, standardAvailablePrice);
+        commonMethods.clearAndTypeIfPresentAndVisible(standardTicketAvailableTicketsInput_XPath, standardAvailablePrice);
     }
 
     public void typeVIPAvailablePrice() {
-        clearAndTypeIfPresentAndVisible(vipTicketAvailableTicketsInput_XPath, vipAvailablePrice);
+        commonMethods.clearAndTypeIfPresentAndVisible(vipTicketAvailableTicketsInput_XPath, vipAvailablePrice);
     }
 
     /*** Sale Price ***/
 
-    public void setEventSalePricess(){
+    public void setEventSalePricess() {
         List<WebElement> salePricessList = fetchElement.getListOfWebElements(Locator.XPath, eventSalePriceses);
         int salePrice = 2;
         for (int i = 0; i < salePricessList.size(); i++) {
@@ -715,7 +721,7 @@ public class CreateNewEventPageEvents extends CommonMethods {
 
     /*** Base Price ***/
 
-    public void setEventBasePricess(){
+    public void setEventBasePricess() {
         List<WebElement> basePricessList = fetchElement.getListOfWebElements(Locator.XPath, eventBasePriceses);
         int basePrice = 1;
         for (int i = 0; i < basePricessList.size(); i++) {
@@ -726,7 +732,6 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
 
-
     /*** Banner Image - Details ***/
 
     public void uploadBannerImage_Details() {
@@ -734,12 +739,12 @@ public class CreateNewEventPageEvents extends CommonMethods {
     }
 
     public void clickOnlySaveButton() {
-        waitForElementPresentAndVisible(By.xpath(onlySaveEventButton_XPath), waitForElementSeconds);
+        commonMethods.waitForElementPresentAndVisible(By.xpath(onlySaveEventButton_XPath), waitForElementSeconds);
         fetchElement.getWebElement(Locator.XPath, onlySaveEventButton_XPath).click();
     }
 
     public void clickSaveAndPublishButton() {
-        waitForElementPresentAndVisible(By.xpath(saveAndPublishEventButton_XPath), waitForElementSeconds);
+        commonMethods.waitForElementPresentAndVisible(By.xpath(saveAndPublishEventButton_XPath), waitForElementSeconds);
         fetchElement.getWebElement(Locator.XPath, saveAndPublishEventButton_XPath).click();
     }
 
