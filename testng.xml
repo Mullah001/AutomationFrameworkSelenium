@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="TicketLake Test Suite">
+<suite name="TicketLake Test Suite" parallel="classes">
     <listeners>
         <listener class-name="main.utils.SuiteListener"/>
         <listener class-name="main.utils.RetryListener"/>
@@ -11,15 +11,82 @@
     <parameter name="headless" value="false"/>
     <parameter name="isAdmin" value="false"/>
 
-    <test name="TicketLake - Test Automation" parallel="true">
-        <groups>
-            <run>
-                <include name="WEB"/>
-            </run>
-        </groups>
+
+<!--Website Tests    -->
+
+    <test name="TicketLake - Registration">
+        <classes>
+            <class name="test.Web.Register.RegisterTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Login">
+        <classes>
+            <class name="test.Web.LogIn.LoginTest"/>
+            <class name="test.Web.LogIn.SocialLoginsTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Forget Password">
+        <classes>
+            <class name="test.Web.LogIn.SocialLoginsTest"/>
+        </classes>
+    </test>
+
+
+    <test name="TicketLake - Header">
+        <classes>
+            <class name="test.Web.HomePage.HeaderTest"/>
+
+        </classes>
+    </test>
+
+    <test name="TicketLake - Home Page">
+        <classes>
+            <class name="test.Web.HomePage.HomePageTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Purchase flow">
+        <classes>
+            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Shared Functionality">
+        <classes>
+            <class name="test.Web.ShareFunctionalityTest"/>
+        </classes>
+    </test>
+
+
+<!--Admin Tests-->
+
+    <test name="TicketLake - Standard Event Creation">
+        <classes>
+            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Series Event Creation">
+        <classes>
+            <class name="test.ADMIN.AddNewEvent.SeriesEventTest"/>
+        </classes>
+    </test>
+
+    <test name="TicketLake - Recurring Event Creation">
+        <classes>
+            <class name="test.ADMIN.AddNewEvent.RecurringEventTest"/>
+        </classes>
+    </test>
+
+
+
+
+    <test name="TicketLake - Test Automation">
+
         <classes>
 <!--            <class name="test.DemoTest"/>-->
-
 <!--            &lt;!&ndash; Registration API&ndash;&gt;-->
 <!--            <class name="test.API.Registration.Post_VerifyEmailPhone"/>-->
 <!--            <class name="test.API.Registration.Post_Register"/>-->
@@ -40,29 +107,8 @@
 <!--            <class name="test.API.ParentEventsListing.Post_FetchTrendingEvents"/>-->
 <!--            <class name="test.API.ParentEventsListing.Post_FetchNearbyParentEventsForConsumers"/>-->
 
-<!--        Website classes-->
-<!---->
-<!--            <class name="test.Web.Register"/>-->
-            <class name="test.Web.LogIn.LoginTest"/>
-<!--            <class name="test.Web.ForgetPassword"/>-->
-<!--            <class name="test.Web.SocialLogins"/>-->
-<!--            <class name="test.Web.Header"/>-->
-<!--            <class name="test.Web.HomePage.HomePageTest"/>-->
-
-<!--        Admin Classes-->
-
-<!--            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>-->
-<!--            <class name="test.Web.PurchaseFlowMovies.MoviesPurchaseFlowTest"/>-->
-            <class name="test.Web.ShareFunctionalityTest"/>
-<!--            <class name="test.ADMIN.AddNewEvent.SeriesEventTest"/>-->
-<!--            <class name="test.ADMIN.AddNewEvent.RecurringEventTest"/>-->
 
         </classes>
     </test>
 
-<!--    <test name="TicketLake - Test Automation 1">-->
-<!--        <classes>-->
-<!--            <class name="test.ADMIN.AddNewEvent.StandardEventTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
 </suite>

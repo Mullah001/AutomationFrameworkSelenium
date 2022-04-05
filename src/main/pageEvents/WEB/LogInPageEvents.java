@@ -37,7 +37,6 @@ public class LogInPageEvents {
         fetchElement.getWebElement(Locator.XPath, LogInPageElements.logInButton).click();
     }
     public void clickCrossButton(){
-        commonMethods.IsElementPresentAndVisible(By.xpath(corssButton));
         fetchElement.getWebElement(Locator.XPath, corssButton).click();
     }
 
