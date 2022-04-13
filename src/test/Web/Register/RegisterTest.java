@@ -46,7 +46,6 @@ public class RegisterTest extends BaseTest {
             Assert.assertEquals(homePageTitle, "Home", "Verify that user is able to sign up");
         } else {
             Assert.assertEquals(homePageTitle, "Sign in", "Verify that user is able to sign up");
-
         }
 
 
